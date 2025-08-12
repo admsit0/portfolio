@@ -61,19 +61,19 @@ const Hero = () => {
               <div className="w-80 h-80 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-1 animate-scale-in">
                 <div className="w-full h-full rounded-full bg-white p-2">
                   <img 
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
+                    src="public/images/adam.png"
                     alt="Adam - Data Science Student"
                     className="w-full h-full rounded-full object-cover"
                   />
                 </div>
               </div>
               {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-3 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+              {/* <div className="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-3 animate-fade-in" style={{ animationDelay: '0.5s' }}>
                 <span className="text-2xl">🚀</span>
               </div>
               <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-3 animate-fade-in" style={{ animationDelay: '1s' }}>
                 <span className="text-2xl">📊</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
