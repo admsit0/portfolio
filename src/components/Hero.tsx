@@ -1,12 +1,17 @@
 import { ArrowDown, Github, Linkedin, Mail, Youtube } from 'lucide-react';
-import adamProfile from '/public/placeholder.svg';
+import adamProfile from '@/assets/adam-profile.png';
 import heroBg from '@/assets/hero-bg.jpg';
 
 const Hero = () => {
   const scrollToNext = () => {
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
+      // Smooth scroll with proper offset for navbar
+      const offsetTop = aboutSection.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -27,8 +32,8 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
-          {/* Profile Image */}
-          <div className="mb-8 animate-float">
+          {/* Profile Image - No animation */}
+          <div className="mb-8">
             <img
               src={adamProfile}
               alt="Adam Maltoni"
@@ -52,7 +57,7 @@ const Hero = () => {
           </p>
 
           {/* Social Links */}
-          <div className="flex justify-center space-x-6 mb-12">
+          <div className="flex justify-center space-x-6 mb-8">
             <a
               href="https://github.com/adam-maltoni"
               target="_blank"
@@ -86,7 +91,7 @@ const Hero = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
             <button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               className="btn-primary px-8 py-3 rounded-lg text-base font-medium"
@@ -102,12 +107,13 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - Fixed positioning and animations */}
         <button
           onClick={scrollToNext}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white hover:text-primary transition-colors duration-300 animate-bounce"
+          className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hero-scroll-arrow"
+          aria-label="Scroll to next section"
         >
-          <ArrowDown className="w-6 h-6" />
+          <ArrowDown className="w-5 h-5" />
         </button>
       </div>
     </section>

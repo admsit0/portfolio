@@ -4,7 +4,9 @@ import {
   MapPin, 
   Github, 
   Linkedin, 
-  Youtube
+  Youtube,
+  ArrowDown,
+  Download
 } from 'lucide-react';
 
 const Contact = () => {
@@ -66,9 +68,9 @@ const Contact = () => {
 
         <div className="max-w-4xl mx-auto">
           {/* Contact Information */}
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
             {/* Contact Details */}
-            <div>
+            <div className="h-full">
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Get In Touch
               </h3>
@@ -102,7 +104,7 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div>
+            <div className="h-full">
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Connect Online
               </h3>

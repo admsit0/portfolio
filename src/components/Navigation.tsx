@@ -56,7 +56,7 @@ const Navigation = () => {
           
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-center space-x-6">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -68,30 +68,34 @@ const Navigation = () => {
                   {item.label}
                 </button>
               ))}
-              <a
-                href="https://github.com/adam-maltoni"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary-dark transition-colors p-2"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/adam-maltoni"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary-dark transition-colors p-2"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="/cv-adam-maltoni.pdf"
-                download
-                className="btn-primary px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              >
-                <Download className="w-4 h-4" />
-                CV
-              </a>
+              
+              {/* Social Icons Container - Properly aligned */}
+              <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-border">
+                <a
+                  href="https://github.com/adam-maltoni"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary-dark transition-colors rounded-md hover:bg-muted/50"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/adam-maltoni"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary-dark transition-colors rounded-md hover:bg-muted/50"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a
+                  href="/cv-adam-maltoni.pdf"
+                  download
+                  className="btn-primary px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-2 ml-2"
+                >
+                  <Download className="w-4 h-4" />
+                  CV
+                </a>
+              </div>
             </div>
           </div>
 
