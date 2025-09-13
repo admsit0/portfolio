@@ -7,7 +7,8 @@ import {
   Youtube,
   ArrowDown,
   Download
-} from 'lucide-react';
+  } from 'lucide-react';
+  import { SectionHeader } from './ui/section-header';
 
 const Contact = () => {
 
@@ -57,17 +58,12 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+  <section id="contact" className="py-12 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Let's Connect
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I'm always interested in new opportunities, collaborations, and interesting projects. 
-            Let's discuss how we can work together!
-          </p>
-        </div>
+          <SectionHeader
+            title="Connect"
+            subtitle="I'm always interested in new opportunities, collaborations, and interesting projects. Let's discuss how we can work together!"
+          />
 
         <div className="max-w-4xl mx-auto">
           {/* Contact Information */}
@@ -84,25 +80,31 @@ const Contact = () => {
               </p>
 
               <div className="space-y-4">
-                {contactInfo.map((contact, index) => (
-                  <a
-                    key={index}
-                    href={contact.href}
-                    target={contact.href.startsWith('http') ? '_blank' : undefined}
-                    rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group"
-                  >
-                    <div className="text-primary-dark group-hover:text-accent transition-colors">
-                      {contact.icon}
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{contact.label}</p>
-                      <p className="font-medium text-foreground group-hover:text-primary-dark transition-colors">
-                        {contact.value}
-                      </p>
-                    </div>
-                  </a>
-                ))}
+                {contactInfo.map((contact, index) => {
+                  let iconHoverColor = '';
+                  if (contact.label === 'Email') iconHoverColor = 'group-hover:text-blue-600';
+                  else if (contact.label === 'Phone') iconHoverColor = 'group-hover:text-green-600';
+                  else if (contact.label === 'Location') iconHoverColor = 'group-hover:text-orange-500';
+                  return (
+                    <a
+                      key={index}
+                      href={contact.href}
+                      target={contact.href.startsWith('http') ? '_blank' : undefined}
+                      rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group"
+                    >
+                      <div className={`text-primary-dark transition-colors ${iconHoverColor}`}>
+                        {contact.icon}
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">{contact.label}</p>
+                        <p className="font-medium text-foreground transition-colors">
+                          {contact.value}
+                        </p>
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
@@ -117,31 +119,38 @@ const Contact = () => {
               </p>
 
               <div className="space-y-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group`}
-                  >
-                    <div className={`text-primary-dark transition-colors group-hover:${social.hoverColor ? social.hoverColor.replace('hover:', '') : 'text-green-600'}`}>
-                      {social.icon}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground">{social.label}</p>
-                      <p className={`font-medium text-foreground transition-colors group-hover:${social.hoverColor ? social.hoverColor.replace('hover:', '') : 'text-green-600'}`}>
-                        {social.value}
-                      </p>
-                    </div>
-                  </a>
-                ))}
+                {socialLinks.map((social, index) => {
+                  // Map label to hover color for icon
+                  let iconHoverColor = '';
+                  if (social.label === 'GitHub') iconHoverColor = 'group-hover:text-black';
+                  else if (social.label === 'LinkedIn') iconHoverColor = 'group-hover:text-blue-600';
+                  else if (social.label === 'YouTube') iconHoverColor = 'group-hover:text-red-600';
+                  return (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group"
+                    >
+                      <div className={`text-primary-dark transition-colors ${iconHoverColor}`}>
+                        {social.icon}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-muted-foreground">{social.label}</p>
+                        <p className="font-medium text-foreground transition-colors">
+                          {social.value}
+                        </p>
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
 
           {/* Additional Info */}
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <div className="bg-gradient-primary rounded-lg p-6 text-white">
               <h4 className="font-semibold mb-2">Available for Opportunities</h4>
               <p className="text-sm opacity-90 mb-4">

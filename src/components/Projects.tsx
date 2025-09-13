@@ -12,6 +12,8 @@ import {
   X,
   FileText
 } from 'lucide-react';
+import { scrollToSectionWithOffset } from '../lib/utils';
+  import { SectionHeader } from './ui/section-header';
 
 // Import project images
 import stableDiffusionImg from '@/assets/project-stable-diffusion.jpg';
@@ -38,9 +40,9 @@ const Projects = () => {
         'Performance benchmarking and model comparison tools'
       ],
       image: stableDiffusionImg,
-      github: 'https://github.com/admsit0/stable-diffusion-project',
-      demo: 'https://sd-demo.adam-maltoni.dev',
-      report: 'https://github.com/admsit0/stable-diffusion-project/blob/main/report.pdf',
+        github: 'https://github.com/admsit0/imageGenerativeAI',
+        demo: undefined,
+        report: '/project-stable-diffusion.pdf',
       metrics: {
         'Generation Speed': '2.3s per image',
         'Model Size': '3.4GB optimized',
@@ -52,18 +54,10 @@ const Projects = () => {
       category: 'Full-Stack Development',
       icon: <Globe className="w-6 h-6" />,
       description: 'Complete web solution for a heating systems company including CMS, appointment booking, inventory management, and customer portal.',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe API', 'AWS'],
-      features: [
-        'Responsive design with modern UI/UX',
-        'Customer appointment booking system',
-        'Inventory management dashboard',
-        'Payment processing integration',
-        'SEO optimization and analytics'
-      ],
       image: heatingWebsiteImg,
-      github: 'https://github.com/admsit0/heating-company-web',
-      demo: 'https://heating-company.adam-maltoni.dev',
-      report: 'https://github.com/admsit0/heating-company-web/blob/main/case-study.pdf',
+        github: undefined,
+        demo: 'https://www.aguitaefitec.com/',
+        report: undefined,
       metrics: {
         'Page Load Time': '< 2s',
         'Conversion Rate': '+45%',
@@ -84,8 +78,8 @@ const Projects = () => {
         'Detailed reporting dashboard'
       ],
       image: databasePerformanceImg,
-      github: 'https://github.com/admsit0/db-performance-study',
-      report: 'https://github.com/admsit0/db-performance-study/blob/main/analysis-report.pdf',
+        github: 'https://github.com/admsit0/DB-performance-comparison',
+        report: '/project-database-performance.pdf',
       metrics: {
         'Databases Tested': '3 Systems',
         'Test Scenarios': '15 Workloads',
@@ -106,8 +100,8 @@ const Projects = () => {
         'Real-world dataset analysis'
       ],
       image: clusteringImg,
-      github: 'https://github.com/admsit0/clustering-evaluation',
-      report: 'https://github.com/admsit0/clustering-evaluation/blob/main/research-paper.pdf',
+        github: 'https://github.com/admsit0/clustering-techniques-evaluation',
+        report: '/project-clustering.pdf',
       metrics: {
         'Algorithms': '8 Methods',
         'Datasets': '12 Different',
@@ -128,8 +122,8 @@ const Projects = () => {
         'Agent behavior analysis tools'
       ],
       image: reinforcementLearningImg,
-      github: 'https://github.com/admsit0/rl-analysis',
-      report: 'https://github.com/admsit0/rl-analysis/blob/main/thesis.pdf',
+        github: 'https://github.com/admsit0/RL-analysis',
+        report: '/project-reinforcement-learning.pdf',
       metrics: {
         'Environments': '5 Custom',
         'Algorithms': '6 Methods',
@@ -150,8 +144,8 @@ const Projects = () => {
         'Clinical insights and recommendations'
       ],
       image: cardiacHealthImg,
-      github: 'https://github.com/admsit0/cardiac-risk-analysis',
-      report: 'https://github.com/admsit0/cardiac-risk-analysis/blob/main/statistical-report.pdf',
+        github: 'https://github.com/admsit0/heart-risk-analysis',
+        report: '/project-heart-risk.pdf',
       metrics: {
         'Accuracy': '94.2%',
         'Patients Analyzed': '10,000+',
@@ -172,13 +166,10 @@ const Projects = () => {
     <section id="projects" className="py-20 bg-gradient-subtle">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my work in data science, machine learning, and full-stack development, 
-            demonstrating technical expertise and real-world problem-solving skills.
-          </p>
+          <SectionHeader
+            title="Featured Projects"
+            subtitle="A showcase of my work in data science, machine learning, and full-stack development, demonstrating technical expertise and real-world problem-solving skills."
+          />
         </div>
 
         {/* Projects Grid */}
@@ -215,7 +206,7 @@ const Projects = () => {
 
               {/* Technologies */}
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.slice(0, 3).map((tech) => (
+                {(project.technologies?.slice(0, 3) ?? []).map((tech) => (
                   <span
                     key={tech}
                     className="px-2 py-1 bg-primary/10 text-primary-dark text-xs rounded-full"
@@ -223,7 +214,7 @@ const Projects = () => {
                     {tech}
                   </span>
                 ))}
-                {project.technologies.length > 3 && (
+                {project.technologies && project.technologies.length > 3 && (
                   <span className="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-full">
                     +{project.technologies.length - 3}
                   </span>
@@ -282,7 +273,7 @@ const Projects = () => {
             Want to see more projects or discuss collaboration opportunities?
           </p>
           <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => scrollToSectionWithOffset('contact')}
             className="btn-primary px-6 py-3 rounded-lg text-base font-medium"
           >
             Get In Touch
@@ -333,26 +324,26 @@ const Projects = () => {
                   <div>
                     <h3 className="font-medium text-foreground mb-2">Key Features</h3>
                     <ul className="space-y-1">
-                      {projects[selectedProject].features.map((feature, idx) => (
-                        <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                          <ChevronRight className="w-3 h-3 mt-1 text-accent flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
+                        {(projects[selectedProject].features ?? []).map((feature, idx) => (
+                          <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <ChevronRight className="w-3 h-3 mt-1 text-accent flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
                     </ul>
                   </div>
 
                   <div>
                     <h3 className="font-medium text-foreground mb-2">Technologies</h3>
                     <div className="flex flex-wrap gap-2">
-                      {projects[selectedProject].technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-primary/10 text-primary-dark text-sm rounded-full"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                        {(projects[selectedProject].technologies ?? []).map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 bg-primary/10 text-primary-dark text-sm rounded-full"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                     </div>
                   </div>
                 </div>

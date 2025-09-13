@@ -1,36 +1,34 @@
+
 import { ArrowDown, Github, Linkedin, Mail, Youtube } from 'lucide-react';
 import adamProfile from '@/assets/adam-profile.png';
 import heroBg from '@/assets/hero-bg.jpg';
+import { scrollToSectionWithOffset } from '../lib/utils';
 
 const Hero = () => {
   const scrollToNext = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      // Smooth scroll with proper offset for navbar
-      const offsetTop = aboutSection.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSectionWithOffset('about');
   };
 
   return (
-    <section 
-      id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    <section
+      id="home"
+      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden"
       style={{
         backgroundImage: `url(${heroBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        width: '100vw',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
       }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-primary-dark/60"></div>
-      
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
           {/* Profile Image - No animation */}
           <div className="mb-8">
@@ -93,13 +91,13 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
             <button
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToSectionWithOffset('projects')}
               className="btn-primary px-8 py-3 rounded-lg text-base font-medium"
             >
               View My Work
             </button>
             <button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToSectionWithOffset('contact')}
               className="btn-outline px-8 py-3 rounded-lg text-base font-medium text-white border-white hover:bg-white hover:text-primary-dark"
             >
               Get In Touch

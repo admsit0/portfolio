@@ -8,6 +8,7 @@ import {
   Database,
   Code2
 } from 'lucide-react';
+import { SectionHeader } from './ui/section-header';
 import gdgLogo from '@/assets/gdg-logo.webp';
 import gmvLogo from '@/assets/gmv-logo.png';
 import fullstackLogo from '@/assets/fullstack-logo.png';
@@ -99,14 +100,10 @@ const Experience = () => {
   return (
     <section id="experience" className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Experience & Education
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            My journey through professional experience and academic achievements in data science and technology.
-          </p>
-        </div>
+        <SectionHeader
+          title="Experience & Education"
+          subtitle="My journey through professional experience and academic achievements in data science and technology."
+        />
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Professional Experience */}

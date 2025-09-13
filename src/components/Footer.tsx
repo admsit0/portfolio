@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -76,7 +76,7 @@ const Footer = () => {
               © {currentYear} Adam Maltoni. All rights reserved.
             </p>
             <p className="text-primary-foreground/60 text-sm flex items-center gap-1 mt-2 md:mt-0">
-              Made with <Heart className="w-4 h-4 text-accent" fill="currentColor" /> and React
+              Portfolio crafted for professional growth and collaboration.
             </p>
           </div>
         </div>
