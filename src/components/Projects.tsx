@@ -38,9 +38,9 @@ const Projects = () => {
         'Performance benchmarking and model comparison tools'
       ],
       image: stableDiffusionImg,
-      github: 'https://github.com/adam-maltoni/stable-diffusion-project',
+      github: 'https://github.com/admsit0/stable-diffusion-project',
       demo: 'https://sd-demo.adam-maltoni.dev',
-      report: 'https://github.com/adam-maltoni/stable-diffusion-project/blob/main/report.pdf',
+      report: 'https://github.com/admsit0/stable-diffusion-project/blob/main/report.pdf',
       metrics: {
         'Generation Speed': '2.3s per image',
         'Model Size': '3.4GB optimized',
@@ -61,9 +61,9 @@ const Projects = () => {
         'SEO optimization and analytics'
       ],
       image: heatingWebsiteImg,
-      github: 'https://github.com/adam-maltoni/heating-company-web',
-      demo: 'https://calefaccion-madrid.es',
-      report: 'https://github.com/adam-maltoni/heating-company-web/blob/main/case-study.pdf',
+      github: 'https://github.com/admsit0/heating-company-web',
+      demo: 'https://heating-company.adam-maltoni.dev',
+      report: 'https://github.com/admsit0/heating-company-web/blob/main/case-study.pdf',
       metrics: {
         'Page Load Time': '< 2s',
         'Conversion Rate': '+45%',
@@ -84,8 +84,8 @@ const Projects = () => {
         'Detailed reporting dashboard'
       ],
       image: databasePerformanceImg,
-      github: 'https://github.com/adam-maltoni/db-performance-study',
-      report: 'https://github.com/adam-maltoni/db-performance-study/blob/main/analysis-report.pdf',
+      github: 'https://github.com/admsit0/db-performance-study',
+      report: 'https://github.com/admsit0/db-performance-study/blob/main/analysis-report.pdf',
       metrics: {
         'Databases Tested': '3 Systems',
         'Test Scenarios': '15 Workloads',
@@ -106,8 +106,8 @@ const Projects = () => {
         'Real-world dataset analysis'
       ],
       image: clusteringImg,
-      github: 'https://github.com/adam-maltoni/clustering-evaluation',
-      report: 'https://github.com/adam-maltoni/clustering-evaluation/blob/main/research-paper.pdf',
+      github: 'https://github.com/admsit0/clustering-evaluation',
+      report: 'https://github.com/admsit0/clustering-evaluation/blob/main/research-paper.pdf',
       metrics: {
         'Algorithms': '8 Methods',
         'Datasets': '12 Different',
@@ -128,8 +128,8 @@ const Projects = () => {
         'Agent behavior analysis tools'
       ],
       image: reinforcementLearningImg,
-      github: 'https://github.com/adam-maltoni/rl-analysis',
-      report: 'https://github.com/adam-maltoni/rl-analysis/blob/main/thesis.pdf',
+      github: 'https://github.com/admsit0/rl-analysis',
+      report: 'https://github.com/admsit0/rl-analysis/blob/main/thesis.pdf',
       metrics: {
         'Environments': '5 Custom',
         'Algorithms': '6 Methods',
@@ -150,8 +150,8 @@ const Projects = () => {
         'Clinical insights and recommendations'
       ],
       image: cardiacHealthImg,
-      github: 'https://github.com/adam-maltoni/cardiac-risk-analysis',
-      report: 'https://github.com/adam-maltoni/cardiac-risk-analysis/blob/main/statistical-report.pdf',
+      github: 'https://github.com/admsit0/cardiac-risk-analysis',
+      report: 'https://github.com/admsit0/cardiac-risk-analysis/blob/main/statistical-report.pdf',
       metrics: {
         'Accuracy': '94.2%',
         'Patients Analyzed': '10,000+',

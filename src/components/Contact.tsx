@@ -36,20 +36,23 @@ const Contact = () => {
     {
       icon: <Github className="w-5 h-5" />,
       label: 'GitHub',
-      value: '@adam-maltoni',
-      href: 'https://github.com/adam-maltoni'
+      value: '@admsit0',
+      href: 'https://github.com/admsit0',
+      hoverColor: 'hover:text-black'
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
       label: 'LinkedIn',
       value: '/in/adam-maltoni',
-      href: 'https://linkedin.com/in/adam-maltoni'
+      href: 'https://linkedin.com/in/adam-maltoni',
+      hoverColor: 'hover:text-blue-600'
     },
     {
       icon: <Youtube className="w-5 h-5" />,
       label: 'YouTube',
-      value: '@adam-maltoni',
-      href: 'https://youtube.com/@adam-maltoni'
+      value: '@admsito17',
+      href: 'https://youtube.com/@admsito17',
+      hoverColor: 'hover:text-red-600'
     }
   ];
 
@@ -68,13 +71,13 @@ const Contact = () => {
 
         <div className="max-w-4xl mx-auto">
           {/* Contact Information */}
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Contact Details */}
-            <div className="h-full">
+            <div className="flex flex-col">
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Get In Touch
               </h3>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-muted-foreground mb-8 flex-grow">
                 Feel free to reach out for opportunities in data science, machine learning, 
                 full-stack development, or any interesting technical challenges. I'm particularly 
                 interested in projects involving AI, fintech, and innovative web solutions.
@@ -104,11 +107,11 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="h-full">
+            <div className="flex flex-col">
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Connect Online
               </h3>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-muted-foreground mb-8 flex-grow">
                 Follow my work and connect with me on social platforms where I share insights 
                 about data science, AI developments, and technical tutorials.
               </p>
@@ -120,14 +123,14 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group"
+                    className={`flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group`}
                   >
-                    <div className="text-primary-dark group-hover:text-accent transition-colors">
+                    <div className={`text-primary-dark transition-colors group-hover:${social.hoverColor ? social.hoverColor.replace('hover:', '') : 'text-green-600'}`}>
                       {social.icon}
                     </div>
                     <div className="flex-1">
                       <p className="text-sm text-muted-foreground">{social.label}</p>
-                      <p className="font-medium text-foreground group-hover:text-primary-dark transition-colors">
+                      <p className={`font-medium text-foreground transition-colors group-hover:${social.hoverColor ? social.hoverColor.replace('hover:', '') : 'text-green-600'}`}>
                         {social.value}
                       </p>
                     </div>

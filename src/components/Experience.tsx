@@ -8,9 +8,12 @@ import {
   Database,
   Code2
 } from 'lucide-react';
-import gdgLogo from '@/assets/gdg-logo.png';
+import gdgLogo from '@/assets/gdg-logo.webp';
 import gmvLogo from '@/assets/gmv-logo.png';
 import fullstackLogo from '@/assets/fullstack-logo.png';
+import uamLogo from '@/assets/uam-logo.png';
+import harvardLogo from '@/assets/harvard-logo.png';
+import ironiaLogo from '@/assets/ironia-logo.png';
 
 const Experience = () => {
   const experiences = [
@@ -45,7 +48,7 @@ const Experience = () => {
       title: 'Freelance Full-Stack Developer',
       company: 'Self-employed',
       location: 'Remote',
-      period: 'Feb 2023 - Present',
+      period: 'Feb 2023 - Dec 2024',
       description: [
         'Delivered end-to-end web applications using Python, JS, SQL',
         'Managed client needs, development, and deployment processes'
@@ -65,7 +68,8 @@ const Experience = () => {
         'Class Delegate (2 years); active in student innovation events',
         'MVP for AI learning platform at UAM Hackathon (2nd round)'
       ],
-      gpa: 'Current Focus: Machine Learning & AI'
+      gpa: '8.38/10.0',
+  logo: uamLogo
     },
     {
       degree: 'Machine Learning and AI with Python (40h)',
@@ -74,7 +78,9 @@ const Experience = () => {
       details: [
         'Advanced coursework in machine learning algorithms and implementation',
         'Hands-on projects in neural networks and deep learning'
-      ]
+      ],
+      focus: 'Focus: Machine Learning & AI',
+  logo: harvardLogo
     },
     {
       degree: 'Microcredencial: Liga de Inversores',
@@ -84,7 +90,9 @@ const Experience = () => {
         'Designed portfolios achieving top Sharpe ratio among 240+ participants',
         'Applied predictive modeling, Black-Scholes and advanced backtesting'
       ],
-      achievement: '1st Place Winner'
+      technologies: ['Python', 'Pandas', 'NumPy', 'Financial Modeling', 'Portfolio Optimization'],
+      achievement: '1st Place Winner',
+  logo: ironiaLogo
     }
   ];
 
@@ -102,13 +110,13 @@ const Experience = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Professional Experience */}
-          <div>
+          <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-8">
               <Briefcase className="w-6 h-6 text-primary-dark" />
               <h3 className="text-2xl font-semibold text-foreground">Professional Experience</h3>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 flex-grow">
               {experiences.map((exp, index) => (
                 <div key={index} className="project-card group">
                   <div className="flex flex-col space-y-3">
@@ -122,23 +130,24 @@ const Experience = () => {
                       <div className="text-right text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          <span>{exp.period}</span>
+                          <span className="whitespace-nowrap">{exp.period}</span>
                         </div>
                         <div className="flex items-center gap-1 mt-1">
                           <MapPin className="w-4 h-4" />
                           <span>{exp.location}</span>
                         </div>
-                        {exp.logo && (
-                          <div className="mt-2">
-                            <img 
-                              src={exp.logo} 
-                              alt={`${exp.company} logo`}
-                              className="w-12 h-12 object-contain rounded"
-                            />
-                          </div>
-                        )}
                       </div>
                     </div>
+                    
+                    {exp.logo && (
+                      <div className="flex justify-end -mt-2">
+                        <img 
+                          src={exp.logo} 
+                          alt={`${exp.company} logo`}
+                          className="w-12 h-12 object-contain rounded"
+                        />
+                      </div>
+                    )}
 
                     <ul className="space-y-2">
                       {exp.description.map((item, idx) => (
@@ -166,13 +175,13 @@ const Experience = () => {
           </div>
 
           {/* Education */}
-          <div>
+          <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-8">
               <GraduationCap className="w-6 h-6 text-primary-dark" />
               <h3 className="text-2xl font-semibold text-foreground">Education</h3>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 flex-grow">
               {education.map((edu, index) => (
                 <div key={index} className="project-card group">
                   <div className="flex flex-col space-y-3">
@@ -197,6 +206,16 @@ const Experience = () => {
                         </div>
                       </div>
                     </div>
+                    
+                    {edu.logo && (
+                      <div className="flex justify-end -mt-2">
+                        <img 
+                          src={edu.logo} 
+                          alt={`${edu.institution} logo`}
+                          className="w-12 h-12 object-contain rounded"
+                        />
+                      </div>
+                    )}
 
                     <ul className="space-y-2">
                       {edu.details.map((detail, idx) => (
@@ -207,9 +226,37 @@ const Experience = () => {
                       ))}
                     </ul>
 
+                    {/* GPA Display */}
                     {edu.gpa && (
                       <div className="pt-2">
-                        <span className="text-sm font-medium text-accent">{edu.gpa}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-muted-foreground">GPA:</span>
+                          <span className="text-sm font-semibold text-accent">{edu.gpa}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Focus Area Display */}
+                    {edu.focus && (
+                      <div className="pt-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-muted-foreground">Focus:</span>
+                          <span className="text-sm font-semibold text-primary-dark">{edu.focus}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Technologies Display */}
+                    {edu.technologies && (
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        {edu.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-1 bg-accent/10 text-accent text-xs rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     )}
                   </div>

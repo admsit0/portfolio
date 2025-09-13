@@ -59,7 +59,7 @@ const Hero = () => {
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-8">
             <a
-              href="https://github.com/adam-maltoni"
+              href="https://github.com/admsit0"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -75,7 +75,7 @@ const Hero = () => {
               <Linkedin className="w-8 h-8" />
             </a>
             <a
-              href="https://youtube.com/@adam-maltoni"
+              href="https://youtube.com/@admsito17"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -110,7 +110,7 @@ const Hero = () => {
         {/* Scroll Indicator - Fixed positioning and animations */}
         <button
           onClick={scrollToNext}
-          className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hero-scroll-arrow"
+          className="absolute bottom-3 left-1/2 transform -translate-x-1/2 hero-scroll-arrow"
           aria-label="Scroll to next section"
         >
           <ArrowDown className="w-5 h-5" />

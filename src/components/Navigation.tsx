@@ -70,9 +70,9 @@ const Navigation = () => {
               ))}
               
               {/* Social Icons Container - Properly aligned */}
-              <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-border">
+              <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-gray-400">
                 <a
-                  href="https://github.com/adam-maltoni"
+                  href="https://github.com/admsit0"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary-dark transition-colors rounded-md hover:bg-muted/50"

@@ -8,7 +8,8 @@ import {
   MapPin,
   Phone,
   Mail,
-  Calendar
+  Calendar,
+  Briefcase
 } from 'lucide-react';
 
 const About = () => {
@@ -74,7 +75,7 @@ const About = () => {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A passionate data scientist with a strong international background and expertise 
+            A passionate data scientist with a strong international background and expertise
             in quantitative analysis, machine learning, and full-stack development.
           </p>
         </div>
@@ -113,18 +114,18 @@ const About = () => {
           {/* Skills */}
           <div>
             <h3 className="text-xl font-semibold text-foreground mb-6">Technical Skills</h3>
-            <div className="grid gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[...skills, ...softSkills].map((skillGroup) => (
-                <div key={skillGroup.category} className="bg-card rounded-lg p-6 border border-border hover-lift">
-                  <div className="flex items-center gap-3 mb-3">
+                <div key={skillGroup.category} className="bg-card rounded-lg p-4 border border-border hover-lift">
+                  <div className="flex items-center gap-2 mb-2">
                     <div className="text-primary-dark">{skillGroup.icon}</div>
-                    <h4 className="font-semibold text-foreground">{skillGroup.category}</h4>
+                    <h4 className="font-semibold text-foreground text-sm">{skillGroup.category}</h4>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {skillGroup.items.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 bg-primary/10 text-primary-dark text-sm rounded-full"
+                        className="px-2 py-0.5 bg-primary/10 text-primary-dark text-xs rounded-full"
                       >
                         {skill}
                       </span>
