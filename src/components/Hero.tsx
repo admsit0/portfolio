@@ -1,5 +1,5 @@
 import { ArrowDown, Github, Linkedin, Mail, Youtube } from 'lucide-react';
-import adamProfile from '@/assets/adam-profile.jpg';
+import adamProfile from '/public/placeholder.svg';
 import heroBg from '@/assets/hero-bg.jpg';
 
 const Hero = () => {

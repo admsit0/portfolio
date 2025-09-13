@@ -8,7 +8,7 @@ import {
   Database,
   Code2
 } from 'lucide-react';
-import gdgLogo from '@/assets/gdg-logo.png';
+import gdgLogo from '/public/placeholder.svg';
 import gmvLogo from '@/assets/gmv-logo.png';
 import fullstackLogo from '@/assets/fullstack-logo.png';
 
