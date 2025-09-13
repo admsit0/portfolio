@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { 
   ExternalLink, 
   Github, 
@@ -20,11 +20,12 @@ import stableDiffusionImg from '@/assets/project-stable-diffusion.jpg';
 import heatingWebsiteImg from '@/assets/project-heating-website.jpg';
 import databasePerformanceImg from '@/assets/project-database-performance.jpg';
 import clusteringImg from '@/assets/project-clustering.jpg';
-import reinforcementLearningImg from '@/assets/project-reinforcement-learning.jpg';
-import cardiacHealthImg from '@/assets/project-cardiac-health.jpg';
+import reinforcementLearningImg from '@/assets/project-reinforcement-learning.png';
+import cardiacHealthImg from '@/assets/cardiac-health.webp';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const projects = [
     {
@@ -283,8 +284,18 @@ const Projects = () => {
 
       {/* Project Modal */}
       {selectedProject !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-background rounded-lg border border-border max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          onClick={(e) => {
+            if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+              closeProjectModal();
+            }
+          }}
+        >
+          <div
+            ref={modalRef}
+            className="bg-background rounded-lg border border-border max-w-6xl w-full max-h-[99vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}>
             <div className="sticky top-0 bg-background border-b border-border p-6 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className="text-primary-dark">{projects[selectedProject].icon}</div>
@@ -300,14 +311,13 @@ const Projects = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            
             <div className="p-6">
               {/* Project Image */}
               <div className="mb-6">
                 <img
                   src={projects[selectedProject].image}
                   alt={projects[selectedProject].title}
-                  className="w-full h-64 object-cover rounded-lg"
+                  className="w-full h-96 object-cover rounded-lg"
                 />
               </div>
 
@@ -420,6 +430,6 @@ const Projects = () => {
       )}
     </section>
   );
-};
+}
 
 export default Projects;

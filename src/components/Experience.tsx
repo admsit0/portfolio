@@ -15,6 +15,8 @@ import fullstackLogo from '@/assets/fullstack-logo.png';
 import uamLogo from '@/assets/uam-logo.png';
 import harvardLogo from '@/assets/harvard-logo.png';
 import ironiaLogo from '@/assets/ironia-logo.png';
+import reinforcementLearningImg from '@/assets/project-reinforcement-learning.png';
+import cardiacHealthImg from '@/assets/cardiac-health.webp';
 
 const Experience = () => {
   const experiences = [
@@ -39,10 +41,11 @@ const Experience = () => {
       period: 'Feb - Jun 2025',
       description: [
         'Built LLM+RAG system for querying intelligence data',
-        'Integrated APIs and geospatial data in production pipelines'
+        'Integrated APIs and geospatial data in production pipelines',
+        'Developed reinforcement learning models for decision support'
       ],
-      technologies: ['Python', 'LLM', 'RAG', 'APIs', 'Geospatial Data'],
-      logo: gmvLogo
+      technologies: ['Python', 'LLM', 'RAG', 'APIs', 'Geospatial Data', 'Reinforcement Learning'],
+      logo: reinforcementLearningImg
     },
     {
       type: 'work',
@@ -52,7 +55,8 @@ const Experience = () => {
       period: 'Feb 2023 - Dec 2024',
       description: [
         'Delivered end-to-end web applications using Python, JS, SQL',
-        'Managed client needs, development, and deployment processes'
+        'Managed client needs, development, and deployment processes',
+        'Built custom dashboards and analytics for client projects'
       ],
       technologies: ['Python', 'JavaScript', 'SQL', 'Full-Stack', 'Client Management'],
       logo: fullstackLogo
@@ -67,10 +71,11 @@ const Experience = () => {
       details: [
         'Focused on machine learning, generative AI, and advanced statistical modeling',
         'Class Delegate (2 years); active in student innovation events',
-        'MVP for AI learning platform at UAM Hackathon (2nd round)'
+        'MVP for AI learning platform at UAM Hackathon (2nd round)',
+        'Cardiac health risk prediction project using ML'
       ],
       gpa: '8.38/10.0',
-  logo: uamLogo
+      logo: cardiacHealthImg
     },
     {
       degree: 'Machine Learning and AI with Python (40h)',
@@ -78,7 +83,8 @@ const Experience = () => {
       period: '2023',
       details: [
         'Advanced coursework in machine learning algorithms and implementation',
-        'Hands-on projects in neural networks and deep learning'
+        'Hands-on projects in neural networks and deep learning',
+        'Placeholder for alignment'
       ],
       focus: 'Focus: Machine Learning & AI',
   logo: harvardLogo
@@ -89,7 +95,8 @@ const Experience = () => {
       period: '2025',
       details: [
         'Designed portfolios achieving top Sharpe ratio among 240+ participants',
-        'Applied predictive modeling, Black-Scholes and advanced backtesting'
+        'Applied predictive modeling, Black-Scholes and advanced backtesting',
+        'Placeholder for alignment'
       ],
       technologies: ['Python', 'Pandas', 'NumPy', 'Financial Modeling', 'Portfolio Optimization'],
       achievement: '1st Place Winner',
@@ -99,7 +106,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-20 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Experience & Education"
           subtitle="My journey through professional experience and academic achievements in data science and technology."
@@ -124,27 +131,26 @@ const Experience = () => {
                         </h4>
                         <p className="text-primary-dark font-medium">{exp.company}</p>
                       </div>
-                      <div className="text-right text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          <span className="whitespace-nowrap">{exp.period}</span>
-                        </div>
-                        <div className="flex items-center gap-1 mt-1">
-                          <MapPin className="w-4 h-4" />
-                          <span>{exp.location}</span>
+                      <div className="flex flex-col items-end">
+                        {exp.logo && (
+                          <img 
+                            src={exp.logo} 
+                            alt={`${exp.company} logo`}
+                            className="w-12 h-12 object-contain rounded mb-6" 
+                          />
+                        )}
+                        <div className="text-right text-sm text-muted-foreground mb-2">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            <span className="whitespace-nowrap">{exp.period}</span>
+                          </div>
+                          <div className="flex items-center gap-1 mt-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{exp.location}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
-                    {exp.logo && (
-                      <div className="flex justify-end -mt-2">
-                        <img 
-                          src={exp.logo} 
-                          alt={`${exp.company} logo`}
-                          className="w-12 h-12 object-contain rounded"
-                        />
-                      </div>
-                    )}
 
                     <ul className="space-y-2">
                       {exp.description.map((item, idx) => (
@@ -196,23 +202,22 @@ const Experience = () => {
                           </div>
                         )}
                       </div>
-                      <div className="text-right text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          <span>{edu.period}</span>
+                      <div className="flex flex-col items-end">
+                        {edu.logo && (
+                          <img 
+                            src={edu.logo} 
+                            alt={`${edu.institution} logo`}
+                            className="w-12 h-12 object-contain rounded mb-6" 
+                          />
+                        )}
+                        <div className="text-right text-sm text-muted-foreground mb-2">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            <span>{edu.period}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
-                    {edu.logo && (
-                      <div className="flex justify-end -mt-2">
-                        <img 
-                          src={edu.logo} 
-                          alt={`${edu.institution} logo`}
-                          className="w-12 h-12 object-contain rounded"
-                        />
-                      </div>
-                    )}
 
                     <ul className="space-y-2">
                       {edu.details.map((detail, idx) => (

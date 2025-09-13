@@ -13,6 +13,53 @@ import {
   Briefcase
 } from 'lucide-react';
   import { SectionHeader } from './ui/section-header';
+interface InfoCardProps {
+  title: string;
+  subtitle: string;
+  date: string;
+  location: string;
+  logo: React.ReactNode;
+  bullets: string[];
+  tags: string[];
+  extra?: React.ReactNode;
+}
+
+const InfoCard: React.FC<InfoCardProps> = ({
+  title,
+  subtitle,
+  date,
+  location,
+  logo,
+  bullets,
+  tags,
+  extra,
+}) => (
+  <div className="info-card flex flex-col justify-between h-[220px] bg-white rounded-lg shadow p-4 relative">
+    <div className="flex items-start justify-between">
+      <div>
+        <h3 className="font-semibold text-lg">{title}</h3>
+        <div className="text-sm text-gray-500">{subtitle}</div>
+      </div>
+      <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center">{logo}</div>
+    </div>
+    <div className="flex items-center text-xs text-gray-400 mt-1">
+      <span>{date}</span>
+      <span className="mx-2">•</span>
+      <span>{location}</span>
+    </div>
+    <ul className="mt-2 text-sm list-disc list-inside">
+      {bullets.map((b, i) => (
+        <li key={i}>{b}</li>
+      ))}
+    </ul>
+    {extra}
+    <div className="mt-2 flex flex-wrap gap-2">
+      {tags.map((tag, i) => (
+  <span key={i} className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded">{tag}</span>
+      ))}
+    </div>
+  </div>
+);
 
 const About = () => {
   const skills = [
@@ -55,16 +102,16 @@ const About = () => {
     {
       icon: <Award className="w-5 h-5 text-accent" />,
       title: 'Excellence Scholarship - Community of Madrid',
-      year: '2023, 2025'
+      year: '2023, Projected 2025'
     },
     {
       icon: <Award className="w-5 h-5 text-accent" />,
-      title: '2nd Prize - Sports Tech Innovation',
+      title: '2nd Prize - Inmune Institute Sports Tech Innovation',
       year: '2022'
     },
     {
       icon: <Award className="w-5 h-5 text-accent" />,
-      title: '3rd Place - Olimpiada Científica Juvenil',
+      title: '3rd Place - Olimpiada Científica Juvenil Española (Madrid)',
       year: '2020'
     }
   ];
@@ -173,24 +220,24 @@ const About = () => {
 
         {/* Achievements */}
         <div className="relative mt-12">
-          <div className="flex justify-center mb-2">
-            <span className="inline-block w-16 h-1 bg-muted rounded-full"></span>
-          </div>
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center tracking-tight">
+          <h3 className="text-2xl font-bold text-black mb-8 tracking-tight text-left">
             Honors & Awards
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="bg-background rounded-xl p-5 border border-muted shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex items-center gap-5"
+                className="group bg-background rounded-xl border border-muted shadow-sm hover:shadow-lg transition-all duration-200 flex items-stretch gap-0 overflow-hidden"
               >
-                <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-muted/40">
-                  {achievement.icon}
-                </div>
-                <div className="flex flex-col">
-                  <h4 className="font-semibold text-lg text-foreground mb-1 leading-tight">{achievement.title}</h4>
-                  <span className="text-xs font-medium text-muted-foreground tracking-wide">{achievement.year}</span>
+                <div className="w-2 bg-green-400 group-hover:bg-green-500 transition-all duration-200" />
+                <div className="flex items-center gap-4 p-5 flex-1">
+                  <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-muted/40">
+                    {achievement.icon}
+                  </div>
+                  <div className="flex flex-col justify-center text-left">
+                    <h4 className="font-semibold text-lg text-foreground mb-1 leading-tight">{achievement.title}</h4>
+                    <span className="text-xs font-medium text-muted-foreground tracking-wide">{achievement.year}</span>
+                  </div>
                 </div>
               </div>
             ))}

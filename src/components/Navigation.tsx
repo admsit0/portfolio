@@ -88,9 +88,20 @@ const Navigation = () => {
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a
-                  href="/cv-adam-maltoni.pdf"
-                  download
+                  href="#"
                   className="btn-primary px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-2 ml-2"
+                  onClick={e => {
+                    e.preventDefault();
+                    // Open in new tab
+                    window.open('/cv-adam-maltoni.pdf', '_blank');
+                    // Download
+                    const link = document.createElement('a');
+                    link.href = '/cv-adam-maltoni.pdf';
+                    link.download = 'cv-adam-maltoni.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
                 >
                   <Download className="w-4 h-4" />
                   CV
