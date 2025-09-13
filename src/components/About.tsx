@@ -76,12 +76,12 @@ const About = () => {
     {
       category: 'Soft Skills & Interests',
       icon: <Users className="w-6 h-6" />,
-      items: ['Team Leadership', 'Public Speaking', 'Collaboration', 'Mentoring', 'Technical Writing', 'Finance', 'Innovation', 'Event Management', 'Entrepreneurship']
+      items: ['Team Working', 'Public Speaking', 'Team working', 'Mentoring', 'Technical Writing', 'Financial literacy', 'Innovation', 'Event Management', 'Entrepreneurship']
     },
     {
       category: 'Languages',
       icon: <Award className="w-6 h-6 text-accent" />,
-      items: ['English (C2)', 'Spanish (Native)', 'Italian (B2)', 'French (A2)']
+      items: ['English (C1)', 'Spanish (Native)', 'Italian (Native)', 'French (B2)']
     }
   ];
 
@@ -162,28 +162,28 @@ const About = () => {
                 // Define a color scheme for each card (more standard colors)
                 const colorSchemes = [
                   {
-                    bg: 'bg-gray-50',
-                    icon: 'text-blue-500',
+                    bg: 'bg-blue-50',
+                    icon: 'text-blue-400',
                     tag: '',
-                    border: 'border-gray-200'
+                    border: 'border-blue-100'
                   },
                   {
-                    bg: 'bg-gray-50',
-                    icon: 'text-purple-500',
+                    bg: 'bg-purple-50',
+                    icon: 'text-purple-400',
                     tag: '',
-                    border: 'border-gray-200'
+                    border: 'border-purple-100'
                   },
                   {
-                    bg: 'bg-gray-50',
-                    icon: 'text-green-500',
+                    bg: 'bg-green-50',
+                    icon: 'text-green-400',
                     tag: '',
-                    border: 'border-gray-200'
+                    border: 'border-green-100'
                   },
                   {
-                    bg: 'bg-gray-50',
-                    icon: 'text-cyan-500',
+                    bg: 'bg-cyan-50',
+                    icon: 'text-cyan-400',
                     tag: '',
-                    border: 'border-gray-200'
+                    border: 'border-cyan-100'
                   }
                 ];
                 const scheme = colorSchemes[idx] || colorSchemes[0];

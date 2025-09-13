@@ -11,9 +11,9 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const Index = () => {
   useScrollAnimation();
   return (
-    <div className="flex flex-col min-h-0">
+    <div className="flex flex-col min-h-screen">
       <Navigation />
-      <main className="flex-1 w-full mx-auto px-2 sm:px-4 lg:px-0 max-w-7xl">
+      <main className="flex-1 w-full mx-auto px-2 sm:px-4 lg:px-0 max-w-7xl pt-16">
         <section className="scroll-animate"><Hero /></section>
         <section className="scroll-animate"><About /></section>
         <AnimatedSeparator />

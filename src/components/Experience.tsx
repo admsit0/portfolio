@@ -71,11 +71,10 @@ const Experience = () => {
       details: [
         'Focused on machine learning, generative AI, and advanced statistical modeling',
         'Class Delegate (2 years); active in student innovation events',
-        'MVP for AI learning platform at UAM Hackathon (2nd round)',
-        'Cardiac health risk prediction project using ML'
+        'MVP for AI learning platform at UAM Hackathon (2nd round)'
       ],
       gpa: '8.38/10.0',
-      logo: cardiacHealthImg
+      logo: uamLogo
     },
     {
       degree: 'Machine Learning and AI with Python (40h)',
