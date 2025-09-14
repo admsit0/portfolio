@@ -15,8 +15,6 @@ import fullstackLogo from '@/assets/fullstack-logo.png';
 import uamLogo from '@/assets/uam-logo.png';
 import harvardLogo from '@/assets/harvard-logo.png';
 import ironiaLogo from '@/assets/ironia-logo.png';
-import reinforcementLearningImg from '@/assets/project-reinforcement-learning.png';
-import cardiacHealthImg from '@/assets/cardiac-health.webp';
 
 const Experience = () => {
   const experiences = [
@@ -45,7 +43,7 @@ const Experience = () => {
         'Developed reinforcement learning models for decision support'
       ],
       technologies: ['Python', 'LLM', 'RAG', 'APIs', 'Geospatial Data', 'Reinforcement Learning'],
-      logo: reinforcementLearningImg
+      logo: gmvLogo
     },
     {
       type: 'work',
