@@ -93,10 +93,10 @@ const Navigation = () => {
                   onClick={e => {
                     e.preventDefault();
                     // Open in new tab
-                    window.open('/cv-adam-maltoni.pdf', '_blank');
+                    window.open('/portfolio/cv-adam-maltoni.pdf', '_blank');
                     // Download
                     const link = document.createElement('a');
-                    link.href = '/cv-adam-maltoni.pdf';
+                    link.href = '/portfolio/cv-adam-maltoni.pdf';
                     link.download = 'cv-adam-maltoni.pdf';
                     document.body.appendChild(link);
                     link.click();

@@ -76,7 +76,7 @@ const Footer = () => {
               © {currentYear} Adam Maltoni. All rights reserved.
             </p>
             <p className="text-primary-foreground/60 text-sm flex items-center gap-1 mt-2 md:mt-0">
-              Portfolio crafted for professional growth and collaboration.
+              Personal project portfolio built with React.
             </p>
           </div>
         </div>

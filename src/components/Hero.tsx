@@ -30,20 +30,13 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
-          {/* Profile Image and Arrow - perfectly aligned */}
+          {/* Profile Image */}
           <div className="flex flex-col items-center mb-8">
             <img
               src={adamProfile}
               alt="Adam Maltoni"
-              className="w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover"
+              className="w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover mt-8" // Added top margin
             />
-            <button
-              onClick={scrollToNext}
-              className="mt-4 hero-scroll-arrow"
-              aria-label="Scroll to next section"
-            >
-              <ArrowDown className="w-5 h-5" />
-            </button>
           </div>
 
           {/* Name and Title */}
@@ -93,6 +86,16 @@ const Hero = () => {
             >
               <Mail className="w-8 h-8" />
             </a>
+          </div>
+          {/* Arrow moved below social links */}
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={scrollToNext}
+              className="hero-scroll-arrow"
+              aria-label="Scroll to next section"
+            >
+              <ArrowDown className="w-5 h-5" />
+            </button>
           </div>
 
           {/* CTA Buttons */}

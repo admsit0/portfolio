@@ -43,7 +43,7 @@ const Projects = () => {
       image: stableDiffusionImg,
         github: 'https://github.com/admsit0/imageGenerativeAI',
         demo: undefined,
-        report: '/project-stable-diffusion.pdf',
+  report: '/portfolio/project-stable-diffusion.pdf',
       metrics: {
         'Generation Speed': '2.3s per image',
         'Model Size': '3.4GB optimized',
@@ -80,7 +80,7 @@ const Projects = () => {
       ],
       image: databasePerformanceImg,
         github: 'https://github.com/admsit0/DB-performance-comparison',
-        report: '/project-database-performance.pdf',
+  report: '/portfolio/project-database-performance.pdf',
       metrics: {
         'Databases Tested': '3 Systems',
         'Test Scenarios': '15 Workloads',
@@ -102,7 +102,7 @@ const Projects = () => {
       ],
       image: clusteringImg,
         github: 'https://github.com/admsit0/clustering-techniques-evaluation',
-        report: '/project-clustering.pdf',
+  report: '/portfolio/project-clustering.pdf',
       metrics: {
         'Algorithms': '8 Methods',
         'Datasets': '12 Different',
@@ -124,7 +124,7 @@ const Projects = () => {
       ],
       image: reinforcementLearningImg,
         github: 'https://github.com/admsit0/RL-analysis',
-        report: '/project-reinforcement-learning.pdf',
+  report: '/portfolio/project-reinforcement-learning.pdf',
       metrics: {
         'Environments': '5 Custom',
         'Algorithms': '6 Methods',
@@ -146,7 +146,7 @@ const Projects = () => {
       ],
       image: cardiacHealthImg,
         github: 'https://github.com/admsit0/heart-risk-analysis',
-        report: '/project-heart-risk.pdf',
+  report: '/portfolio/project-heart-risk.pdf',
       metrics: {
         'Accuracy': '94.2%',
         'Patients Analyzed': '10,000+',
