@@ -1,3 +1,25 @@
+/* Footer copyright text: center and prevent break on mobile */
+@media (max-width: 600px) {
+  .footer-copyright {
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: keep-all;
+  }
+}
+/* Reduce space between contact section and footer on mobile */
+@media (max-width: 600px) {
+  .contact-section {
+    margin-bottom: 1.5rem !important;
+    padding-bottom: 0 !important;
+  }
+}
+/* Ensure profile picture does not touch navbar on mobile */
+@media (max-width: 600px) {
+  .profile-picture {
+    margin-top: 1.5rem;
+  }
+}
 @keyframes scaleIn {
   0% {
     opacity: 0;
