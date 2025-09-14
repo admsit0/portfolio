@@ -81,7 +81,7 @@ const Experience = () => {
       details: [
         'Advanced coursework in machine learning algorithms and implementation',
         'Hands-on projects in neural networks and deep learning',
-        'Placeholder for alignment'
+        'Online hands-on labs with real-world datasets'
       ],
       focus: 'Focus: Machine Learning & AI',
   logo: harvardLogo
