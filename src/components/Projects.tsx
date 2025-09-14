@@ -284,7 +284,7 @@ const Projects = () => {
                   {/* Project Modal */}
                   {selectedProject !== null && (
                     <div
-                      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+                      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-2 sm:p-4"
                       onClick={(e) => {
                         if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
                           closeProjectModal();
@@ -293,8 +293,8 @@ const Projects = () => {
                     >
                       <div
                         ref={modalRef}
-                        className="bg-background rounded-xl border border-border w-full max-w-6xl min-h-[250px] h-auto mx-auto shadow-2xl flex flex-col"
-                        style={{ margin: '0 auto' }}
+                        className="bg-background rounded-xl border border-border w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-6xl min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
+                        style={{ margin: '0 auto', overscrollBehavior: 'contain' }}
                         onClick={(e) => e.stopPropagation()}>
                         {/* Modal Header */}
                         <div className="flex justify-between items-center p-6 pb-2">
