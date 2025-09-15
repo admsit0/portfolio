@@ -93,7 +93,7 @@ const Experience = () => {
       details: [
         'Designed portfolios achieving top Sharpe ratio among 240+ participants',
         'Applied predictive modeling, Black-Scholes and advanced backtesting',
-        'Placeholder for alignment'
+        'Collaborated in team-based investment simulations'
       ],
       technologies: ['Python', 'Pandas', 'NumPy', 'Financial Modeling', 'Portfolio Optimization'],
       achievement: '1st Place Winner',
