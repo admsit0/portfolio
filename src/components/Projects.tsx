@@ -17,7 +17,7 @@ import { SectionHeader } from './ui/section-header';
 
 // Import project images
 import stableDiffusionImg from '@/assets/project-stable-diffusion.jpg';
-import heatingWebsiteImg from '@/assets/project-heating-website.jpg';
+
 import databasePerformanceImg from '@/assets/project-database-performance.jpg';
 import clusteringImg from '@/assets/project-clustering.jpg';
 import reinforcementLearningImg from '@/assets/project-reinforcement-learning.png';
@@ -64,17 +64,23 @@ const Projects = () => {
       }
     },
     {
-      title: 'Boiler & Radiant Floor Company Website',
-      category: 'Full-Stack Development',
-      icon: <Globe className="w-6 h-6" />,
-      description: 'Complete web solution for a heating systems company including contact form, internal hiring platform and blog system.',
-      image: heatingWebsiteImg,
-      github: undefined,
-      demo: 'https://www.aguitaefitec.com/',
-      report: undefined,
+      title: 'Regularization in CNNs (TFG)',
+      category: 'Artificial Intelligence',
+      icon: <Brain className="w-6 h-6" />,
+      description: 'Comparative study of seven regularization techniques (L1, L2, Dropout, Batch Norm, etc.) applied to CNNs trained on CIFAR-10 and SVHN. Analyzed external performance and internal model behaviour via Shannon entropy and dispersion ratios.',
+      technologies: ['Python', 'PyTorch', 'CNNs', 'Deep Learning', 'Data Analysis'],
+      features: [
+        'Analyzed external performance of models',
+        'Analyzed internal model behaviour via Shannon entropy and dispersion ratios'
+      ],
+      image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000',
+      github: 'https://github.com/admsit0/tfg',
+      demo: undefined,
+      report: 'https://github.com/admsit0/tfg',
       metrics: {
-        Languages: 'Python, JavaScript, HTML, CSS, PHP',
-        Satisfaction: '100'
+        Framework: 'PyTorch',
+        Datasets: 'CIFAR-10, SVHN',
+        Techniques: '7 Regularizers'
       }
     },
     {

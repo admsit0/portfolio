@@ -146,7 +146,7 @@ const Experience = () => {
 
             <div className="space-y-6 flex-grow">
               {experiences.map((exp, index) => (
-                <div key={index} className="project-card h-[500px] flex flex-col relative group transition-all duration-300">
+                <div key={index} className="project-card h-[520px] flex flex-col relative group transition-all duration-300">
                   <div className="flex flex-col h-full">
                     <div className="flex items-start justify-between mb-3">
                       <div>
@@ -222,7 +222,7 @@ const Experience = () => {
 
             <div className="space-y-6 flex-grow">
               {education.map((edu, index) => (
-                <div key={index} className="project-card h-[450px] flex flex-col relative group transition-all duration-300">
+                <div key={index} className="project-card h-[520px] flex flex-col relative group transition-all duration-300">
                   <div className="flex flex-col h-full">
                     <div className="flex items-start justify-between mb-3">
                       <div>
