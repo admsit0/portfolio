@@ -41,12 +41,12 @@ const Hero = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-4 text-foreground">
             Adam Maltoni
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-6">
+          <p className="text-xl md:text-2xl font-semibold text-muted-foreground mb-6">
             Data Scientist & AI Engineer
           </p>
 
           {/* Brief Summary */}
-          <p className="text-lg text-foreground/80 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg font-medium text-foreground/80 max-w-3xl mx-auto mb-8 leading-relaxed">
             Passionate about building cloud-native LLM architectures, data science solutions, and AI-driven applications. 
             Experienced in technology consulting at Accenture, data analytics, and leading the Google Developer Group as President. 
             Strong foundation in quantitative analysis, machine learning, and full-stack development.

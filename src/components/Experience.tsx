@@ -47,7 +47,7 @@ const Experience = () => {
     },
     {
       type: 'work',
-      title: 'Technology Consulting Analyst',
+      title: 'AI Engineer Intern',
       company: 'Accenture',
       location: 'Madrid, Spain',
       period: 'Oct 2025 - Apr 2026',
@@ -91,6 +91,17 @@ const Experience = () => {
 
   const education = [
     {
+      degree: 'MSc in Artificial Intelligence',
+      institution: 'Universidad Autónoma de Madrid (UAM)',
+      period: '2026 - Present',
+      details: [
+        'Placeholder: Describe the program focus and specialization areas',
+        'Placeholder: List key courses or research topics',
+        'Placeholder: Mention any assistantships, projects, or thesis work'
+      ],
+      logo: uamLogo
+    },
+    {
       degree: 'BSc in Data Science and Engineering',
       institution: 'Universidad Autónoma de Madrid (UAM)',
       period: '2022 - Present',
@@ -100,17 +111,6 @@ const Experience = () => {
         'MVP for AI learning platform at UAM Hackathon (2nd round)'
       ],
       gpa: '8.38/10.0',
-      logo: uamLogo
-    },
-    {
-      degree: 'MSc in Artificial Intelligence',
-      institution: 'Universidad Autónoma de Madrid (UAM)',
-      period: '2026 - Present',
-      details: [
-        'Placeholder: Describe the program focus and specialization areas',
-        'Placeholder: List key courses or research topics',
-        'Placeholder: Mention any assistantships, projects, or thesis work'
-      ],
       logo: uamLogo
     },
     {
@@ -124,7 +124,7 @@ const Experience = () => {
       ],
       technologies: ['Python', 'Pandas', 'NumPy', 'Financial Modeling', 'Portfolio Optimization'],
       achievement: '1st Place Winner',
-  logo: ironiaLogo
+      logo: ironiaLogo
     }
   ];
 
@@ -146,9 +146,9 @@ const Experience = () => {
 
             <div className="space-y-6 flex-grow">
               {experiences.map((exp, index) => (
-                <div key={index} className="project-card group">
-                  <div className="flex flex-col space-y-3">
-                    <div className="flex items-start justify-between">
+                <div key={index} className="project-card h-[500px] flex flex-col relative group transition-all duration-300">
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-start justify-between mb-3">
                       <div>
                         <h4 className="text-lg font-semibold text-foreground group-hover:text-primary-dark transition-colors">
                           {exp.title}
@@ -188,7 +188,7 @@ const Experience = () => {
                       </div>
                     </div>
 
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 mb-4 overflow-y-auto pr-2 custom-scrollbar">
                       {exp.description.map((item, idx) => (
                         <li key={idx} className="text-muted-foreground text-sm flex items-start gap-2">
                           <span className="w-1.5 h-1.5 bg-primary-dark rounded-full mt-2 flex-shrink-0"></span>
@@ -197,7 +197,7 @@ const Experience = () => {
                       ))}
                     </ul>
 
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="mt-auto pt-4 flex flex-wrap gap-2">
                       {exp.technologies.map((tech) => (
                         <span
                           key={tech}
@@ -222,9 +222,9 @@ const Experience = () => {
 
             <div className="space-y-6 flex-grow">
               {education.map((edu, index) => (
-                <div key={index} className="project-card group">
-                  <div className="flex flex-col space-y-3">
-                    <div className="flex items-start justify-between">
+                <div key={index} className="project-card h-[450px] flex flex-col relative group transition-all duration-300">
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-start justify-between mb-3">
                       <div>
                         <h4 className="text-lg font-semibold text-foreground group-hover:text-primary-dark transition-colors">
                           {edu.degree}
@@ -255,7 +255,7 @@ const Experience = () => {
                       </div>
                     </div>
 
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 mb-4 overflow-y-auto pr-2 custom-scrollbar">
                       {edu.details.map((detail, idx) => (
                         <li key={idx} className="text-muted-foreground text-sm flex items-start gap-2">
                           <span className="w-1.5 h-1.5 bg-primary-dark rounded-full mt-2 flex-shrink-0"></span>
@@ -264,39 +264,41 @@ const Experience = () => {
                       ))}
                     </ul>
 
-                    {/* GPA Display */}
-                    {edu.gpa && (
-                      <div className="pt-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-muted-foreground">GPA:</span>
-                          <span className="text-sm font-semibold text-accent">{edu.gpa}</span>
+                    <div className="mt-auto space-y-2 pt-2">
+                      {/* GPA Display */}
+                      {edu.gpa && (
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium text-muted-foreground">GPA:</span>
+                            <span className="text-sm font-semibold text-accent">{edu.gpa}</span>
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Focus Area Display */}
-                    {edu.focus && (
-                      <div className="pt-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-muted-foreground">Focus:</span>
-                          <span className="text-sm font-semibold text-primary-dark">{edu.focus}</span>
+                      {/* Focus Area Display */}
+                      {edu.focus && (
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium text-muted-foreground">Focus:</span>
+                            <span className="text-sm font-semibold text-primary-dark">{edu.focus}</span>
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Technologies Display */}
-                    {edu.technologies && (
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {edu.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-1 bg-accent/10 text-accent text-xs rounded"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                      {/* Technologies Display */}
+                      {edu.technologies && (
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {edu.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-2 py-1 bg-accent/10 text-accent text-xs rounded"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

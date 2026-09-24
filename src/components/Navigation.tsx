@@ -88,7 +88,7 @@ const Navigation = () => {
                   <Link
                     key={item.id}
                     to={`/${item.id}`}
-                    className={`nav-link px-3 py-2 text-base font-medium ${
+                    className={`nav-link px-3 py-2 text-lg font-medium ${
                       activeSection === item.id ? 'active' : ''
                     }`}
                   >
@@ -98,7 +98,7 @@ const Navigation = () => {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`nav-link px-3 py-2 text-base font-medium ${
+                    className={`nav-link px-3 py-2 text-lg font-medium ${
                       activeSection === item.id ? 'active' : ''
                     }`}
                   >
@@ -169,7 +169,7 @@ const Navigation = () => {
                 <Link
                   key={item.id}
                   to={`/${item.id}`}
-                  className={`block px-3 py-2 text-base font-medium w-full text-left nav-link ${
+                  className={`block px-3 py-2 text-lg font-medium w-full text-left nav-link ${
                     activeSection === item.id ? 'active' : ''
                   }`}
                   onClick={() => setIsOpen(false)}
@@ -180,7 +180,7 @@ const Navigation = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block px-3 py-2 text-base font-medium w-full text-left nav-link ${
+                  className={`block px-3 py-2 text-lg font-medium w-full text-left nav-link ${
                     activeSection === item.id ? 'active' : ''
                   }`}
                 >

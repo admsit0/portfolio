@@ -150,25 +150,26 @@ const Contact = () => {
           </div>
 
           {/* Additional Info */}
-          <div className="mt-8 text-center">
-            <div className="bg-white/40 backdrop-blur-2xl border border-white/80 shadow-xl rounded-3xl p-8 text-foreground">
-              <h4 className="font-bold text-xl mb-3 text-foreground">Available for Opportunities</h4>
-              <p className="text-muted-foreground mb-6">
-                Currently open to full-time positions, consulting projects, and collaborative research opportunities.
-              </p>
-              <div className="flex flex-wrap justify-center gap-6 text-sm text-foreground/80">
-                <div>
-                  <span className="font-medium text-foreground">Response Time:</span>
-                  <span className="text-muted-foreground ml-1">&lt; 24 hours</span>
-                </div>
-                <div>
-                  <span className="font-medium text-foreground">Time Zone:</span>
-                  <span className="text-muted-foreground ml-1">CET (Madrid)</span>
-                </div>
-                <div>
-                  <span className="font-medium text-foreground">Languages:</span>
-                  <span className="text-muted-foreground ml-1">Spanish, English, Italian, French</span>
-                </div>
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/50 border border-gray-200 shadow-sm backdrop-blur-md">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+              <span className="font-semibold text-foreground tracking-wide">Available for Opportunities</span>
+            </div>
+            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+              Currently open to full-time AI Engineering positions, consulting projects, and collaborative research opportunities.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+              <div>
+                <span className="font-medium text-foreground">Response Time:</span> &lt; 24 hours
+              </div>
+              <div>
+                <span className="font-medium text-foreground">Time Zone:</span> CET (Madrid)
+              </div>
+              <div>
+                <span className="font-medium text-foreground">Languages:</span> Spanish, English, Italian, French
               </div>
             </div>
           </div>
