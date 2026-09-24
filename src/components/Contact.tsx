@@ -59,7 +59,7 @@ const Contact = () => {
 
   return (
   <section id="contact" className="py-12 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Connect"
             subtitle="I'm always interested in new opportunities, collaborations, and interesting projects. Let's discuss how we can work together!"
@@ -151,7 +151,7 @@ const Contact = () => {
 
           {/* Additional Info */}
           <div className="mt-8 text-center">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 text-white">
+            <div className="bg-gradient-to-r from-[#0071e3] to-[#42a5f5] rounded-2xl p-6 text-white">
               <h4 className="font-semibold mb-2">Available for Opportunities</h4>
               <p className="text-sm opacity-90 mb-4">
                 Currently open to full-time positions, consulting projects, and collaborative research opportunities.

@@ -12,25 +12,52 @@ import { SectionHeader } from './ui/section-header';
 import gdgLogo from '@/assets/gdg-logo.webp';
 import gmvLogo from '@/assets/gmv-logo.png';
 import accentureLogo from '@/assets/accenture-logo.svg';
-import fullstackLogo from '@/assets/fullstack-logo.png';
+import freelanceLogo from '@/assets/freelance-logo.svg';
 import uamLogo from '@/assets/uam-logo.png';
-import harvardLogo from '@/assets/harvard-logo.png';
 import ironiaLogo from '@/assets/ironia-logo.png';
 
 const Experience = () => {
-  const experiences = [
+  type ExperienceItem = {
+    type: string;
+    title: string;
+    previousRoles?: string[];
+    company: string;
+    location: string;
+    period: string;
+    description: string[];
+    technologies: string[];
+    logo?: string;
+  };
+
+  const experiences: ExperienceItem[] = [
     {
       type: 'work',
-      title: 'Co-founder & Treasurer, Board Member',
+      title: 'President',
+      previousRoles: ['Co-founder & Treasurer, Board Member'],
       company: 'Google Developer Group on Campus UAM',
-      location: 'Madrid, Spain',
+      location: 'Madrid, Spain', 
       period: 'Jul 2025 - Present',
       description: [
-        'Co-founded chapter and currently leading events on AI and tech innovation',
-        'Managing treasury and operations across a multidisciplinary team'
+        'Leading the chapter as President, driving strategic direction for AI and tech events',
+        'Previously co-founded chapter and managed treasury across a multidisciplinary team',
+        'Organizing workshops, hackathons, and speaker events on AI innovation'
       ],
-      technologies: ['Leadership', 'Event Management', 'AI', 'Innovation'],
+      technologies: ['Leadership', 'Event Management', 'AI', 'Innovation', 'Community Building'],
       logo: gdgLogo
+    },
+    {
+      type: 'work',
+      title: 'Technology Consulting Analyst',
+      company: 'Accenture',
+      location: 'Madrid, Spain',
+      period: 'Oct 2025 - Apr 2026',
+      description: [
+        'Placeholder: Describe your main consulting deliverables and client impact',
+        'Placeholder: Detail specific technology solutions and tools used',
+        'Placeholder: Highlight cross-functional collaboration and results achieved'
+      ],
+      technologies: ['Consulting', 'Data Analytics', 'Automation', 'Digital Transformation', 'Financial Services'],
+      logo: accentureLogo
     },
     {
       type: 'work',
@@ -48,20 +75,6 @@ const Experience = () => {
     },
     {
       type: 'work',
-      title: 'Technology Consulting Analyst',
-      company: 'Accenture',
-      location: 'Madrid, Spain',
-      period: 'Jun - Sep 2025',
-      description: [
-        'Delivered technology consulting solutions for enterprise clients in the financial sector',
-        'Developed data-driven strategies leveraging analytics and automation tools',
-        'Collaborated with cross-functional teams on digital transformation initiatives'
-      ],
-      technologies: ['Consulting', 'Data Analytics', 'Automation', 'Digital Transformation', 'Financial Services'],
-      logo: accentureLogo
-    },
-    {
-      type: 'work',
       title: 'Freelance Full-Stack Developer',
       company: 'Self-employed',
       location: 'Remote',
@@ -72,7 +85,7 @@ const Experience = () => {
         'Built custom dashboards and analytics for client projects'
       ],
       technologies: ['Python', 'JavaScript', 'SQL', 'Full-Stack', 'Client Management'],
-      logo: fullstackLogo
+      logo: freelanceLogo
     }
   ];
 
@@ -90,16 +103,15 @@ const Experience = () => {
       logo: uamLogo
     },
     {
-      degree: 'Machine Learning and AI with Python (40h)',
-      institution: 'Harvard University (Online)',
-      period: '2023',
+      degree: 'MSc in Artificial Intelligence',
+      institution: 'Universidad Autónoma de Madrid (UAM)',
+      period: '2026 - Present',
       details: [
-        'Advanced coursework in machine learning algorithms and implementation',
-        'Hands-on projects in neural networks and deep learning',
-        'Online hands-on labs with real-world datasets'
+        'Placeholder: Describe the program focus and specialization areas',
+        'Placeholder: List key courses or research topics',
+        'Placeholder: Mention any assistantships, projects, or thesis work'
       ],
-      focus: 'Focus: Machine Learning & AI',
-  logo: harvardLogo
+      logo: uamLogo
     },
     {
       degree: 'Microcredencial: Liga de Inversores',
@@ -118,7 +130,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Experience & Education"
           subtitle="My journey through professional experience and academic achievements in data science and technology."
@@ -141,14 +153,26 @@ const Experience = () => {
                         <h4 className="text-lg font-semibold text-foreground group-hover:text-primary-dark transition-colors">
                           {exp.title}
                         </h4>
-                        <p className="text-primary-dark font-medium">{exp.company}</p>
+                        {exp.previousRoles && (
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-medium">Current</span>
+                          </div>
+                        )}
+                        {exp.previousRoles && (
+                          <div className="mt-2 pl-3 border-l-2 border-gray-200">
+                            {exp.previousRoles.map((role, idx) => (
+                              <p key={idx} className="text-sm text-muted-foreground italic">{role}</p>
+                            ))}
+                          </div>
+                        )}
+                        <p className="text-primary-dark font-medium mt-1">{exp.company}</p>
                       </div>
                       <div className="flex flex-col items-end">
                         {exp.logo && (
                           <img 
                             src={exp.logo} 
                             alt={`${exp.company} logo`}
-                            className="w-10 h-10 object-contain rounded mb-2 opacity-90" 
+                            className="w-10 h-10 object-contain rounded mb-2" 
                           />
                         )}
                         <div className="text-right text-sm text-muted-foreground mb-2">
@@ -219,7 +243,7 @@ const Experience = () => {
                           <img 
                             src={edu.logo} 
                             alt={`${edu.institution} logo`}
-                            className="w-10 h-10 object-contain rounded mb-2 opacity-90" 
+                            className="w-10 h-10 object-contain rounded mb-2" 
                           />
                         )}
                         <div className="text-right text-sm text-muted-foreground mb-2">

@@ -1,17 +1,18 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black/60 backdrop-blur-xl text-white border-t border-white/10 py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Branding */}
           <div>
             <h3 className="text-xl font-bold mb-4">Adam Maltoni</h3>
             <p className="text-white/70 mb-4">
-              Data Science & Engineering Student passionate about AI, finance, and technology.
+              Data Scientist & AI Engineer passionate about AI, cloud, and technology.
             </p>
             <div className="flex gap-4">
               <a
@@ -55,6 +56,9 @@ const Footer = () => {
                   {link}
                 </button>
               ))}
+              <Link to="/blog" className="block text-white/70 hover:text-white transition-colors">
+                Blog
+              </Link>
             </div>
           </div>
 

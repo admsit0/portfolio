@@ -179,7 +179,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 bg-gradient-subtle">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <SectionHeader
             title="Featured Projects"
@@ -225,7 +225,7 @@ const Projects = () => {
                   {(project.technologies?.slice(0, 3) ?? []).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-white/10 text-primary text-xs rounded-full"
+                      className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full"
                     >
                       {tech}
                     </span>
@@ -248,7 +248,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="View Source Code"
                       >
-                        <Github className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/10" />
+                        <Github className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-gray-100" />
                       </a>
                     )}
                     {project.demo && (
@@ -259,7 +259,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="Live Demo"
                       >
-                        <ExternalLink className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/10" />
+                        <ExternalLink className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-gray-100" />
                       </a>
                     )}
                     {project.report && (
@@ -270,7 +270,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="View Report"
                       >
-                        <FileText className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/10" />
+                        <FileText className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-gray-100" />
                       </a>
                     )}
                   </div>
@@ -298,7 +298,7 @@ const Projects = () => {
       {/* Project Modal */}
       {selectedProject !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-2 sm:p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-2 sm:p-4"
           onClick={(e) => {
             if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
               closeProjectModal();
@@ -307,7 +307,7 @@ const Projects = () => {
         >
           <div
             ref={modalRef}
-            className="bg-card backdrop-blur-xl border border-white/10 rounded-xl w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-6xl min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
+            className="bg-white border border-gray-200 rounded-xl w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-[1400px] min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
             style={{ margin: '0 auto', overscrollBehavior: 'contain' }}
             onClick={(e) => e.stopPropagation()}>
             {/* Modal Header */}
@@ -363,7 +363,7 @@ const Projects = () => {
                       {(projects[selectedProject].technologies ?? []).map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-white/10 text-primary text-base rounded-full border border-white/10"
+                          className="px-3 py-1 bg-blue-50 text-blue-700 text-base rounded-full border border-blue-100"
                         >
                           {tech}
                         </span>
@@ -375,11 +375,13 @@ const Projects = () => {
                 <div className="col-span-1 flex flex-col gap-6">
                   <div>
                     <h3 className="font-semibold text-foreground mb-2">Results & Impact</h3>
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                       {Object.entries(projects[selectedProject].metrics).map(([key, value]) => (
-                        <div key={key} className="flex justify-between items-center">
-                          <span className="text-sm text-muted-foreground">{key}</span>
-                          <span className="text-sm font-semibold text-green-600">{value}</span>
+                        <div key={key} className="border-b border-gray-100 pb-3 last:border-0">
+                          <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                            {key.replace(/([A-Z])/g, ' $1').trim()}
+                          </span>
+                          <p className="text-sm font-semibold text-foreground mt-1">{value}</p>
                         </div>
                       ))}
                     </div>
@@ -392,7 +394,7 @@ const Projects = () => {
                           href={projects[selectedProject].github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-card rounded-lg border border-border hover:shadow group"
+                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md group"
                         >
                           <Github className="w-5 h-5 text-primary-dark" />
                           <div className="flex-1">
@@ -407,7 +409,7 @@ const Projects = () => {
                           href={projects[selectedProject].demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-card rounded-lg border border-border hover:shadow group"
+                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md group"
                         >
                           <ExternalLink className="w-5 h-5 text-primary-dark" />
                           <div className="flex-1">
@@ -422,7 +424,7 @@ const Projects = () => {
                           href={projects[selectedProject].report}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-card rounded-lg border border-border hover:shadow group"
+                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md group"
                         >
                           <FileText className="w-5 h-5 text-primary-dark" />
                           <div className="flex-1">

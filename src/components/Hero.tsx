@@ -38,18 +38,18 @@ const Hero = () => {
           </div>
 
           {/* Name and Title */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
             Adam Maltoni
           </h1>
           <p className="text-xl md:text-2xl text-white/80 mb-6">
-            Data Science & Software Engineering Student
+            Data Scientist & AI Engineer
           </p>
 
           {/* Brief Summary */}
           <p className="text-lg text-white/60 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Passionate about the intersection of data science, finance, and technology. 
-            Experienced in predictive modeling, portfolio optimization, and full-stack development 
-            with a strong foundation in quantitative analysis and machine learning.
+            Passionate about building cloud-native LLM architectures, data science solutions, and AI-driven applications. 
+            Experienced in technology consulting at Accenture, data analytics, and leading the Google Developer Group as President. 
+            Strong foundation in quantitative analysis, machine learning, and full-stack development.
           </p>
 
           {/* Social Links */}

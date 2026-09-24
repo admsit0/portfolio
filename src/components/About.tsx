@@ -34,7 +34,7 @@ const InfoCard: FC<InfoCardProps> = ({
   tags,
   extra,
 }) => (
-  <div className="info-card flex flex-col justify-between min-h-[220px] bg-white/5 backdrop-blur-md rounded-lg shadow p-4 relative">
+  <div className="info-card flex flex-col justify-between min-h-[220px] bg-white rounded-lg shadow p-4 relative">
     <div className="flex items-start justify-between">
       <div>
         <h3 className="font-semibold text-lg">{title}</h3>
@@ -42,7 +42,7 @@ const InfoCard: FC<InfoCardProps> = ({
       </div>
       <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center">{logo}</div>
     </div>
-    <div className="flex items-center text-xs text-muted-foreground/70 mt-1">
+    <div className="flex items-center text-xs text-muted-foreground mt-1">
       <span>{date}</span>
       <span className="mx-2">•</span>
       <span>{location}</span>
@@ -76,7 +76,7 @@ const About = () => {
     {
       category: 'Soft Skills & Interests',
       icon: <Users className="w-6 h-6" />,
-      items: ['Team Working', 'Public Speaking', 'Team working', 'Mentoring', 'Technical Writing', 'Financial literacy', 'Innovation', 'Event Management', 'Entrepreneurship']
+      items: ['Team Working', 'Public Speaking', 'Mentoring', 'Technical Writing', 'Financial literacy', 'Innovation', 'Event Management', 'Entrepreneurship']
     },
     {
       category: 'Languages',
@@ -102,7 +102,7 @@ const About = () => {
     {
       icon: <Award className="w-5 h-5 text-accent" />,
       title: 'Excellence Scholarship - Community of Madrid',
-      year: '2023, Projected 2025'
+      year: '2023'
     },
     {
       icon: <Award className="w-5 h-5 text-accent" />,
@@ -118,7 +118,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 bg-gradient-subtle">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="About Me"
           subtitle="A passionate data scientist with a strong international background and expertise in quantitative analysis, machine learning, and full-stack development."
@@ -128,16 +128,16 @@ const About = () => {
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-foreground mb-4">Background</h3>
             <p className="text-muted-foreground leading-relaxed">
-              I'm a 4th-year Data Science and Engineering student at Universidad Autónoma de Madrid 
-              with a passion for applying cutting-edge technology to solve real-world problems. 
-              My experience spans across finance, machine learning, and full-stack development, 
-              with a particular interest in the intersection of data science and finance.
+              I'm a Data Scientist and AI Engineer with a BSc in Data Science and Engineering from 
+              Universidad Autónoma de Madrid, currently pursuing an MSc in Artificial Intelligence. 
+              My experience spans technology consulting at Accenture, building cloud-native LLM and RAG architectures, 
+              and leading data science projects across finance, geospatial intelligence, and web development.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Currently working as Co-founder & Treasurer of the Google Developer Group on Campus UAM, 
-              leading AI and tech innovation events. I've also gained valuable industry experience 
-              as a Data Science Intern at GMV-ISTAR Systems, where I built LLM+RAG systems and 
-              integrated APIs with geospatial data.
+              Currently serving as President of the Google Developer Group on Campus UAM, 
+              driving AI and tech innovation events. I've built production LLM+RAG systems at GMV-ISTAR, 
+              delivered data-driven consulting solutions at Accenture, and designed award-winning 
+              portfolio optimization models in quantitative finance.
             </p>
             
             {/* Let's Connect Pointer */}
@@ -160,14 +160,14 @@ const About = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {skills.map((skillGroup, idx) => {
                 const scheme = {
-                  bg: 'bg-white/5',
+                  bg: 'bg-white',
                   icon: 'text-primary',
-                  border: 'border-white/10'
+                  border: 'border-gray-100'
                 };
                 return (
                   <div
                     key={skillGroup.category}
-                    className={`rounded-xl p-5 border backdrop-blur-md hover-lift shadow-sm relative overflow-visible bg-white/5 border-white/10`}
+                    className={`rounded-xl p-5 border hover-lift shadow-sm relative overflow-visible bg-white border-gray-100`}
                   >
                     <div className="flex items-center gap-2 mb-3">
                       {/* Icon with strong color */}
@@ -182,7 +182,7 @@ const About = () => {
                       {skillGroup.items.map((skill, i) => (
                         <span
                           key={skill}
-                          className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors bg-white/10 text-foreground border border-white/10`}
+                          className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors bg-gray-50 text-gray-700 border border-gray-200`}
                         >
                           {skill}
                         </span>
@@ -206,9 +206,9 @@ const About = () => {
                 key={index}
                 className="group bg-background rounded-xl border border-muted shadow-sm hover:shadow-lg transition-all duration-200 flex items-stretch gap-0 overflow-hidden"
               >
-                <div className="w-2 bg-primary group-hover:bg-primary/80 transition-all duration-200" />
+                <div className="w-2 bg-[#0071e3] group-hover:bg-[#0077ED] transition-all duration-200" />
                 <div className="flex items-center gap-4 p-5 flex-1">
-                  <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-muted/40">
+                  <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-gray-100">
                     {achievement.icon}
                   </div>
                   <div className="flex flex-col justify-center text-left">
