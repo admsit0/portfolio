@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, FC, cloneElement } from 'react';
 import { 
   Code, 
   Database, 
@@ -18,13 +18,13 @@ interface InfoCardProps {
   subtitle: string;
   date: string;
   location: string;
-  logo: React.ReactNode;
+  logo: ReactNode;
   bullets: string[];
   tags: string[];
-  extra?: React.ReactNode;
+  extra?: ReactNode;
 }
 
-const InfoCard: React.FC<InfoCardProps> = ({
+const InfoCard: FC<InfoCardProps> = ({
   title,
   subtitle,
   date,
@@ -34,15 +34,15 @@ const InfoCard: React.FC<InfoCardProps> = ({
   tags,
   extra,
 }) => (
-  <div className="info-card flex flex-col justify-between h-[220px] bg-white rounded-lg shadow p-4 relative">
+  <div className="info-card flex flex-col justify-between min-h-[220px] bg-white/5 backdrop-blur-md rounded-lg shadow p-4 relative">
     <div className="flex items-start justify-between">
       <div>
         <h3 className="font-semibold text-lg">{title}</h3>
-        <div className="text-sm text-gray-500">{subtitle}</div>
+        <div className="text-sm text-muted-foreground">{subtitle}</div>
       </div>
       <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center">{logo}</div>
     </div>
-    <div className="flex items-center text-xs text-gray-400 mt-1">
+    <div className="flex items-center text-xs text-muted-foreground/70 mt-1">
       <span>{date}</span>
       <span className="mx-2">•</span>
       <span>{location}</span>
@@ -55,7 +55,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
     {extra}
     <div className="mt-2 flex flex-wrap gap-2">
       {tags.map((tag, i) => (
-  <span key={i} className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded">{tag}</span>
+  <span key={i} className="bg-accent/10 text-accent text-xs px-2 py-1 rounded">{tag}</span>
       ))}
     </div>
   </div>
@@ -159,44 +159,21 @@ const About = () => {
             <h3 className="text-xl font-semibold text-foreground mb-6">Technical Skills</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {skills.map((skillGroup, idx) => {
-                // Define a color scheme for each card (more standard colors)
-                const colorSchemes = [
-                  {
-                    bg: 'bg-blue-50',
-                    icon: 'text-blue-400',
-                    tag: '',
-                    border: 'border-blue-100'
-                  },
-                  {
-                    bg: 'bg-purple-50',
-                    icon: 'text-purple-400',
-                    tag: '',
-                    border: 'border-purple-100'
-                  },
-                  {
-                    bg: 'bg-green-50',
-                    icon: 'text-green-400',
-                    tag: '',
-                    border: 'border-green-100'
-                  },
-                  {
-                    bg: 'bg-cyan-50',
-                    icon: 'text-cyan-400',
-                    tag: '',
-                    border: 'border-cyan-100'
-                  }
-                ];
-                const scheme = colorSchemes[idx] || colorSchemes[0];
+                const scheme = {
+                  bg: 'bg-white/5',
+                  icon: 'text-primary',
+                  border: 'border-white/10'
+                };
                 return (
                   <div
                     key={skillGroup.category}
-                    className={`rounded-xl p-5 border hover-lift shadow-sm relative overflow-visible ${scheme.bg} ${scheme.border}`}
+                    className={`rounded-xl p-5 border backdrop-blur-md hover-lift shadow-sm relative overflow-visible bg-white/5 border-white/10`}
                   >
                     <div className="flex items-center gap-2 mb-3">
                       {/* Icon with strong color */}
                       <div className={scheme.icon}>
                         {skillGroup.icon && typeof skillGroup.icon === 'object'
-                          ? React.cloneElement(skillGroup.icon, { className: `w-6 h-6 ${scheme.icon}` })
+                          ? cloneElement(skillGroup.icon as any, { className: `w-6 h-6 ${scheme.icon}` })
                           : skillGroup.icon}
                       </div>
                       <h4 className="font-semibold text-foreground text-base">{skillGroup.category}</h4>
@@ -205,7 +182,7 @@ const About = () => {
                       {skillGroup.items.map((skill, i) => (
                         <span
                           key={skill}
-                          className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors bg-white text-foreground border border-gray-200`}
+                          className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors bg-white/10 text-foreground border border-white/10`}
                         >
                           {skill}
                         </span>
@@ -220,7 +197,7 @@ const About = () => {
 
         {/* Achievements */}
         <div className="relative mt-12">
-          <h3 className="text-2xl font-bold text-black mb-8 tracking-tight text-left">
+          <h3 className="text-2xl font-bold text-foreground mb-8 tracking-tight text-left">
             Honors & Awards
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
@@ -229,7 +206,7 @@ const About = () => {
                 key={index}
                 className="group bg-background rounded-xl border border-muted shadow-sm hover:shadow-lg transition-all duration-200 flex items-stretch gap-0 overflow-hidden"
               >
-                <div className="w-2 bg-green-400 group-hover:bg-green-500 transition-all duration-200" />
+                <div className="w-2 bg-primary group-hover:bg-primary/80 transition-all duration-200" />
                 <div className="flex items-center gap-4 p-5 flex-1">
                   <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-muted/40">
                     {achievement.icon}

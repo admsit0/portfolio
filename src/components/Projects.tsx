@@ -225,7 +225,7 @@ const Projects = () => {
                   {(project.technologies?.slice(0, 3) ?? []).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-primary/10 text-primary-dark text-xs rounded-full"
+                      className="px-2 py-1 bg-white/10 text-primary text-xs rounded-full"
                     >
                       {tech}
                     </span>
@@ -248,7 +248,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="View Source Code"
                       >
-                        <Github className="w-4 h-4 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-primary/10" />
+                        <Github className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/10" />
                       </a>
                     )}
                     {project.demo && (
@@ -259,7 +259,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="Live Demo"
                       >
-                        <ExternalLink className="w-4 h-4 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-primary/10" />
+                        <ExternalLink className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/10" />
                       </a>
                     )}
                     {project.report && (
@@ -270,7 +270,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="View Report"
                       >
-                        <FileText className="w-4 h-4 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-primary/10" />
+                        <FileText className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/10" />
                       </a>
                     )}
                   </div>
@@ -298,7 +298,7 @@ const Projects = () => {
       {/* Project Modal */}
       {selectedProject !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-2 sm:p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-2 sm:p-4"
           onClick={(e) => {
             if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
               closeProjectModal();
@@ -307,7 +307,7 @@ const Projects = () => {
         >
           <div
             ref={modalRef}
-            className="bg-background rounded-xl border border-border w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-6xl min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
+            className="bg-card backdrop-blur-xl border border-white/10 rounded-xl w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-6xl min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
             style={{ margin: '0 auto', overscrollBehavior: 'contain' }}
             onClick={(e) => e.stopPropagation()}>
             {/* Modal Header */}
@@ -363,7 +363,7 @@ const Projects = () => {
                       {(projects[selectedProject].technologies ?? []).map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-primary/10 text-primary-dark text-base rounded-full border border-primary/20"
+                          className="px-3 py-1 bg-white/10 text-primary text-base rounded-full border border-white/10"
                         >
                           {tech}
                         </span>

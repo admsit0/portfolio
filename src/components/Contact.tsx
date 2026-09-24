@@ -151,7 +151,7 @@ const Contact = () => {
 
           {/* Additional Info */}
           <div className="mt-8 text-center">
-            <div className="bg-gradient-primary rounded-lg p-6 text-white">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 text-white">
               <h4 className="font-semibold mb-2">Available for Opportunities</h4>
               <p className="text-sm opacity-90 mb-4">
                 Currently open to full-time positions, consulting projects, and collaborative research opportunities.

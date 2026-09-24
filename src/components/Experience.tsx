@@ -11,6 +11,7 @@ import {
 import { SectionHeader } from './ui/section-header';
 import gdgLogo from '@/assets/gdg-logo.webp';
 import gmvLogo from '@/assets/gmv-logo.png';
+import accentureLogo from '@/assets/accenture-logo.svg';
 import fullstackLogo from '@/assets/fullstack-logo.png';
 import uamLogo from '@/assets/uam-logo.png';
 import harvardLogo from '@/assets/harvard-logo.png';
@@ -44,6 +45,20 @@ const Experience = () => {
       ],
       technologies: ['Python', 'LLM', 'RAG', 'APIs', 'Geospatial Data', 'Reinforcement Learning'],
       logo: gmvLogo
+    },
+    {
+      type: 'work',
+      title: 'Technology Consulting Analyst',
+      company: 'Accenture',
+      location: 'Madrid, Spain',
+      period: 'Jun - Sep 2025',
+      description: [
+        'Delivered technology consulting solutions for enterprise clients in the financial sector',
+        'Developed data-driven strategies leveraging analytics and automation tools',
+        'Collaborated with cross-functional teams on digital transformation initiatives'
+      ],
+      technologies: ['Consulting', 'Data Analytics', 'Automation', 'Digital Transformation', 'Financial Services'],
+      logo: accentureLogo
     },
     {
       type: 'work',
@@ -133,7 +148,7 @@ const Experience = () => {
                           <img 
                             src={exp.logo} 
                             alt={`${exp.company} logo`}
-                            className="w-12 h-12 object-contain rounded mb-6" 
+                            className="w-10 h-10 object-contain rounded mb-2 opacity-90" 
                           />
                         )}
                         <div className="text-right text-sm text-muted-foreground mb-2">
@@ -204,7 +219,7 @@ const Experience = () => {
                           <img 
                             src={edu.logo} 
                             alt={`${edu.institution} logo`}
-                            className="w-12 h-12 object-contain rounded mb-6" 
+                            className="w-10 h-10 object-contain rounded mb-2 opacity-90" 
                           />
                         )}
                         <div className="text-right text-sm text-muted-foreground mb-2">

@@ -13,15 +13,17 @@ const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navigation />
-      <main className="flex-1 w-full mx-auto px-2 sm:px-4 lg:px-0 max-w-7xl pt-16">
+      <main className="flex-1 w-full pt-16">
         <section className="scroll-animate"><Hero /></section>
-        <section className="scroll-animate"><About /></section>
-        <AnimatedSeparator />
-        <section className="scroll-animate"><Experience /></section>
-        <AnimatedSeparator />
-        <section className="scroll-animate"><Projects /></section>
-        <AnimatedSeparator />
-        <section className="scroll-animate"><Contact /></section>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section className="scroll-animate"><About /></section>
+          <AnimatedSeparator />
+          <section className="scroll-animate"><Experience /></section>
+          <AnimatedSeparator />
+          <section className="scroll-animate"><Projects /></section>
+          <AnimatedSeparator />
+          <section className="scroll-animate"><Contact /></section>
+        </div>
       </main>
       <Footer />
     </div>
