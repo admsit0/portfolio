@@ -248,7 +248,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="View Source Code"
                       >
-                        <Github className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-gray-100" />
+                        <Github className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/80 hover:shadow-sm" />
                       </a>
                     )}
                     {project.demo && (
@@ -259,7 +259,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="Live Demo"
                       >
-                        <ExternalLink className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-gray-100" />
+                        <ExternalLink className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/80 hover:shadow-sm" />
                       </a>
                     )}
                     {project.report && (
@@ -270,7 +270,7 @@ const Projects = () => {
                         onClick={(e) => e.stopPropagation()}
                         title="View Report"
                       >
-                        <FileText className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-gray-100" />
+                        <FileText className="w-8 h-8 p-2 text-muted-foreground hover:text-primary-dark transition-colors rounded-lg hover:bg-white/80 hover:shadow-sm" />
                       </a>
                     )}
                   </div>
@@ -307,7 +307,7 @@ const Projects = () => {
         >
           <div
             ref={modalRef}
-            className="bg-white border border-gray-200 rounded-xl w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-[1400px] min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
+            className="bg-white/90 backdrop-blur-3xl border border-gray-200 rounded-xl w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl lg:max-w-[1400px] min-h-[200px] max-h-[90vh] mx-auto shadow-2xl flex flex-col overflow-y-auto"
             style={{ margin: '0 auto', overscrollBehavior: 'contain' }}
             onClick={(e) => e.stopPropagation()}>
             {/* Modal Header */}
@@ -394,7 +394,7 @@ const Projects = () => {
                           href={projects[selectedProject].github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md group"
+                          className="flex items-center gap-3 p-3 bg-white/50 border border-white/80 rounded-lg hover:shadow-md group"
                         >
                           <Github className="w-5 h-5 text-primary-dark" />
                           <div className="flex-1">
@@ -409,7 +409,7 @@ const Projects = () => {
                           href={projects[selectedProject].demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md group"
+                          className="flex items-center gap-3 p-3 bg-white/50 border border-white/80 rounded-lg hover:shadow-md group"
                         >
                           <ExternalLink className="w-5 h-5 text-primary-dark" />
                           <div className="flex-1">
@@ -424,7 +424,7 @@ const Projects = () => {
                           href={projects[selectedProject].report}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md group"
+                          className="flex items-center gap-3 p-3 bg-white/50 border border-white/80 rounded-lg hover:shadow-md group"
                         >
                           <FileText className="w-5 h-5 text-primary-dark" />
                           <div className="flex-1">

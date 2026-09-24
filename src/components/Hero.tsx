@@ -22,8 +22,8 @@ const Hero = () => {
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/70"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/40 via-transparent to-transparent"></div>
       
       {/* Content */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 text-center">
@@ -38,15 +38,15 @@ const Hero = () => {
           </div>
 
           {/* Name and Title */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-foreground">
             Adam Maltoni
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-6">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-6">
             Data Scientist & AI Engineer
           </p>
 
           {/* Brief Summary */}
-          <p className="text-lg text-white/60 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg text-foreground/80 max-w-3xl mx-auto mb-8 leading-relaxed">
             Passionate about building cloud-native LLM architectures, data science solutions, and AI-driven applications. 
             Experienced in technology consulting at Accenture, data analytics, and leading the Google Developer Group as President. 
             Strong foundation in quantitative analysis, machine learning, and full-stack development.
@@ -54,12 +54,12 @@ const Hero = () => {
 
           {/* Social Links */}
           <div className="flex justify-center mb-8">
-            <div className="bg-white/10 backdrop-blur-md rounded-full px-6 py-3 border border-white/10 flex justify-center space-x-6">
+            <div className="bg-white/60 backdrop-blur-2xl rounded-full px-6 py-3 border border-white/80 shadow-sm flex justify-center space-x-6">
               <a
                 href="https://github.com/admsit0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-blue-400 transition-colors duration-300 hover:scale-110 transform"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Github className="w-6 h-6" />
               </a>
@@ -67,7 +67,7 @@ const Hero = () => {
                 href="https://linkedin.com/in/adam-maltoni"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-blue-400 transition-colors duration-300 hover:scale-110 transform"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Linkedin className="w-6 h-6" />
               </a>
@@ -75,13 +75,13 @@ const Hero = () => {
                 href="https://youtube.com/@admsito17"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-blue-400 transition-colors duration-300 hover:scale-110 transform"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Youtube className="w-6 h-6" />
               </a>
               <a
                 href="mailto:adam.maltoni@gmail.com"
-                className="text-white hover:text-blue-400 transition-colors duration-300 hover:scale-110 transform"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Mail className="w-6 h-6" />
               </a>
@@ -109,7 +109,7 @@ const Hero = () => {
             </button>
             <button
               onClick={() => scrollToSectionWithOffset('contact')}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-3 rounded-lg text-base font-medium transition-colors duration-300"
+              className="bg-white/50 backdrop-blur-sm border border-gray-200 text-foreground hover:bg-white/80 px-8 py-3 rounded-lg text-base font-medium transition-colors duration-300"
             >
               Get In Touch
             </button>

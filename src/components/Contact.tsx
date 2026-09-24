@@ -151,23 +151,23 @@ const Contact = () => {
 
           {/* Additional Info */}
           <div className="mt-8 text-center">
-            <div className="bg-gradient-to-r from-[#0071e3] to-[#42a5f5] rounded-2xl p-6 text-white">
-              <h4 className="font-semibold mb-2">Available for Opportunities</h4>
-              <p className="text-sm opacity-90 mb-4">
+            <div className="bg-white/40 backdrop-blur-2xl border border-white/80 shadow-xl rounded-3xl p-8 text-foreground">
+              <h4 className="font-bold text-xl mb-3 text-foreground">Available for Opportunities</h4>
+              <p className="text-muted-foreground mb-6">
                 Currently open to full-time positions, consulting projects, and collaborative research opportunities.
               </p>
-              <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-foreground/80">
                 <div>
-                  <span className="font-medium">Response Time:</span>
-                  <span className="opacity-90 ml-1">&lt; 24 hours</span>
+                  <span className="font-medium text-foreground">Response Time:</span>
+                  <span className="text-muted-foreground ml-1">&lt; 24 hours</span>
                 </div>
                 <div>
-                  <span className="font-medium">Time Zone:</span>
-                  <span className="opacity-90 ml-1">CET (Madrid)</span>
+                  <span className="font-medium text-foreground">Time Zone:</span>
+                  <span className="text-muted-foreground ml-1">CET (Madrid)</span>
                 </div>
                 <div>
-                  <span className="font-medium">Languages:</span>
-                  <span className="opacity-90 ml-1">Spanish, English, Italian, French</span>
+                  <span className="font-medium text-foreground">Languages:</span>
+                  <span className="text-muted-foreground ml-1">Spanish, English, Italian, French</span>
                 </div>
               </div>
             </div>

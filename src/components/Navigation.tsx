@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Download, Github, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
@@ -16,6 +18,11 @@ const Navigation = () => {
   ];
 
   useEffect(() => {
+    if (location.pathname === '/blog') {
+      setActiveSection('blog');
+      return;
+    }
+
     const handleScroll = () => {
       const sections = navItems.filter(item => !item.isRoute).map(item => item.id);
       const currentSection = sections.find(section => {
@@ -33,19 +40,36 @@ const Navigation = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Call once to set initial state
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const scrollToSection = (sectionId: string) => {
+    setIsOpen(false);
+    
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for home page to render before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
-      const offsetTop = element.offsetTop - 80;
       window.scrollTo({
-        top: offsetTop,
+        top: element.offsetTop - 80,
         behavior: 'smooth'
       });
     }
-    setIsOpen(false);
   };
 
   return (
@@ -64,7 +88,9 @@ const Navigation = () => {
                   <Link
                     key={item.id}
                     to={`/${item.id}`}
-                    className="nav-link px-3 py-2 text-base font-medium"
+                    className={`nav-link px-3 py-2 text-base font-medium ${
+                      activeSection === item.id ? 'active' : ''
+                    }`}
                   >
                     {item.label}
                   </Link>
@@ -143,7 +169,9 @@ const Navigation = () => {
                 <Link
                   key={item.id}
                   to={`/${item.id}`}
-                  className="block px-3 py-2 text-base font-medium w-full text-left nav-link"
+                  className={`block px-3 py-2 text-base font-medium w-full text-left nav-link ${
+                    activeSection === item.id ? 'active' : ''
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
