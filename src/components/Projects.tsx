@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { 
   ExternalLink, 
   Github, 
@@ -26,6 +26,17 @@ import cardiacHealthImg from '@/assets/cardiac-health.webp';
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selectedProject !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject]);
 
   const projects = [
     {
@@ -73,7 +84,7 @@ const Projects = () => {
         'Analyzed external performance of models',
         'Analyzed internal model behaviour via Shannon entropy and dispersion ratios'
       ],
-      image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000',
       github: 'https://github.com/admsit0/tfg',
       demo: undefined,
       report: 'https://github.com/admsit0/tfg',
