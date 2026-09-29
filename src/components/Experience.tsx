@@ -38,9 +38,9 @@ const Experience = () => {
       location: 'Madrid, Spain', 
       period: 'Jul 2025 - Present',
       description: [
-        'Leading the chapter as President, driving strategic direction for AI and tech events',
-        'Previously co-founded chapter and managed treasury across a multidisciplinary team',
-        'Organizing workshops, hackathons, and speaker events on AI innovation'
+        'Elected President in Jul 2026 after co-founding the chapter and serving as Treasurer',
+        'Led 10+ events with 250+ attendees and helped grow the community to more than 200 members',
+        'Managed teams from 6 up to 13 people across multidisciplinary events and initiatives, including highly technical projects'
       ],
       technologies: ['Leadership', 'Event Management', 'AI', 'Innovation', 'Community Building'],
       logo: gdgLogo
@@ -52,9 +52,11 @@ const Experience = () => {
       location: 'Madrid, Spain',
       period: 'Oct 2025 - Apr 2026',
       description: [
-        'Placeholder: Describe your main consulting deliverables and client impact',
-        'Placeholder: Detail specific technology solutions and tools used',
-        'Placeholder: Highlight cross-functional collaboration and results achieved'
+        'Developed internal MCP servers and integrated external ones in a full-stack application, building AI agents and chatbot systems',
+        'Built an internal alerting tool with data anomaly detection, automated reporting, and AI-generated summaries',
+        'Worked across the full data science pipeline, from data preparation to modeling and visualization',
+        'Collaborated in international environments, producing clear technical documentation',
+        'Received return offer following the internship'
       ],
       technologies: ['Consulting', 'Data Analytics', 'Automation', 'Digital Transformation', 'Financial Services'],
       logo: accentureLogo
@@ -66,9 +68,9 @@ const Experience = () => {
       location: 'Madrid, Spain',
       period: 'Feb - Jun 2025',
       description: [
-        'Built LLM+RAG system for querying intelligence data',
-        'Integrated APIs and geospatial data in production pipelines',
-        'Developed reinforcement learning models for decision support'
+        'Built an LLM-based RAG system for querying intelligence data',
+        'Integrated APIs and geospatial data into production pipelines',
+        'Documented systems and workflows with clarity and precision'
       ],
       technologies: ['Python', 'LLM', 'RAG', 'APIs', 'Geospatial Data', 'Reinforcement Learning'],
       logo: gmvLogo
@@ -81,36 +83,46 @@ const Experience = () => {
       period: 'Feb 2023 - Dec 2024',
       description: [
         'Delivered end-to-end web applications using Python, JS, SQL',
-        'Managed client needs, development, and deployment processes',
-        'Built custom dashboards and analytics for client projects'
+        'Managed client needs, development, and deployment processes'
       ],
       technologies: ['Python', 'JavaScript', 'SQL', 'Full-Stack', 'Client Management'],
       logo: freelanceLogo
     }
   ];
 
-  const education = [
+  type EducationItem = {
+    degree: string;
+    institution: string;
+    period: string;
+    details: string[];
+    gpa?: string;
+    focus?: string;
+    technologies?: string[];
+    achievement?: string;
+    logo?: string;
+  };
+
+  const education: EducationItem[] = [
     {
       degree: 'MSc in Artificial Intelligence',
       institution: 'Universidad Autónoma de Madrid (UAM)',
       period: '2026 - Present',
       details: [
-        'Placeholder: Describe the program focus and specialization areas',
-        'Placeholder: List key courses or research topics',
-        'Placeholder: Mention any assistantships, projects, or thesis work'
+        'Focused on the scientific foundations of AI, with strong emphasis on research methodology, advanced theory, and technical development.',
+        'Thesis: Latent representation editing in LLMs for deceptive behavior unlearning and alignment (in progress)'
       ],
       logo: uamLogo
     },
     {
       degree: 'BSc in Data Science and Engineering',
       institution: 'Universidad Autónoma de Madrid (UAM)',
-      period: '2022 - Present',
+      period: '2022 - 2026',
       details: [
-        'Focused on machine learning, generative AI, and advanced statistical modeling',
-        'Class Delegate (2 years); active in student innovation events',
-        'MVP for AI learning platform at UAM Hackathon (2nd round)'
+        'Focused on machine learning, generative AI, and advanced statistical modeling, with experience developing reports and presentations in various languages.',
+        'Class Delegate (2 years); active in various student innovation events',
+        'Thesis: Study of regularization effects on neural networks\' internal activations'
       ],
-      gpa: '8.38/10.0',
+      gpa: '8.58 / 10',
       logo: uamLogo
     },
     {
@@ -146,7 +158,7 @@ const Experience = () => {
 
             <div className="space-y-6 flex-grow">
               {experiences.map((exp, index) => (
-                <div key={index} className="project-card h-[520px] flex flex-col relative group transition-all duration-300">
+                <div key={index} className="project-card h-[460px] flex flex-col relative group transition-all duration-300">
                   <div className="flex flex-col h-full">
                     <div className="flex items-start justify-between mb-3">
                       <div>
@@ -172,7 +184,7 @@ const Experience = () => {
                           <img 
                             src={exp.logo} 
                             alt={`${exp.company} logo`}
-                            className="w-10 h-10 object-contain rounded mb-2" 
+                            className="w-14 h-14 object-contain rounded mb-2" 
                           />
                         )}
                         <div className="text-right text-sm text-muted-foreground mb-2">
@@ -222,7 +234,7 @@ const Experience = () => {
 
             <div className="space-y-6 flex-grow">
               {education.map((edu, index) => (
-                <div key={index} className="project-card h-[520px] flex flex-col relative group transition-all duration-300">
+                <div key={index} className="project-card h-[460px] flex flex-col relative group transition-all duration-300">
                   <div className="flex flex-col h-full">
                     <div className="flex items-start justify-between mb-3">
                       <div>
@@ -243,7 +255,7 @@ const Experience = () => {
                           <img 
                             src={edu.logo} 
                             alt={`${edu.institution} logo`}
-                            className="w-10 h-10 object-contain rounded mb-2" 
+                            className="w-14 h-14 object-contain rounded mb-2" 
                           />
                         )}
                         <div className="text-right text-sm text-muted-foreground mb-2">
