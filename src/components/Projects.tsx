@@ -116,6 +116,7 @@ const projects: Project[] = [
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/tfg', kind: 'github' },
+      { label: 'Paper', href: assetPath('english/tfgtfmthesisuam.pdf'), kind: 'report' },
       { label: 'Blog', href: '/blog/regularization-in-cnns-internal-activations', kind: 'article', internal: true },
     ],
   },
@@ -145,7 +146,7 @@ const projects: Project[] = [
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/imageGenerativeAI', kind: 'github' },
-      { label: 'Paper', href: assetPath('project-stable-diffusion.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-stable-diffusion/project-stable-diffusion.pdf'), kind: 'report' },
       { label: 'Blog', href: '/blog/diffusion-models-from-sdes-to-images', kind: 'article', internal: true },
     ],
   },
@@ -174,6 +175,7 @@ const projects: Project[] = [
       caption: 'Signal validation and decision ranking under competition constraints',
     },
     links: [
+      { label: 'Paper', href: assetPath('english/athenai.pdf'), kind: 'report' },
       { label: 'Blog', href: '/blog/athenai-competition-decision-pipeline', kind: 'article', internal: true },
     ],
   },
@@ -203,7 +205,7 @@ const projects: Project[] = [
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/DB-performance-comparison', kind: 'github' },
-      { label: 'Paper', href: assetPath('project-database-performance.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-database-performance/project-database-performance.pdf'), kind: 'report' },
     ],
   },
   {
@@ -232,7 +234,7 @@ const projects: Project[] = [
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/RL-analysis', kind: 'github' },
-      { label: 'Paper', href: assetPath('project-reinforcement-learning.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-reinforcement-learning/project-reinforcement-learning.pdf'), kind: 'report' },
     ],
   },
   {
@@ -261,7 +263,7 @@ const projects: Project[] = [
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/clustering-techniques-evaluation', kind: 'github' },
-      { label: 'Paper', href: assetPath('project-clustering.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-clustering/project-clustering.pdf'), kind: 'report' },
     ],
   },
   {
@@ -290,7 +292,7 @@ const projects: Project[] = [
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/heart-risk-analysis', kind: 'github' },
-      { label: 'Paper', href: assetPath('project-heart-risk.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-heart-risk/project-heart-risk.pdf'), kind: 'report' },
     ],
   },
 ];
