@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F7FFF9"/>
+  <rect x="70" y="58" width="1060" height="514" rx="32" fill="white" stroke="#DCEFE4" stroke-width="2"/>
+  <path d="M148 404C220 328 276 355 337 285C405 207 472 216 534 280C604 352 671 356 742 262C814 167 894 185 1034 126" stroke="#34A853" stroke-width="14" stroke-linecap="round"/>
+  <path d="M148 448C236 384 289 420 366 362C445 302 497 331 561 380C646 446 724 438 782 362C852 270 928 294 1034 236" stroke="#FBBC04" stroke-width="14" stroke-linecap="round"/>
+  <path d="M148 490C224 456 300 482 362 448C436 408 495 421 572 466C650 512 744 506 820 438C884 381 954 391 1034 350" stroke="#EA4335" stroke-width="14" stroke-linecap="round"/>
+  <rect x="188" y="168" width="164" height="112" rx="18" fill="#EAF7EF" stroke="#34A853" stroke-width="3"/>
+  <rect x="424" y="168" width="164" height="112" rx="18" fill="#FFF7DF" stroke="#FBBC04" stroke-width="3"/>
+  <rect x="660" y="168" width="164" height="112" rx="18" fill="#E8F2FF" stroke="#0071E3" stroke-width="3"/>
+  <path d="M352 224H424M588 224H660M824 224H918" stroke="#1D1D1F" stroke-opacity="0.28" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="944" cy="224" r="30" fill="#111827"/>
+  <path d="M932 224L941 233L958 214" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="230" y="235" fill="#188038" font-size="22" font-weight="800" font-family="Inter, Arial, sans-serif">signals</text>
+  <text x="466" y="235" fill="#B06000" font-size="22" font-weight="800" font-family="Inter, Arial, sans-serif">model</text>
+  <text x="696" y="235" fill="#0071E3" font-size="22" font-weight="800" font-family="Inter, Arial, sans-serif">decision</text>
+  <rect x="102" y="452" width="700" height="108" rx="22" fill="white" fill-opacity="0.86"/>
+  <text x="118" y="136" fill="#188038" font-size="22" font-weight="700" font-family="Inter, Arial, sans-serif" letter-spacing="4">ATHENAI / APPLIED ML</text>
+  <text x="118" y="500" fill="#111827" font-size="54" font-weight="800" font-family="Inter, Arial, sans-serif">Decision Pipeline</text>
+  <text x="118" y="542" fill="#667085" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">Validation, ranking, and readable technical reasoning</text>
+</svg>
