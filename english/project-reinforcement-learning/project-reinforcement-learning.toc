@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Exercise 1: The gymnasium}{2}{section.1}%
+\contentsline {section}{\numberline {2}Exercise 2: Q-learning}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Step 0: Set up and understand Frozen Lake environment}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Step 1: Greedy and Epsilon greedy policies}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Step 2: Train the RL agent}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}A more challenging problem}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Slippery environment}{6}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Exercise 3: Train the RL agent using SARSA}{7}{section.3}%
+\contentsline {section}{\numberline {4}Exercise 4: Compare SARSA and Q-learning}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}What is episode reward in RL and how is it related to the performance of an RL agent?}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}What is episode length in RL and how is it related to the performance of an RL agent?}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}What is training error in RL and how is it related to the performance of an RL agent?}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Exercise 5: Compare SARSA and Q-learning plots}{9}{section.5}%
+\contentsline {section}{\numberline {6}Exercise 6: Train a deep Q-learning agent}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Deep Q-Learning Agent}{10}{subsection.6.1}%
+\contentsline {section}{\numberline {7}References}{11}{section.7}%
