@@ -4,9 +4,7 @@ import {
   MapPin, 
   Github, 
   Linkedin, 
-  Youtube,
-  ArrowDown,
-  Download
+  Youtube
   } from 'lucide-react';
   import { SectionHeader } from './ui/section-header';
 
@@ -76,7 +74,7 @@ const Contact = () => {
               <p className="text-muted-foreground mb-8 flex-grow">
                 Feel free to reach out for opportunities in data science, machine learning, 
                 full-stack development, or any interesting technical challenges. I'm particularly 
-                interested in projects involving AI, fintech, and innovative web solutions.
+                interested in projects involving AI, data systems, and innovative web solutions.
               </p>
 
               <div className="space-y-4">

@@ -2,23 +2,24 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Download, Github, Linkedin } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+  { id: 'blog', label: 'Blog', isRoute: true },
+];
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
-
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-    { id: 'blog', label: 'Blog', isRoute: true }
-  ];
+  const cvPath = `${import.meta.env.BASE_URL}cv-adam-maltoni.pdf`;
 
   useEffect(() => {
-    if (location.pathname === '/blog') {
+    if (location.pathname.startsWith('/blog')) {
       setActiveSection('blog');
       return;
     }
@@ -131,10 +132,10 @@ const Navigation = () => {
                   onClick={e => {
                     e.preventDefault();
                     // Open in new tab
-                    window.open('/portfolio/cv-adam-maltoni.pdf', '_blank');
+                    window.open(cvPath, '_blank');
                     // Download
                     const link = document.createElement('a');
-                    link.href = '/portfolio/cv-adam-maltoni.pdf';
+                    link.href = cvPath;
                     link.download = 'cv-adam-maltoni.pdf';
                     document.body.appendChild(link);
                     link.click();
@@ -190,7 +191,7 @@ const Navigation = () => {
             ))}
             <div className="px-3 py-2">
               <a
-                href="/cv-adam-maltoni.pdf"
+                href={cvPath}
                 download
                 className="bg-[#0071e3] text-white hover:bg-[#0077ED] px-4 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2 transition-colors"
               >

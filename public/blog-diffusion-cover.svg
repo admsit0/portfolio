@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#FAF8FF"/>
+  <rect x="70" y="58" width="1060" height="514" rx="32" fill="white" stroke="#EDE7FF" stroke-width="2"/>
+  <circle cx="304" cy="304" r="184" fill="#F0E9FF"/>
+  <circle cx="304" cy="304" r="132" fill="#E8F2FF"/>
+  <circle cx="304" cy="304" r="76" fill="#FFFFFF" stroke="#7B2FF7" stroke-width="3"/>
+  <g fill="#7B2FF7" opacity="0.8">
+    <circle cx="169" cy="240" r="5"/>
+    <circle cx="235" cy="147" r="4"/>
+    <circle cx="362" cy="164" r="6"/>
+    <circle cx="429" cy="248" r="4"/>
+    <circle cx="399" cy="384" r="5"/>
+    <circle cx="260" cy="430" r="4"/>
+    <circle cx="176" cy="362" r="6"/>
+    <circle cx="303" cy="304" r="7"/>
+  </g>
+  <path d="M508 304C586 216 650 216 728 304C806 392 870 392 948 304" stroke="#0071E3" stroke-width="12" stroke-linecap="round"/>
+  <path d="M508 350C586 262 650 262 728 350C806 438 870 438 948 350" stroke="#34A853" stroke-width="12" stroke-linecap="round"/>
+  <path d="M508 258C586 170 650 170 728 258C806 346 870 346 948 258" stroke="#FBBC04" stroke-width="12" stroke-linecap="round"/>
+  <rect x="826" y="150" width="210" height="210" rx="26" fill="#111827"/>
+  <rect x="852" y="178" width="158" height="16" rx="8" fill="#FFFFFF" opacity="0.92"/>
+  <rect x="852" y="214" width="108" height="16" rx="8" fill="#7B2FF7"/>
+  <rect x="852" y="250" width="136" height="16" rx="8" fill="#34A853"/>
+  <rect x="852" y="286" width="82" height="16" rx="8" fill="#FBBC04"/>
+  <text x="118" y="136" fill="#7B2FF7" font-size="22" font-weight="700" font-family="Inter, Arial, sans-serif" letter-spacing="4">GENERATIVE AI / SDE</text>
+  <text x="118" y="500" fill="#111827" font-size="54" font-weight="800" font-family="Inter, Arial, sans-serif">Diffusion Models</text>
+  <text x="118" y="542" fill="#667085" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">From stochastic noise to controllable image generation</text>
+</svg>

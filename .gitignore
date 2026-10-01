@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+qa-*.png
+.qa-chrome/
 
 # Editor directories and files
 .vscode/*

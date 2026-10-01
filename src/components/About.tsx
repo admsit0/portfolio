@@ -1,65 +1,10 @@
-import { ReactNode, FC, cloneElement } from 'react';
 import { 
-  Code, 
   Database, 
   Brain, 
-  TrendingUp, 
   Users, 
   Award,
-  MapPin,
-  Phone,
-  Mail,
-  Calendar,
-  Briefcase
 } from 'lucide-react';
-  import { SectionHeader } from './ui/section-header';
-interface InfoCardProps {
-  title: string;
-  subtitle: string;
-  date: string;
-  location: string;
-  logo: ReactNode;
-  bullets: string[];
-  tags: string[];
-  extra?: ReactNode;
-}
-
-const InfoCard: FC<InfoCardProps> = ({
-  title,
-  subtitle,
-  date,
-  location,
-  logo,
-  bullets,
-  tags,
-  extra,
-}) => (
-  <div className="info-card flex flex-col justify-between min-h-[220px] bg-white rounded-lg shadow p-4 relative">
-    <div className="flex items-start justify-between">
-      <div>
-        <h3 className="font-semibold text-lg">{title}</h3>
-        <div className="text-sm text-muted-foreground">{subtitle}</div>
-      </div>
-      <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center">{logo}</div>
-    </div>
-    <div className="flex items-center text-xs text-muted-foreground mt-1">
-      <span>{date}</span>
-      <span className="mx-2">•</span>
-      <span>{location}</span>
-    </div>
-    <ul className="mt-2 text-sm list-disc list-inside">
-      {bullets.map((b, i) => (
-        <li key={i}>{b}</li>
-      ))}
-    </ul>
-    {extra}
-    <div className="mt-2 flex flex-wrap gap-2">
-      {tags.map((tag, i) => (
-  <span key={i} className="bg-accent/10 text-accent text-xs px-2 py-1 rounded">{tag}</span>
-      ))}
-    </div>
-  </div>
-);
+import { SectionHeader } from './ui/section-header';
 
 const About = () => {
   const skills = [
@@ -71,25 +16,17 @@ const About = () => {
     {
       category: 'AI & Data Science',
       icon: <Brain className="w-6 h-6" />,
-      items: ['Scikit-learn', 'TensorFlow', 'Machine Learning', 'Deep Learning', 'NLP', 'Computer Vision', 'Portfolio Optimization', 'Risk Management', 'Quantitative Analysis']
+      items: ['Scikit-learn', 'TensorFlow', 'Machine Learning', 'Deep Learning', 'NLP', 'Computer Vision', 'Model Evaluation', 'Statistical Modeling', 'Generative AI']
     },
     {
       category: 'Soft Skills & Interests',
       icon: <Users className="w-6 h-6" />,
-      items: ['Team Working', 'Public Speaking', 'Mentoring', 'Technical Writing', 'Financial literacy', 'Innovation', 'Event Management', 'Entrepreneurship']
+      items: ['Team Working', 'Public Speaking', 'Mentoring', 'Technical Writing', 'Developer Communities', 'Innovation', 'Event Management', 'Entrepreneurship']
     },
     {
       category: 'Languages',
       icon: <Award className="w-6 h-6 text-accent" />,
       items: ['English (C1)', 'Spanish (Native)', 'Italian (Native)', 'French (B2)']
-    }
-  ];
-
-  const softSkills = [
-    {
-      category: 'Leadership & Communication',
-      icon: <Users className="w-6 h-6" />,
-      items: ['Team Leadership', 'Public Speaking', 'Cross-functional Collaboration', 'Mentoring', 'Technical Writing']
     }
   ];
 
@@ -131,13 +68,13 @@ const About = () => {
               I'm a Data Scientist and AI Engineer with a BSc in Data Science and Engineering from 
               Universidad Autónoma de Madrid, currently pursuing an MSc in Artificial Intelligence. 
               My experience spans technology consulting at Accenture, building cloud-native LLM and RAG architectures, 
-              and leading data science projects across finance, geospatial intelligence, and web development.
+              and leading data science projects across geospatial intelligence, applied AI, and web development.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               Currently serving as President of the Google Developer Group on Campus UAM, 
               driving AI and tech innovation events. I've built production LLM+RAG systems at GMV-ISTAR, 
-              delivered data-driven consulting solutions at Accenture, and designed award-winning 
-              portfolio optimization models in quantitative finance.
+              delivered data-driven consulting solutions at Accenture, and developed research-oriented 
+              projects in generative AI, model evaluation, and statistical analysis.
             </p>
             
             {/* Let's Connect Pointer */}
@@ -158,7 +95,7 @@ const About = () => {
           <div>
             <h3 className="text-xl font-semibold text-foreground mb-6">Technical Skills</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {skills.map((skillGroup, idx) => {
+              {skills.map((skillGroup) => {
                 const scheme = {
                   bg: 'bg-white',
                   icon: 'text-primary',
@@ -172,14 +109,12 @@ const About = () => {
                     <div className="flex items-center gap-2 mb-3">
                       {/* Icon with strong color */}
                       <div className={scheme.icon}>
-                        {skillGroup.icon && typeof skillGroup.icon === 'object'
-                          ? cloneElement(skillGroup.icon as any, { className: `w-6 h-6 ${scheme.icon}` })
-                          : skillGroup.icon}
+                        {skillGroup.icon}
                       </div>
                       <h4 className="font-semibold text-foreground text-base">{skillGroup.category}</h4>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {skillGroup.items.map((skill, i) => (
+                      {skillGroup.items.map((skill) => (
                         <span
                           key={skill}
                           className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors bg-gray-50 text-gray-700 border border-gray-200`}
