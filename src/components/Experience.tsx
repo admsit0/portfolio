@@ -12,8 +12,7 @@ import gmvLogo from '@/assets/gmv-logo.png';
 import freelanceLogo from '@/assets/freelance-logo.svg';
 import uamLogo from '@/assets/uam-logo.png';
 import ironiaLogo from '@/assets/ironia-logo.png';
-
-const accentureLogo = `${import.meta.env.BASE_URL}acn-logo.png`;
+import accentureLogo from '@/assets/accenture-logo-raw.svg';
 
 const Experience = () => {
   type ExperienceItem = {
@@ -26,7 +25,6 @@ const Experience = () => {
     description: string[];
     technologies: string[];
     logo?: string;
-    logoFrame?: string;
     website?: string;
     websiteLabel?: string;
   };
@@ -63,7 +61,6 @@ const Experience = () => {
       ],
       technologies: ['AI Agents', 'MCP', 'Data Pipelines', 'Automation', 'Dashboards'],
       logo: accentureLogo,
-      logoFrame: 'bg-black p-2',
     },
     {
       type: 'work',
@@ -146,16 +143,14 @@ const Experience = () => {
   const Logo = ({
     src,
     alt,
-    frame,
   }: {
     src?: string;
     alt: string;
-    frame?: string;
   }) => {
     if (!src) return null;
 
     return (
-      <div className={`flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-lg border border-black/[0.06] bg-[#f5f5f7] p-3 shadow-sm ${frame ?? ''}`}>
+      <div className="flex h-20 w-24 flex-shrink-0 items-center justify-center bg-transparent p-1">
         <img
           src={src}
           alt={alt}
@@ -182,7 +177,7 @@ const Experience = () => {
 
             <div className="grid gap-6">
               {experiences.map((exp, index) => (
-                <div key={index} className="project-card min-h-[390px] flex flex-col overflow-hidden relative group">
+                <div key={index} className="project-card relative flex min-h-[430px] flex-col overflow-hidden md:h-[430px] group">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="min-w-0">
                       <h4 className="text-xl font-semibold leading-tight text-foreground group-hover:text-primary-dark transition-colors">
@@ -213,7 +208,7 @@ const Experience = () => {
                       )}
                     </div>
 
-                    <Logo src={exp.logo} alt={`${exp.company} logo`} frame={exp.logoFrame} />
+                    <Logo src={exp.logo} alt={`${exp.company} logo`} />
                   </div>
 
                   <div className="mb-5 flex flex-wrap gap-3 text-sm text-muted-foreground">
@@ -259,7 +254,7 @@ const Experience = () => {
 
             <div className="grid gap-6">
               {education.map((edu, index) => (
-                <div key={index} className="project-card min-h-[390px] flex flex-col overflow-hidden relative group">
+                <div key={index} className="project-card relative flex min-h-[430px] flex-col overflow-hidden md:h-[430px] group">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="min-w-0">
                       <h4 className="text-xl font-semibold leading-tight text-foreground group-hover:text-primary-dark transition-colors">

@@ -25,21 +25,20 @@ const accentClasses = {
 } satisfies Record<BlogPost['accent'], Record<string, string>>;
 
 const BlogVisual = ({ post, featured = false }: { post: BlogPost; featured?: boolean }) => (
-  <div className={`relative overflow-hidden bg-[#111214] ${featured ? 'min-h-[380px]' : 'h-60'} p-5 sm:p-7`}>
+  <div className={`relative overflow-hidden bg-white ${featured ? 'min-h-[380px]' : 'h-60'}`}>
     <img
       src={post.coverImage}
       alt=""
       aria-hidden="true"
-      className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-xl"
+      className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-2xl transition-transform duration-500 group-hover:scale-[1.14]"
     />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.20),transparent_34%),linear-gradient(135deg,rgba(17,18,20,0.88),rgba(17,18,20,0.42))]" />
-    <div className="relative z-10 flex h-full items-center justify-center">
-      <img
-        src={post.coverImage}
-        alt={post.coverAlt}
-        className="max-h-full w-auto max-w-[78%] rounded-md border border-white/15 bg-white object-contain shadow-2xl shadow-black/35 transition-transform duration-500 group-hover:scale-[1.02]"
-      />
-    </div>
+    <div className="absolute inset-0 bg-white/62" aria-hidden="true" />
+    <img
+      src={post.coverImage}
+      alt={post.coverAlt}
+      className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.025]"
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04))]" aria-hidden="true" />
   </div>
 );
 
@@ -169,7 +168,12 @@ const BlogArticle = ({ post }: { post: BlogPost }) => {
               },
               img: ({ node: _node, ...props }) => {
                 void _node;
-                return <img {...props} className="my-8 rounded-lg border border-gray-200 shadow-sm" />;
+                return (
+                  <img
+                    {...props}
+                    className="my-9 w-full rounded-xl border border-black/[0.08] bg-white p-2 shadow-lg shadow-black/[0.06]"
+                  />
+                );
               },
               code: ({ node: _node, className, children, ...props }) => {
                 void _node;

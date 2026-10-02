@@ -24,10 +24,10 @@ export const blogPosts: BlogPost[] = [
       'My TFG compared seven regularizers on the same CNN and asked what they do to hidden activations, robustness, and generalization.',
     date: '2026-07-18',
     displayDate: 'Published on 18 July 2026, 09:00',
-    readTime: '18 min read',
+    readTime: '21 min read',
     category: 'Thesis',
     coverImage: asset('blog-covers/regularization.png'),
-    coverAlt: 'Cover page of the thesis on regularization mechanisms in neural networks',
+    coverAlt: 'Stylized radar-chart cover for the thesis on CNN regularization mechanisms',
     accent: 'blue',
     content: `Most regularization explanations eventually collapse into one plot: the training curve keeps going down, the validation curve stops improving, and the gap between them is called overfitting. That picture is useful, but it hides the object that I actually wanted to study in my TFG: the internal representation learned by the network.
 
@@ -36,6 +36,8 @@ The question behind the thesis was:
 **When two CNNs reach similar validation accuracy, are they internally organizing information in the same way?**
 
 The answer was no. Regularization did not only change the final score. It changed how activations spread, compressed, saturated, and reacted to perturbations. The project became an attempt to make that difference measurable.
+
+That sounds obvious now, but it was not how I started. My first instinct was to make the standard regularization comparison, rank the methods by validation accuracy, and write the discussion around that table. The more checkpoints I inspected, the less satisfying that felt. Some models were accurate but internally sharp. Others were not top-ranked on clean validation, yet survived parameter noise much better. The thesis became interesting only when I stopped treating accuracy as the whole story and started treating the network as a system with hidden state.
 
 ## The setup: keep the model boring on purpose
 
@@ -171,6 +173,33 @@ Second, I added Gaussian noise directly to the weights of conv1, conv3, and fc1.
 
 This is where dropout stood out. At weight noise sigma = 0.15, dropout had consistently strong retention across layers and datasets. On CIFAR-10 it retained 83.1% in conv1, 77.5% in conv3, and 86.1% in fc1. BatchNorm, despite its strong clean performance, collapsed more strongly in convolutional layers, with CIFAR-10 retentions of 51.2% in conv1 and 42.0% in conv3.
 
+The radar plot below is the compact version of that tension. Each axis is normalized inside the dataset, so it should not be read as an absolute measurement scale. It is a profile view: validation accuracy, robustness to data noise, robustness to weight noise in conv1/conv3/fc1, and consistency across layers. The useful part is not that it crowns one winner. The useful part is that it makes the shape of each regularizer visible.
+
+The profile I used can be thought of as a small multi-objective vector per regularizer and dataset:
+
+\`\`\`text
+v_method,dataset =
+  [
+    val_acc,
+    retention_data_noise_sigma_0.20,
+    retention_weight_noise_conv1_sigma_0.15,
+    retention_weight_noise_conv3_sigma_0.15,
+    retention_weight_noise_fc1_sigma_0.15,
+    inter_layer_consistency
+  ]
+
+normalized_axis_value =
+  15 + 85 * (x - min_axis) / (max_axis - min_axis)
+\`\`\`
+
+The floor at 15 keeps a weak method visible without pretending it is zero, and the per-axis min-max scaling keeps the radar from mixing raw percentages with heterogeneous robustness measurements.
+
+![Radar charts comparing regularizers across accuracy, data-noise robustness, weight-noise robustness, and inter-layer consistency on CIFAR-10, SVHN, CIFAR-100, and FashionMNIST.](${asset('blog-plots/regularization-radar.png')})
+
+The plot made one thing hard to ignore: no method fills the star. Data augmentation pushes clean accuracy strongly, especially in the image datasets where augmentation matches the task invariances, but it does not dominate every robustness axis. Dropout is less glamorous in the accuracy table, yet its weight-noise footprint is consistently large. BatchNorm has a strong profile in several domains but can become brittle when the perturbation is applied to convolutional parameters. L2 often keeps a wide internal state space, which can look healthy in entropy terms but does not automatically mean better generalization.
+
+I like this visualization because it prevents the lazy sentence "regularizer X is best." It forces the follow-up: best under which axis, on which dataset, and against which perturbation?
+
 The lesson is not that BatchNorm is bad. The lesson is that the same method can be excellent for optimization and fragile under parameter perturbation. That difference is invisible if the only column in the spreadsheet is validation accuracy.
 
 ## The practical takeaway
@@ -178,6 +207,8 @@ The lesson is not that BatchNorm is bad. The lesson is that the same method can 
 By the end of the project, I no longer thought of regularization as a ranked list of techniques. I thought of it as a set of biases with different failure modes.
 
 Data augmentation was the best choice when the priority was clean-image validation performance. Dropout was the strongest candidate when parameter stability mattered. L2 and even the baseline could look relatively resilient under stochastic input noise, although they sacrificed clean performance. BatchNorm was powerful but sharp in the convolutional feature extractor.
+
+That conditional answer is less tidy than a leaderboard, but it is closer to how I would actually use the results. If I were training a small vision model for a setting where the input distribution is clean and augmentation captures the expected invariances, I would start with augmentation. If I cared about compression, pruning, noisy deployment weights, or small hardware perturbations, I would look again at dropout and not dismiss it just because it lost the clean validation race. If a model showed high entropy, high unique-state percentage, and a large gap, I would treat that as a warning sign rather than as "rich representation" by default.
 
 So the thesis answer to "which regularizer is best?" was deliberately conditional:
 
@@ -210,10 +241,10 @@ That was the value of the thesis for me. It turned the CNN from a black box that
       'A modular PyTorch diffusion platform for image generation, with configurable SDEs, schedulers, samplers, conditioning, imputation, and metrics.',
     date: '2025-05-28',
     displayDate: 'Published on 28 May 2025, 09:00',
-    readTime: '16 min read',
+    readTime: '19 min read',
     category: 'Generative AI',
     coverImage: asset('blog-covers/diffusion.png'),
-    coverAlt: 'Technical report page for the diffusion-based generative image system',
+    coverAlt: 'Stylized diffusion cover with denoising samples, runtime bars, and imputation output',
     accent: 'purple',
     content: `The one-sentence version of diffusion image generation is almost too clean: add noise until an image becomes Gaussian static, then learn how to reverse the process. It is a good intuition, but it hides the engineering question that made this project interesting:
 
@@ -222,6 +253,8 @@ That was the value of the thesis for me. It turned the CNN from a black box that
 In this project, I worked on a modular generative image system built around score-based diffusion. The goal was not to train a giant production model. It was to build a practical experimental platform where the user could swap the diffusion process, the noise schedule, the sampler, and the conditioning mode without rewriting the whole system.
 
 The system supported grayscale and RGB image datasets, trained a U-Net-style score model, generated samples from noise, evaluated them with standard metrics, and included controlled generation modes such as class conditioning and imputation.
+
+The part I liked most was that the project refused to stay as a single notebook. Diffusion code becomes misleading very quickly when the SDE, the scheduler, the sampler, and the visualization are all tangled together. You can get a grid of images, but you cannot tell whether an improvement came from the process, the integration method, a conditioning trick, or just a lucky seed. I wanted the package to make those choices explicit enough that a bad experiment would at least fail for a traceable reason.
 
 ## The score is the direction back to data
 
@@ -240,6 +273,22 @@ score(x_t, t) ~= gradient_x log p_t(x_t)
 \`\`\`
 
 Intuitively, the score points toward regions where the noisy sample looks more like something that could have come from the data distribution at that noise level. Sampling then becomes numerical navigation: start at noise, repeatedly ask the score network which way data lies, and integrate backward.
+
+The two equations I kept coming back to were the denoising score-matching objective and the reverse-time dynamics. In implementation terms, the model is learning a time-conditioned vector field:
+
+\`\`\`text
+theta* = argmin_theta E_t,x0,z [
+  lambda(t) || s_theta(x_t, t, y) - target_score(x_t, x0, t) ||_2^2
+]
+
+reverse SDE:
+dx = [f(x,t) - g(t)^2 * s_theta(x,t)] dt + g(t) d_w_bar
+
+probability-flow ODE:
+dx = [f(x,t) - 0.5 * g(t)^2 * s_theta(x,t)] dt
+\`\`\`
+
+That is why the sampler abstraction mattered. Euler-Maruyama, Predictor-Corrector, and Probability Flow ODE are not cosmetic variants; they are different ways of using the same learned score field.
 
 A very compressed training loop looks like this:
 
@@ -318,6 +367,12 @@ plot samples
 
 This may sound like ordinary software modularity, but for diffusion models it is a big deal. A sampler is not just an implementation detail; it is part of the model's behavior.
 
+One of the useful sanity checks was timing the sampler combinations instead of only looking at final images. The plot below is not a universal benchmark; it came from a small experimental setting, so I would not over-interpret CPU versus CUDA ratios. But it captures the engineering shape of the problem: Predictor-Corrector is cheap in this configuration, Euler-Maruyama is heavier, and the Exponential Integrator sits in the middle while behaving differently from the stochastic samplers.
+
+![Average sampling time per sampler grouped by device for a digit-3 MNIST Sub-VP experiment.](${asset('blog-plots/diffusion-sampler-runtime.png')})
+
+That matters because sampler choice is not only about visual quality. It changes latency, repeatability, and the number of reverse steps you can afford. In a teaching notebook, that tradeoff can be hidden. In a reusable package, it needs to be surfaced because the "best" sampler under a metric may be the wrong sampler for an interactive workflow.
+
 ## Conditioning: pushing the sample toward a class
 
 The system included class-conditioned generation when the dataset supported labels. The model can be trained with class embeddings, so generation can ask for a specific category:
@@ -355,6 +410,10 @@ given original image x and mask M:
 \`\`\`
 
 This turns diffusion from "make me an image" into "complete this image in a way that is consistent with its context." It is a small version of the same principle behind many modern image-editing workflows: the model has learned a distribution over images, and the mask constrains where it is allowed to move.
+
+![Image imputation demo showing original MNIST digits, masked inputs, and reconstructed missing regions.](${asset('blog-plots/diffusion-imputation.png')})
+
+The imputation demo is small, but it is a good test of whether the implementation is really doing conditional generation and not just unconditional sampling with a mask drawn on top. The observed pixels have to be re-imposed during the reverse process, otherwise the sample drifts away from the known context. That tiny implementation detail is exactly the kind of thing that separates a diffusion explanation from a diffusion tool.
 
 ## Evaluation: do not trust the prettiest grid
 
@@ -401,6 +460,10 @@ The first trained models on MNIST digit 3, using VE, VP, and Sub-VP variants wit
 
 The results were deliberately framed with modest compute in mind. Training a U-Net-based model from scratch with reduced model size and a limited number of training steps cannot compete with large diffusion systems. But the generated images were coherent enough to demonstrate that the system learned useful relationships between noise, class information, and visual form.
 
+![Sub-VP Predictor-Corrector sample progression from random noise to CIFAR-10 boat images.](${asset('blog-plots/diffusion-denoising-samples.png')})
+
+I would not present these samples as artistic output. They are more useful as debugging evidence. The left side is still noise, the right side has learned class-level structure, and the middle of the pipeline is where small mistakes in normalization, timestep scaling, or sampler compatibility usually show up. When a generated image looks wrong, the bug is rarely just "the model is bad"; it can be the score target, the marginal probability function, the timestep embedding, the reverse-step variance, or the conditioning path.
+
 That makes the project valuable as an experimental platform: not "look, I recreated a frontier image model," but "look, every important moving piece of score-based image generation is implemented, swappable, and testable."
 
 ## The lesson I took from building it
@@ -432,14 +495,16 @@ That is the kind of generative AI project I like: not just a gallery of samples,
       'The AthenAI project reconstructed a daily algorithm universe, clustered strategy behavior into super-assets, and built the state layer for offline portfolio RL.',
     date: '2026-09-14',
     displayDate: 'Published on 14 September 2026, 09:00',
-    readTime: '17 min read',
+    readTime: '20 min read',
     category: 'Applied ML',
     coverImage: asset('blog-covers/athenai.png'),
-    coverAlt: 'Technical report page for the AthenAI Finance-RL pipeline',
+    coverAlt: 'Stylized AthenAI cover with the pipeline, clustering diagnostics, and market-state plots',
     accent: 'green',
     content: `The tempting version of a finance-RL competition project is to jump straight to the agent. Pick PPO, define an action space, train a policy, draw a beautiful equity curve. The AthenAI project pushed me in the opposite direction.
 
 The hard part was not the acronym after "agent." The hard part was building a state representation that an agent could honestly learn from.
+
+I treated the challenge less as "I know finance" and more as a representation-learning problem with unusually strict leakage rules. Every attractive idea had to pass a simple test: could this signal exist at decision time, and does it encode future performance by accident? If the answer was unclear, the feature had to be downgraded to diagnostics or future work.
 
 The raw universe contained thousands of proprietary trading-algorithm files, each with intraday OHLC rows. There was also a benchmark trade file. A naive RL setup would treat every algorithm as an asset and ask a model to allocate across all of them directly. That is fragile for three reasons:
 
@@ -464,6 +529,8 @@ raw algorithm CSVs
 
 That is less flashy than "trained a trading bot." It is also more honest.
 
+![AthenAI offline pipeline from raw competition files to daily returns, static personality, factor clustering, proxy state, and RL/backtesting interface.](${asset('blog-plots/athenai-pipeline.png')})
+
 ## The competition as an offline portfolio problem
 
 The formal framing was a sequential portfolio-management problem. At each decision date, the system observes the current state of the algorithm universe and chooses a capital allocation. The reward arrives later through portfolio returns, adjusted for risk and costs.
@@ -475,6 +542,20 @@ w_t in simplex(C)
 sum_c w_t,c = 1
 w_t,c >= 0
 \`\`\`
+
+The useful mental model is a constrained MDP, except the state is reconstructed offline and the action space is a compressed cluster universe:
+
+\`\`\`text
+s_t = [cluster_features_t, proxy_scores_t, alive_mask_t, w_t-1]
+a_t = w_t
+
+r_t+1 =
+  dot(w_t, R_t+1)
+  - cost_rate * ||w_t - w_t-1||_1
+  - risk_penalty * max(0, drawdown_t+1 - drawdown_limit)
+\`\`\`
+
+That last term was not about claiming a final production reward function. It was a design reminder: in portfolio RL, the agent should be punished for fragile equity paths, not only rewarded for point returns.
 
 But the original universe had far too many raw algorithms for that to be a clean action space. The central design choice was to compress algorithm behavior into cluster-level "super-assets" before attempting RL.
 
@@ -596,6 +677,10 @@ This is where the learning problem changed. Instead of asking a model to underst
 
 That compression is not cosmetic. It is the main contribution of the implementation.
 
+![Behavioral clustering diagnostics showing a robust-PCA view, cluster size profile, cluster risk-return map, and momentum hit-rate profile.](${asset('blog-plots/athenai-clusters.png')})
+
+The clustering figure is the part of the project I would show first in an interview. It says more than "I used k-means." The PCA view checks whether the accepted algorithms have obvious outliers and co-movement structure. The size distribution checks whether the compression produced a few giant clusters and many tiny ones. The risk-return and hit-rate panels give the clusters a behavioral texture that an RL state can actually use. The clusters are not labels for a dashboard; they are the new action-space vocabulary.
+
 ## Windowed state features
 
 The state layer used multiple horizons because market behavior is not one-speed:
@@ -615,6 +700,10 @@ dispersion_t = cross-sectional std of cluster returns at t
 \`\`\`
 
 This matters because stress regimes often show up as joint patterns: falling breadth, rising correlation, higher volatility, fatter left tails. A single aggregate return cannot capture that structure.
+
+![Internal universe state reconstructed from cluster returns, including market return, cross-sectional breadth, volatility, and rolling correlation features.](${asset('blog-plots/athenai-state.png')})
+
+This plot is exactly why I did not want a state made only of recent portfolio returns. The market factor, breadth, volatility, and correlation state move on different rhythms. Breadth is noisy but gives cross-sectional participation. Volatility clusters. Correlations spike and decay. A portfolio agent should see those differences because they imply different action costs: sometimes the right response is to reduce turnover, sometimes to rotate clusters, and sometimes simply to distrust the proxy layer.
 
 ## Macro proxies without live macro dependency
 
@@ -681,6 +770,8 @@ For a future continuous-allocation version, PPO or SAC would make sense. But the
 ## What the benchmark showed
 
 The benchmark yearly return file showed positive returns in every available year. The best year was 2022 at 7.13%, followed by 2024 at 6.99%. The weakest was 2020 at 0.54%, with the caveat that the monthly file begins in June 2020. Compounding the monthly return file gave a total return of 22.95%, with a maximum monthly-resolution drawdown of -1.87%.
+
+![Benchmark diagnostics with year-over-year returns, cumulative monthly return, monthly return heatmap, and realized drawdown.](${asset('blog-plots/athenai-benchmark.png')})
 
 That drawdown should be read carefully. It is based on monthly benchmark returns, not fabricated intramonth equity. Again, the theme is restraint: report what the data supports and do not fill missing resolution with imagination.
 

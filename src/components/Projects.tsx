@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import {
   ArrowUpRight,
   Brain,
@@ -112,7 +112,7 @@ const projects: Project[] = [
     metrics: [
       { label: 'Regularizers', value: '7' },
       { label: 'Datasets', value: '4' },
-      { label: 'Focus', value: 'Internal dynamics' },
+      { label: 'Focus', value: 'Latent' },
     ],
     icon: <Brain className="w-5 h-5" />,
     accent: 'blue',
@@ -120,8 +120,8 @@ const projects: Project[] = [
       label: 'CNN',
       nodes: ['input', 'conv', 'entropy', 'states'],
       caption: 'Activation states across regularized convolutional layers',
-      image: assetPath('blog-covers/regularization.png'),
-      imageAlt: 'Thesis cover for regularization mechanisms in neural networks',
+      image: assetPath('blog-plots/regularization-radar.png'),
+      imageAlt: 'Radar comparison of regularizers across datasets and robustness axes',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/tfg', kind: 'github' },
@@ -321,16 +321,18 @@ const projects: Project[] = [
 const ProjectVisual = ({ project, featured = false }: { project: Project; featured?: boolean }) => {
   const accent = accentStyles[project.accent];
   const heightClass = featured ? 'min-h-[18rem]' : 'min-h-[14rem]';
+  const usesDesignedCover = project.visual.image?.includes('blog-covers/');
+  const usesTechnicalPlot = project.visual.image?.includes('blog-plots/');
 
   if (project.visual.image) {
     return (
-      <figure className={`relative overflow-hidden rounded-lg border border-black/[0.08] bg-[#111214] ${heightClass} shadow-sm`}>
+      <figure className={`relative overflow-hidden rounded-lg border border-black/[0.08] ${usesDesignedCover || usesTechnicalPlot ? 'bg-white' : 'bg-[#111214]'} ${heightClass} shadow-sm`}>
         <img
           src={project.visual.image}
           alt={project.visual.imageAlt ?? project.visual.caption}
-          className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.03]"
+          className={`absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.03] ${usesDesignedCover || usesTechnicalPlot ? 'object-contain p-3 opacity-100' : 'object-cover opacity-90'}`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/20" />
+        <div className={`absolute inset-0 ${usesDesignedCover || usesTechnicalPlot ? 'bg-gradient-to-t from-black/35 via-transparent to-transparent' : 'bg-gradient-to-t from-black/75 via-black/10 to-black/20'}`} />
         <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-between p-4 sm:p-5">
           <div className="flex items-center justify-between gap-3">
             <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-xs font-semibold text-white shadow-sm backdrop-blur-xl">
@@ -403,6 +405,12 @@ const Projects = () => {
   const featuredProject = projects[0];
   const remainingProjects = projects.slice(1);
 
+  const handleLiquidMove = (event: MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
+    event.currentTarget.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+  };
+
   const renderLink = (link: ProjectLink, className: string) => {
     if (link.internal) {
       return (
@@ -422,7 +430,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-[#f5f5f7]">
+    <section id="projects" className="py-20 bg-white">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Featured Projects"
@@ -430,7 +438,10 @@ const Projects = () => {
         />
 
         <div className="grid gap-6 xl:grid-cols-3">
-          <article className="project-card xl:col-span-2 min-h-[540px] flex flex-col overflow-hidden">
+          <article
+            className="liquid-project-card xl:col-span-2 min-h-[540px] flex flex-col overflow-hidden"
+            onMouseMove={handleLiquidMove}
+          >
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
               <div className="flex flex-col">
                 <span className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-primary-dark">
@@ -446,7 +457,7 @@ const Projects = () => {
 
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {featuredProject.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-lg border border-gray-100 bg-white/70 p-3">
+                    <div key={metric.label} className="rounded-lg border border-[#e4e4e7] bg-white/80 p-3">
                       <p className="break-words text-xl font-bold leading-tight text-foreground">{metric.value}</p>
                       <p className="mt-1 text-xs text-muted-foreground">{metric.label}</p>
                     </div>
@@ -465,12 +476,12 @@ const Projects = () => {
                   {featuredProject.links.map((link) =>
                     renderLink(
                       link,
-                      'inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-primary-dark'
+                      'inline-flex items-center gap-2 rounded-full border border-[#e4e4e7] bg-white px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-[#81b6ff] hover:text-primary-dark'
                     )
                   )}
                   <button
                     onClick={() => setSelectedProject(featuredProject)}
-                    className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#3c83f6] px-4 py-2 text-sm font-medium text-white transition-all hover:bg-[#2d6edf] hover:shadow-[0_0_0_0.5px_#0544a9,inset_0_-1px_0_0_#022c70,inset_0_0.5px_0_0_#81b6ff]"
                   >
                     Details
                     <ArrowUpRight className="w-4 h-4" />
@@ -482,13 +493,16 @@ const Projects = () => {
             </div>
           </article>
 
-          <div className="min-h-[540px] rounded-lg border border-black/80 bg-[#111214] p-6 text-background shadow-[0_24px_70px_rgba(17,18,20,0.22)]">
+          <div
+            className="liquid-project-card min-h-[540px] text-foreground"
+            onMouseMove={handleLiquidMove}
+          >
             <div>
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-white">
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#cfe2ff] bg-[#f3f8ff] text-primary-dark">
                 <Layers3 className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold tracking-tight">Research stack</h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Each project is framed as a compact technical case study: the question, the modeling approach, the artifact, and the signal that made the result worth keeping.
               </p>
             </div>
@@ -498,10 +512,10 @@ const Projects = () => {
                 <button
                   key={project.title}
                   onClick={() => setSelectedProject(project)}
-                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.06] px-4 py-3 text-left text-sm transition-colors hover:bg-white/10"
+                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-[#e4e4e7] bg-white/75 px-4 py-3 text-left text-sm transition-colors hover:border-[#81b6ff] hover:bg-[#f3f8ff]"
                 >
-                  <span className="min-w-0 font-medium leading-snug text-white">{project.title.split(':')[0]}</span>
-                  <ArrowUpRight className="h-4 w-4 text-white/60" />
+                  <span className="min-w-0 font-medium leading-snug text-foreground">{project.title.split(':')[0]}</span>
+                  <ArrowUpRight className="h-4 w-4 text-primary-dark/70" />
                 </button>
               ))}
             </div>
@@ -513,7 +527,11 @@ const Projects = () => {
             const accent = accentStyles[project.accent];
 
             return (
-              <article key={project.title} className="project-card min-h-[520px] flex flex-col overflow-hidden">
+              <article
+                key={project.title}
+                className="liquid-project-card flex min-h-[620px] flex-col overflow-hidden"
+                onMouseMove={handleLiquidMove}
+              >
                 <ProjectVisual project={project} />
 
                 <div className="mt-5 flex items-start justify-between gap-4">
@@ -537,7 +555,7 @@ const Projects = () => {
 
                 <div className="mt-5 grid grid-cols-3 gap-2">
                   {project.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-lg border border-gray-100 bg-white/70 p-2">
+                    <div key={metric.label} className="rounded-lg border border-[#e4e4e7] bg-white/75 p-2">
                       <p className="break-words text-sm font-bold leading-tight text-foreground">{metric.value}</p>
                       <p className="mt-1 text-[11px] text-muted-foreground">{metric.label}</p>
                     </div>
@@ -556,7 +574,7 @@ const Projects = () => {
                   {project.links.map((link) =>
                     renderLink(
                       link,
-                      'inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-primary-dark'
+                      'inline-flex items-center gap-1.5 rounded-full border border-[#e4e4e7] bg-white px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-[#81b6ff] hover:text-primary-dark'
                     )
                   )}
                   <button
