@@ -155,7 +155,7 @@ const Experience = () => {
     if (!src) return null;
 
     return (
-      <div className={`flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-100 bg-white/80 p-3 shadow-sm ${frame ?? ''}`}>
+      <div className={`flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-lg border border-black/[0.06] bg-[#f5f5f7] p-3 shadow-sm ${frame ?? ''}`}>
         <img
           src={src}
           alt={alt}
@@ -182,7 +182,7 @@ const Experience = () => {
 
             <div className="grid gap-6">
               {experiences.map((exp, index) => (
-                <div key={index} className="project-card min-h-[390px] lg:h-[390px] flex flex-col overflow-hidden relative group">
+                <div key={index} className="project-card min-h-[390px] flex flex-col overflow-hidden relative group">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="min-w-0">
                       <h4 className="text-xl font-semibold leading-tight text-foreground group-hover:text-primary-dark transition-colors">
@@ -190,9 +190,9 @@ const Experience = () => {
                       </h4>
                       {exp.previousRoles && (
                         <div className="mt-2 flex flex-wrap gap-2">
-                          <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-medium">Current</span>
+                          <span className="tech-chip border-green-100 bg-green-100 text-green-700">Current</span>
                           {exp.previousRoles.map((role) => (
-                            <span key={role} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
+                            <span key={role} className="tech-chip border-gray-200 bg-gray-100 text-gray-600">
                               {role}
                             </span>
                           ))}
@@ -204,7 +204,7 @@ const Experience = () => {
                           href={exp.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#34a853]/20 bg-[#34a853]/10 px-3 py-1 text-sm font-medium text-[#188038] transition-colors hover:bg-[#34a853]/15"
+                          className="meta-pill mt-3 border-[#34a853]/20 bg-[#34a853]/10 text-[#188038] transition-colors hover:bg-[#34a853]/15"
                         >
                           <Globe2 className="w-4 h-4" />
                           {exp.websiteLabel}
@@ -240,7 +240,7 @@ const Experience = () => {
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 bg-accent/10 text-accent text-xs rounded-full border border-accent/10"
+                        className="tech-chip border-accent/10 bg-accent/10 text-accent"
                       >
                         {tech}
                       </span>
@@ -259,7 +259,7 @@ const Experience = () => {
 
             <div className="grid gap-6">
               {education.map((edu, index) => (
-                <div key={index} className="project-card min-h-[390px] lg:h-[390px] flex flex-col overflow-hidden relative group">
+                <div key={index} className="project-card min-h-[390px] flex flex-col overflow-hidden relative group">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="min-w-0">
                       <h4 className="text-xl font-semibold leading-tight text-foreground group-hover:text-primary-dark transition-colors">
@@ -267,7 +267,7 @@ const Experience = () => {
                       </h4>
                       <p className="text-primary-dark font-medium mt-2">{edu.institution}</p>
                       {edu.achievement && (
-                        <span className="mt-3 inline-flex rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground">
+                        <span className="tech-chip mt-3 border-accent bg-accent text-accent-foreground">
                           {edu.achievement}
                         </span>
                       )}
@@ -292,14 +292,14 @@ const Experience = () => {
 
                   <div className="mt-auto pt-5 space-y-3">
                     {edu.gpa && (
-                      <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-sm">
+                      <div className="meta-pill border-blue-100 bg-blue-50">
                         <span className="font-medium text-muted-foreground">GPA</span>
                         <span className="font-semibold text-primary-dark">{edu.gpa}</span>
                       </div>
                     )}
 
                     {edu.focus && (
-                      <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-sm">
+                      <div className="meta-pill border-blue-100 bg-blue-50">
                         <span className="font-medium text-muted-foreground">Focus</span>
                         <span className="font-semibold text-primary-dark">{edu.focus}</span>
                       </div>
@@ -310,7 +310,7 @@ const Experience = () => {
                         {edu.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-1 bg-accent/10 text-accent text-xs rounded-full border border-accent/10"
+                            className="tech-chip border-accent/10 bg-accent/10 text-accent"
                           >
                             {tech}
                           </span>

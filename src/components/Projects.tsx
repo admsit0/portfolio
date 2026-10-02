@@ -16,6 +16,11 @@ import {
 import { Link } from 'react-router-dom';
 import { scrollToSectionWithOffset } from '../lib/utils';
 import { SectionHeader } from './ui/section-header';
+import stableDiffusionImage from '@/assets/project-stable-diffusion.jpg';
+import reinforcementLearningImage from '@/assets/project-reinforcement-learning.png';
+import databasePerformanceImage from '@/assets/project-database-performance.jpg';
+import clusteringImage from '@/assets/project-clustering.jpg';
+import cardiacHealthImage from '@/assets/cardiac-health.webp';
 
 const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -40,6 +45,8 @@ type Project = {
     label: string;
     nodes: string[];
     caption: string;
+    image?: string;
+    imageAlt?: string;
   };
   links: ProjectLink[];
 };
@@ -113,6 +120,8 @@ const projects: Project[] = [
       label: 'CNN',
       nodes: ['input', 'conv', 'entropy', 'states'],
       caption: 'Activation states across regularized convolutional layers',
+      image: assetPath('blog-covers/regularization.png'),
+      imageAlt: 'Thesis cover for regularization mechanisms in neural networks',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/tfg', kind: 'github' },
@@ -143,10 +152,12 @@ const projects: Project[] = [
       label: 'SDE',
       nodes: ['noise', 'score', 'sample', 'metric'],
       caption: 'Reverse-time denoising pipeline from noise to samples',
+      image: stableDiffusionImage,
+      imageAlt: 'Generated samples and diffusion experiment output',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/imageGenerativeAI', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-stable-diffusion/project-stable-diffusion.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-stable-diffusion.pdf'), kind: 'report' },
       { label: 'Blog', href: '/blog/diffusion-models-from-sdes-to-images', kind: 'article', internal: true },
     ],
   },
@@ -173,6 +184,8 @@ const projects: Project[] = [
       label: 'AthenAI',
       nodes: ['signals', 'model', 'risk', 'decision'],
       caption: 'Signal validation and decision ranking under competition constraints',
+      image: assetPath('blog-covers/athenai.png'),
+      imageAlt: 'AthenAI Finance-RL technical report cover',
     },
     links: [
       { label: 'Paper', href: assetPath('english/athenai.pdf'), kind: 'report' },
@@ -202,10 +215,12 @@ const projects: Project[] = [
       label: 'DB',
       nodes: ['crud', 'cache', 'join', 'profile'],
       caption: 'Multi-engine workload profiler with cache experiments',
+      image: databasePerformanceImage,
+      imageAlt: 'Database benchmarking charts and profiling output',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/DB-performance-comparison', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-database-performance/project-database-performance.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-database-performance.pdf'), kind: 'report' },
     ],
   },
   {
@@ -231,10 +246,12 @@ const projects: Project[] = [
       label: 'RL',
       nodes: ['state', 'policy', 'reward', 'value'],
       caption: 'Agent loop for policy learning and value updates',
+      image: reinforcementLearningImage,
+      imageAlt: 'Reinforcement learning training visualization',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/RL-analysis', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-reinforcement-learning/project-reinforcement-learning.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-reinforcement-learning.pdf'), kind: 'report' },
     ],
   },
   {
@@ -260,10 +277,12 @@ const projects: Project[] = [
       label: 'Clusters',
       nodes: ['k-means', 'fuzzy', 'spectral', 'gmm'],
       caption: 'Cluster geometry compared across algorithms and metrics',
+      image: clusteringImage,
+      imageAlt: 'Clustering evaluation plots and projected clusters',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/clustering-techniques-evaluation', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-clustering/project-clustering.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-clustering.pdf'), kind: 'report' },
     ],
   },
   {
@@ -289,55 +308,85 @@ const projects: Project[] = [
       label: 'Risk',
       nodes: ['pca', 'pls', 'cluster', 'lda'],
       caption: 'Multivariate analysis pipeline for patient risk profiles',
+      image: cardiacHealthImage,
+      imageAlt: 'Cardiac health analysis dashboard',
     },
     links: [
       { label: 'Source', href: 'https://github.com/admsit0/heart-risk-analysis', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-heart-risk/project-heart-risk.pdf'), kind: 'report' },
+      { label: 'Paper', href: assetPath('english/project-heart-risk.pdf'), kind: 'report' },
     ],
   },
 ];
 
 const ProjectVisual = ({ project, featured = false }: { project: Project; featured?: boolean }) => {
   const accent = accentStyles[project.accent];
+  const heightClass = featured ? 'min-h-[18rem]' : 'min-h-[14rem]';
+
+  if (project.visual.image) {
+    return (
+      <figure className={`relative overflow-hidden rounded-lg border border-black/[0.08] bg-[#111214] ${heightClass} shadow-sm`}>
+        <img
+          src={project.visual.image}
+          alt={project.visual.imageAlt ?? project.visual.caption}
+          className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/20" />
+        <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-between p-4 sm:p-5">
+          <div className="flex items-center justify-between gap-3">
+            <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-xs font-semibold text-white shadow-sm backdrop-blur-xl">
+              {project.icon}
+              <span className="truncate">{project.visual.label}</span>
+            </span>
+            <span className="rounded-full border border-white/15 bg-white/15 px-2.5 py-1 text-[11px] font-medium text-white/85 backdrop-blur-xl">
+              Case study
+            </span>
+          </div>
+          <figcaption className="max-w-xl rounded-md border border-white/10 bg-black/35 p-3 text-sm font-medium leading-relaxed text-white/90 shadow-sm backdrop-blur-xl">
+            {project.visual.caption}
+          </figcaption>
+        </div>
+      </figure>
+    );
+  }
 
   return (
-    <div className={`relative overflow-hidden rounded-lg border ${accent.border} bg-gradient-to-br ${accent.soft} ${featured ? 'h-64' : 'h-44'} p-5`}>
-      <div className="absolute inset-0 opacity-[0.55] [background-image:linear-gradient(to_right,rgba(29,29,31,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(29,29,31,0.08)_1px,transparent_1px)] [background-size:28px_28px]" />
+    <div className={`relative overflow-hidden rounded-lg border border-black/[0.08] bg-gradient-to-br ${accent.soft} ${heightClass} p-5 shadow-sm`}>
+      <div className="absolute inset-x-0 top-0 h-px bg-white/90" />
+      <div className="absolute inset-0 opacity-[0.55] [background-image:linear-gradient(to_right,rgba(29,29,31,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(29,29,31,0.055)_1px,transparent_1px)] [background-size:32px_32px]" />
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div className="flex items-center justify-between">
-          <div className={`inline-flex items-center gap-2 rounded-full ${accent.bg} ${accent.text} border ${accent.border} px-3 py-1 text-xs font-semibold`}>
+          <div className={`inline-flex min-w-0 max-w-full items-center gap-2 rounded-full ${accent.bg} ${accent.text} border ${accent.border} px-3 py-1 text-xs font-semibold shadow-sm`}>
             {project.icon}
-            {project.visual.label}
+            <span className="truncate">{project.visual.label}</span>
           </div>
-          <div className="flex gap-1.5">
-            {[0, 1, 2].map((dot) => (
-              <span key={dot} className={`h-2 w-2 rounded-full ${dot === 0 ? 'bg-[#ea4335]' : dot === 1 ? 'bg-[#fbbc04]' : 'bg-[#34a853]'}`} />
-            ))}
-          </div>
+          <span className="rounded-full border border-black/[0.06] bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm backdrop-blur-md">
+            Research artifact
+          </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
           {project.visual.nodes.map((node, index) => (
             <div
               key={node}
-              className="rounded-lg border border-white/80 bg-white/70 p-3 shadow-sm backdrop-blur-md"
+              className="rounded-lg border border-black/[0.06] bg-white/75 p-3 shadow-sm backdrop-blur-md"
             >
-              <div className={`mb-3 h-1 rounded-full ${index % 2 === 0 ? accent.stripe : 'bg-[#1d1d1f]'}`} />
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{node}</p>
-              <div className="mt-3 flex items-end gap-1.5">
-                <span className={`h-7 w-2 rounded-full ${accent.stripe}`} />
-                <span className="h-4 w-2 rounded-full bg-gray-300" />
-                <span className="h-9 w-2 rounded-full bg-gray-900" />
+              <div className="flex items-center justify-between gap-2">
+                <p className="min-w-0 truncate text-xs font-semibold uppercase text-muted-foreground">{node}</p>
+                <span className={`h-2 w-2 rounded-full ${index % 2 === 0 ? accent.stripe : 'bg-[#1d1d1f]'}`} />
+              </div>
+              <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-gray-200">
+                <div
+                  className={`h-full rounded-full ${index % 2 === 0 ? accent.stripe : 'bg-[#1d1d1f]'}`}
+                  style={{ width: `${68 + index * 7}%` }}
+                />
               </div>
             </div>
           ))}
         </div>
 
-        {featured && (
-          <p className="max-w-xl text-sm font-medium text-muted-foreground">
-            {project.visual.caption}
-          </p>
-        )}
+        <p className="max-w-xl text-sm font-medium leading-relaxed text-muted-foreground">
+          {project.visual.caption}
+        </p>
       </div>
     </div>
   );
@@ -373,7 +422,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gradient-subtle">
+    <section id="projects" className="py-20 bg-[#f5f5f7]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Featured Projects"
@@ -395,10 +444,10 @@ const Projects = () => {
                   {featuredProject.description}
                 </p>
 
-                <div className="mt-6 grid grid-cols-3 gap-3">
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {featuredProject.metrics.map((metric) => (
                     <div key={metric.label} className="rounded-lg border border-gray-100 bg-white/70 p-3">
-                      <p className="text-xl font-bold text-foreground">{metric.value}</p>
+                      <p className="break-words text-xl font-bold leading-tight text-foreground">{metric.value}</p>
                       <p className="mt-1 text-xs text-muted-foreground">{metric.label}</p>
                     </div>
                   ))}
@@ -406,7 +455,7 @@ const Projects = () => {
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {featuredProject.technologies.map((tech) => (
-                    <span key={tech} className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                    <span key={tech} className="tech-chip border-blue-100 bg-blue-50 text-blue-700">
                       {tech}
                     </span>
                   ))}
@@ -433,7 +482,7 @@ const Projects = () => {
             </div>
           </article>
 
-          <div className="project-card min-h-[540px] flex flex-col justify-between overflow-hidden bg-foreground text-background">
+          <div className="min-h-[540px] rounded-lg border border-black/80 bg-[#111214] p-6 text-background shadow-[0_24px_70px_rgba(17,18,20,0.22)]">
             <div>
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-white">
                 <Layers3 className="w-6 h-6" />
@@ -449,9 +498,9 @@ const Projects = () => {
                 <button
                   key={project.title}
                   onClick={() => setSelectedProject(project)}
-                  className="flex w-full items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-left text-sm transition-colors hover:bg-white/10"
+                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.06] px-4 py-3 text-left text-sm transition-colors hover:bg-white/10"
                 >
-                  <span className="font-medium text-white">{project.title.split(':')[0]}</span>
+                  <span className="min-w-0 font-medium leading-snug text-white">{project.title.split(':')[0]}</span>
                   <ArrowUpRight className="h-4 w-4 text-white/60" />
                 </button>
               ))}
@@ -489,7 +538,7 @@ const Projects = () => {
                 <div className="mt-5 grid grid-cols-3 gap-2">
                   {project.metrics.map((metric) => (
                     <div key={metric.label} className="rounded-lg border border-gray-100 bg-white/70 p-2">
-                      <p className="text-sm font-bold text-foreground">{metric.value}</p>
+                      <p className="break-words text-sm font-bold leading-tight text-foreground">{metric.value}</p>
                       <p className="mt-1 text-[11px] text-muted-foreground">{metric.label}</p>
                     </div>
                   ))}
@@ -497,7 +546,7 @@ const Projects = () => {
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.technologies.slice(0, 5).map((tech) => (
-                    <span key={tech} className="rounded-full border border-gray-200 bg-white/70 px-2.5 py-1 text-xs text-muted-foreground">
+                    <span key={tech} className="tech-chip border-gray-200 bg-white/70 text-muted-foreground">
                       {tech}
                     </span>
                   ))}
@@ -583,7 +632,7 @@ const Projects = () => {
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech) => (
-                    <span key={tech} className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-muted-foreground">
+                    <span key={tech} className="tech-chip border-gray-200 bg-white text-muted-foreground">
                       {tech}
                     </span>
                   ))}

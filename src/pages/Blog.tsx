@@ -24,25 +24,38 @@ const accentClasses = {
   },
 } satisfies Record<BlogPost['accent'], Record<string, string>>;
 
+const BlogVisual = ({ post, featured = false }: { post: BlogPost; featured?: boolean }) => (
+  <div className={`relative overflow-hidden bg-[#111214] ${featured ? 'min-h-[380px]' : 'h-60'} p-5 sm:p-7`}>
+    <img
+      src={post.coverImage}
+      alt=""
+      aria-hidden="true"
+      className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-xl"
+    />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.20),transparent_34%),linear-gradient(135deg,rgba(17,18,20,0.88),rgba(17,18,20,0.42))]" />
+    <div className="relative z-10 flex h-full items-center justify-center">
+      <img
+        src={post.coverImage}
+        alt={post.coverAlt}
+        className="max-h-full w-auto max-w-[78%] rounded-md border border-white/15 bg-white object-contain shadow-2xl shadow-black/35 transition-transform duration-500 group-hover:scale-[1.02]"
+      />
+    </div>
+  </div>
+);
+
 const BlogCard = ({ post, featured = false }: { post: BlogPost; featured?: boolean }) => {
   const accent = accentClasses[post.accent];
 
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className={`group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl ${featured ? 'grid gap-0 lg:grid-cols-[1.05fr_0.95fr]' : 'flex h-full min-h-[520px] flex-col'}`}
+      className={`group overflow-hidden rounded-lg border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl ${featured ? 'grid gap-0 lg:grid-cols-[1.05fr_0.95fr]' : 'flex h-full min-h-[520px] flex-col'}`}
     >
-      <div className={`relative overflow-hidden bg-white ${featured ? 'min-h-[360px]' : 'h-56'}`}>
-        <img
-          src={post.coverImage}
-          alt={post.coverAlt}
-          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      </div>
+      <BlogVisual post={post} featured={featured} />
 
       <div className="flex flex-col p-6 sm:p-8">
         <div className="mb-5 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-          <span className={`inline-flex items-center gap-2 rounded-full border ${accent.border} ${accent.bg} ${accent.text} px-3 py-1 font-medium`}>
+          <span className={`meta-pill ${accent.border} ${accent.bg} ${accent.text}`}>
             <Tag className="h-4 w-4" />
             {post.category}
           </span>
@@ -73,10 +86,10 @@ const BlogIndex = () => {
   const [featuredPost, ...otherPosts] = blogPosts;
 
   return (
-    <main className="flex-1 w-full pt-28 pb-20">
+    <main className="flex-1 w-full bg-[#f5f5f7] pt-28 pb-20">
       <section className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-semibold text-primary-dark">
+          <span className="meta-pill mb-4 border-blue-100 bg-blue-50 text-primary-dark">
             Blog
           </span>
           <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-foreground md:text-6xl">
@@ -103,7 +116,7 @@ const BlogArticle = ({ post }: { post: BlogPost }) => {
   const accent = accentClasses[post.accent];
 
   return (
-    <main className="flex-1 w-full pt-28 pb-20">
+    <main className="flex-1 w-full bg-[#f5f5f7] pt-28 pb-20">
       <article className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8">
         <Link
           to="/blog"
@@ -114,7 +127,7 @@ const BlogArticle = ({ post }: { post: BlogPost }) => {
         </Link>
 
         <header>
-          <span className={`inline-flex items-center gap-2 rounded-full border ${accent.border} ${accent.bg} ${accent.text} px-3 py-1 text-sm font-semibold`}>
+          <span className={`meta-pill ${accent.border} ${accent.bg} ${accent.text}`}>
             <Tag className="h-4 w-4" />
             {post.category}
           </span>
@@ -141,11 +154,9 @@ const BlogArticle = ({ post }: { post: BlogPost }) => {
             </span>
           </div>
 
-          <img
-            src={post.coverImage}
-            alt={post.coverAlt}
-            className="mt-8 aspect-[1200/630] w-full rounded-lg border border-gray-200 bg-white object-contain shadow-sm"
-          />
+          <div className="mt-8 overflow-hidden rounded-lg border border-black/[0.08] bg-white shadow-sm">
+            <BlogVisual post={post} featured />
+          </div>
         </header>
 
         <div className="blog-prose mt-10">

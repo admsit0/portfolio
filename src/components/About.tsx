@@ -117,7 +117,7 @@ const About = () => {
                       {skillGroup.items.map((skill) => (
                         <span
                           key={skill}
-                          className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors bg-gray-50 text-gray-700 border border-gray-200`}
+                          className="tech-chip border-gray-200 bg-gray-50 text-gray-700 transition-colors"
                         >
                           {skill}
                         </span>
