@@ -33,7 +33,7 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
   const reducedMotion = useReducedMotion();
 
   return (
-    <ReactLenis root options={{ autoRaf: true, lerp: 0.12, smoothWheel: !reducedMotion }}>
+    <ReactLenis root options={{ autoRaf: true, lerp: 0.12, smoothWheel: !reducedMotion, respectReducedMotion: false }}>
       <RouteScroll />
       {children}
     </ReactLenis>

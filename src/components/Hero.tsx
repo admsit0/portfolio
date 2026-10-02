@@ -1,111 +1,122 @@
 import { ArrowDown, Github, Linkedin, Mail, Youtube } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
-import adamPortrait from '@/assets/adam-profile-cutout.webp';
+import adamProfile from '@/assets/adam-profile.png';
+import heroBg from '@/assets/hero-bg.jpg';
 import { useSectionNavigation } from '@/hooks/useSectionNavigation';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-
-const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/admsit0', icon: Github },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/adam-maltoni', icon: Linkedin },
-  { label: 'YouTube', href: 'https://youtube.com/@admsito17', icon: Youtube },
-  { label: 'Email', href: 'mailto:adam.maltoni@gmail.com', icon: Mail },
-];
 
 const Hero = () => {
-  const scrollToSection = useSectionNavigation();
-  const reducedMotion = useReducedMotion();
-  const reveal = {
-    hidden: { opacity: 0, y: reducedMotion ? 0 : 12 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: reducedMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] as const },
-    },
+  const scrollToSectionWithOffset = useSectionNavigation();
+  const scrollToNext = () => {
+    scrollToSectionWithOffset('about');
   };
 
   return (
-    <section id="home" className="hero-section">
-      <motion.div
-        className="hero-content"
-        initial={reducedMotion ? false : 'hidden'}
-        animate="visible"
-        variants={{ visible: { transition: { staggerChildren: reducedMotion ? 0 : 0.09 } } }}
-      >
-        <motion.div className="hero-portrait" variants={reveal}>
-          <img
-            src={adamPortrait}
-            alt="Adam Maltoni"
-            width={640}
-            height={671}
-            fetchPriority="high"
-            className="h-full w-full object-contain object-bottom"
-          />
-        </motion.div>
+    <section
+      id="home"
+      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-cover bg-center md:bg-fixed"
+      style={{
+        backgroundImage: `url(${heroBg})`,
+        width: '100vw',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/40 via-transparent to-transparent"></div>
 
-        <motion.h1
-          className="hero-name text-4xl font-bold text-foreground md:text-6xl"
-          variants={reveal}
-        >
-          Adam Maltoni
-        </motion.h1>
-        <motion.p
-          className="hero-title text-xl font-semibold text-muted-foreground md:text-2xl"
-          variants={reveal}
-        >
-          Data Scientist & AI Engineer
-        </motion.p>
-        <motion.p className="hero-summary" variants={reveal}>
-          I build machine learning systems and cloud-native LLM applications.
-          Based in Madrid, with experience at Accenture and GMV. I lead GDG on Campus UAM.
-        </motion.p>
+      {/* Content */}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 text-center">
+        <div className="animate-fade-in">
+          {/* Profile Image */}
+          <div className="flex flex-col items-center mb-8">
+            <img
+              src={adamProfile}
+              alt="Adam Maltoni"
+              className="w-36 h-36 rounded-full border-4 border-white object-cover mt-8 ring-2 ring-white/20 shadow-[0_0_40px_rgba(59,130,246,0.3)]"
+            />
+          </div>
 
-        <motion.div className="hero-social-pill" variants={reveal}>
-          {socialLinks.map(({ label, href, icon: Icon }) => (
-            <Tooltip key={label} delayDuration={200}>
-              <TooltipTrigger asChild>
-                <motion.a
-                  href={href}
-                  target={label === 'Email' ? undefined : '_blank'}
-                  rel={label === 'Email' ? undefined : 'noopener noreferrer'}
-                  aria-label={label}
-                  className="hero-social-link"
-                  whileHover={reducedMotion ? undefined : { y: -3, scale: 1.08 }}
-                  whileTap={reducedMotion ? undefined : { scale: 0.96 }}
-                  transition={{ type: 'spring', stiffness: 420, damping: 24 }}
-                >
-                  <Icon className="h-6 w-6" aria-hidden="true" />
-                </motion.a>
-              </TooltipTrigger>
-              <TooltipContent side="top">{label}</TooltipContent>
-            </Tooltip>
-          ))}
-        </motion.div>
+          {/* Name and Title */}
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-foreground">
+            Adam Maltoni
+          </h1>
+          <p className="text-xl md:text-2xl font-semibold text-muted-foreground mb-6">
+            Data Scientist & AI Engineer
+          </p>
 
-        <motion.div className="hero-actions" variants={reveal}>
-          <button
-            onClick={() => scrollToSection('projects')}
-            className="btn-primary hero-action"
-          >
-            View My Work
-          </button>
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="hero-action hero-action-secondary"
-          >
-            Get In Touch
-          </button>
-        </motion.div>
+          {/* Brief Summary */}
+          <p className="text-lg font-medium text-foreground/80 max-w-3xl mx-auto mb-8 leading-relaxed">
+            Passionate about building cloud-native LLM architectures, data science solutions, and AI-driven applications.
+            Experienced in technology consulting at Accenture, data analytics, and leading the Google Developer Group as President.
+            Strong foundation in quantitative analysis, machine learning, and full-stack development.
+          </p>
 
-        <motion.div className="hero-scroll" variants={reveal}>
-          <button
-            onClick={() => scrollToSection('about')}
-            className="hero-scroll-arrow"
-            aria-label="Scroll to About Me"
-          >
-            <ArrowDown className="h-5 w-5" aria-hidden="true" />
-          </button>
-        </motion.div>
-      </motion.div>
+          {/* Social Links */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-white/60 backdrop-blur-2xl rounded-full px-6 py-3 border border-white/80 shadow-sm flex justify-center space-x-6">
+              <a
+                href="https://github.com/admsit0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Github className="w-6 h-6" />
+              </a>
+              <a
+                href="https://linkedin.com/in/adam-maltoni"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Linkedin className="w-6 h-6" />
+              </a>
+              <a
+                href="https://youtube.com/@admsito17"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Youtube className="w-6 h-6" />
+              </a>
+              <a
+                href="mailto:adam.maltoni@gmail.com"
+                className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Mail className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+
+          {/* Arrow moved below social links */}
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={scrollToNext}
+              className="hero-scroll-arrow"
+              aria-label="Scroll to next section"
+            >
+              <ArrowDown className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
+            <button
+              onClick={() => scrollToSectionWithOffset('projects')}
+              className="btn-primary backdrop-blur-sm px-8 py-3 rounded-lg text-base font-medium"
+            >
+              View My Work
+            </button>
+            <button
+              onClick={() => scrollToSectionWithOffset('contact')}
+              className="bg-white/50 backdrop-blur-sm border border-gray-200 text-foreground hover:bg-white/80 px-8 py-3 rounded-lg text-base font-medium transition-colors duration-300"
+            >
+              Get In Touch
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

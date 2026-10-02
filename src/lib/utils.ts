@@ -13,16 +13,16 @@ export function scrollToSectionWithOffset(sectionId: string, offset = 80, lenis?
   const top = sectionId === 'home'
     ? 0
     : Math.max(0, element.getBoundingClientRect().top + window.scrollY - offset);
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   if (lenis) {
+    // Section buttons explicitly request an animated transition, including on reduced-motion systems.
     lenis.scrollTo(top, {
-      immediate: reducedMotion,
-      duration: Math.min(1.4, 0.85 + Math.abs(top - window.scrollY) / 7000),
-      easing: (progress: number) => 1 - Math.pow(1 - progress, 4),
+      duration: Math.min(1.55, 1 + Math.abs(top - window.scrollY) / 10000),
+      easing: (progress: number) => progress < 0.5
+        ? 4 * Math.pow(progress, 3)
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2,
       lerp: 0,
     });
   } else {
-    window.scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 }
