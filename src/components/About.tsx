@@ -5,8 +5,10 @@ import {
   Award,
 } from 'lucide-react';
 import { SectionHeader } from './ui/section-header';
+import { useSectionNavigation } from '@/hooks/useSectionNavigation';
 
 const About = () => {
+  const scrollToSection = useSectionNavigation();
   const skills = [
     {
       category: 'Frameworks & Programming',
@@ -83,7 +85,7 @@ const About = () => {
                 Interested in collaboration or have questions?
               </p>
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => scrollToSection('contact')}
                 className="text-primary-dark hover:text-accent font-medium text-sm underline-offset-2 hover:underline transition-colors"
               >
                 Let's connect →

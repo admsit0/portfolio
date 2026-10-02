@@ -14,7 +14,7 @@ const Index = () => {
     <div className="flex flex-col min-h-screen">
       <Navigation />
       <main className="flex-1 w-full pt-16">
-        <section className="scroll-animate"><Hero /></section>
+        <Hero />
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
           <section className="scroll-animate"><About /></section>
           <AnimatedSeparator />

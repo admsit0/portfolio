@@ -14,7 +14,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { scrollToSectionWithOffset } from '../lib/utils';
+import { useSectionNavigation } from '@/hooks/useSectionNavigation';
 import { SectionHeader } from './ui/section-header';
 import stableDiffusionImage from '@/assets/project-stable-diffusion.jpg';
 import reinforcementLearningImage from '@/assets/project-reinforcement-learning.png';
@@ -401,6 +401,7 @@ const LinkIcon = ({ kind }: { kind: ProjectLink['kind'] }) => {
 };
 
 const Projects = () => {
+  const scrollToSection = useSectionNavigation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const featuredProject = projects[0];
   const remainingProjects = projects.slice(1);
@@ -592,7 +593,7 @@ const Projects = () => {
 
         <div className="text-center mt-12">
           <button
-            onClick={() => scrollToSectionWithOffset('contact')}
+            onClick={() => scrollToSection('contact')}
             className="btn-primary px-6 py-3 rounded-full text-base font-medium"
           >
             Get In Touch

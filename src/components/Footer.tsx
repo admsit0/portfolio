@@ -1,8 +1,10 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSectionNavigation } from '@/hooks/useSectionNavigation';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const scrollToSection = useSectionNavigation();
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -47,10 +49,7 @@ const Footer = () => {
               {['About', 'Experience', 'Projects', 'Contact'].map((link) => (
                 <button
                   key={link}
-                  onClick={() => {
-                    const element = document.getElementById(link.toLowerCase());
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => scrollToSection(link.toLowerCase())}
                   className="block text-white/70 hover:text-white transition-colors"
                 >
                   {link}

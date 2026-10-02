@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Download, Github, Linkedin } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useSectionNavigation } from '@/hooks/useSectionNavigation';
 
 const navItems = [
   { id: 'home', label: 'Home' },
@@ -14,7 +15,7 @@ const navItems = [
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigateToSection = useSectionNavigation();
   const [activeSection, setActiveSection] = useState('home');
   const cvPath = `${import.meta.env.BASE_URL}cv-adam-maltoni.pdf`;
 
@@ -48,29 +49,7 @@ const Navigation = () => {
 
   const scrollToSection = (sectionId: string) => {
     setIsOpen(false);
-    
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Wait for home page to render before scrolling
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          window.scrollTo({
-            top: element.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      }, 100);
-      return;
-    }
-
-    const element = document.getElementById(sectionId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
+    navigateToSection(sectionId);
   };
 
   return (
@@ -82,7 +61,7 @@ const Navigation = () => {
           </div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden xl:block">
             <div className="ml-10 flex items-center space-x-6">
               {navItems.map((item) => (
                 item.isRoute ? (
@@ -150,10 +129,12 @@ const Navigation = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-muted-foreground hover:text-foreground p-2"
+              aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -163,7 +144,7 @@ const Navigation = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="xl:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-xl border-b border-gray-200">
             {navItems.map((item) => (
               item.isRoute ? (
