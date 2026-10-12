@@ -20,6 +20,18 @@ const Navigation = () => {
   const cvPath = `${import.meta.env.BASE_URL}cv-adam-maltoni.pdf`;
 
   useEffect(() => {
+    if (!isOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        document.querySelector<HTMLButtonElement>('button[aria-controls="mobile-navigation"]')?.focus();
+      }
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isOpen]);
+
+  useEffect(() => {
     if (location.pathname.startsWith('/blog')) {
       setActiveSection('blog');
       return;
@@ -41,7 +53,7 @@ const Navigation = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     // Call once to set initial state
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -91,6 +103,8 @@ const Navigation = () => {
               <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-gray-200">
                 <a
                   href="https://github.com/admsit0"
+                  aria-label="GitHub"
+                  title="GitHub"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-purple-500 transition-colors rounded-md hover:bg-gray-100"
@@ -99,6 +113,8 @@ const Navigation = () => {
                 </a>
                 <a
                   href="https://linkedin.com/in/adam-maltoni"
+                  aria-label="LinkedIn"
+                  title="LinkedIn"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary-dark transition-colors rounded-md hover:bg-gray-100"
@@ -106,20 +122,9 @@ const Navigation = () => {
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a
-                  href="#"
+                  href={cvPath}
+                  download="cv-adam-maltoni.pdf"
                   className="bg-[#0071e3] text-white hover:bg-[#0077ED] px-4 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2 ml-2 transition-colors"
-                  onClick={e => {
-                    e.preventDefault();
-                    // Open in new tab
-                    window.open(cvPath, '_blank');
-                    // Download
-                    const link = document.createElement('a');
-                    link.href = cvPath;
-                    link.download = 'cv-adam-maltoni.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
                 >
                   <Download className="w-4 h-4" />
                   CV
@@ -135,6 +140,7 @@ const Navigation = () => {
               className="text-muted-foreground hover:text-foreground p-2"
               aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
               aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -144,7 +150,7 @@ const Navigation = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="xl:hidden">
+        <div id="mobile-navigation" className="xl:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-xl border-b border-gray-200">
             {navItems.map((item) => (
               item.isRoute ? (

@@ -1,4 +1,4 @@
-import { useState, type MouseEvent } from 'react';
+import { useRef, useState, type MouseEvent } from 'react';
 import {
   ArrowUpRight,
   Brain,
@@ -6,16 +6,15 @@ import {
   FileText,
   Github,
   HeartPulse,
-  Layers3,
   LineChart,
   Network,
   Sparkles,
-  X,
   Zap,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSectionNavigation } from '@/hooks/useSectionNavigation';
 import { SectionHeader } from './ui/section-header';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from './ui/dialog';
 import stableDiffusionImage from '@/assets/project-stable-diffusion.jpg';
 import reinforcementLearningImage from '@/assets/project-reinforcement-learning.png';
 import databasePerformanceImage from '@/assets/project-database-performance.jpg';
@@ -27,7 +26,7 @@ const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 type ProjectLink = {
   label: string;
   href: string;
-  kind: 'github' | 'report' | 'article';
+  kind: 'github' | 'report' | 'article' | 'website';
   internal?: boolean;
 };
 
@@ -41,6 +40,7 @@ type Project = {
   metrics: { label: string; value: string }[];
   icon: JSX.Element;
   accent: 'blue' | 'green' | 'yellow' | 'red' | 'purple' | 'slate';
+  logo?: string;
   visual: {
     label: string;
     nodes: string[];
@@ -128,6 +128,35 @@ const projects: Project[] = [
       { label: 'Paper', href: assetPath('english/tfgtfmthesisuam.pdf'), kind: 'report' },
       { label: 'Blog', href: '/blog/regularization-in-cnns-internal-activations', kind: 'article', internal: true },
     ],
+  },
+  {
+    title: 'Atlas',
+    eyebrow: 'Live / Learning Platform',
+    category: 'Interactive Learning & Full-Stack Engineering',
+    description:
+      'A bilingual learning platform I built to turn AI theory into interactive experiments, worked problems, and guided practice. Now used by 30+ unique users.',
+    technologies: ['JavaScript', 'Supabase', 'PostgreSQL', 'Google OAuth'],
+    highlights: [
+      '86 lessons and 20 interactive laboratories across symbolic AI and deep learning, available in English and Spanish.',
+      'Reusable course modules and independently tested simulation engines for reasoning, search, and neural-network experiments.',
+      'Google sign-in, private cloud profiles, cross-device progress, and a feedback pipeline backed by Supabase Edge Functions and PostgreSQL.',
+    ],
+    metrics: [
+      { label: 'Unique users', value: '30+' },
+      { label: 'Lessons', value: '86' },
+      { label: 'Languages', value: 'ES / EN' },
+    ],
+    icon: <img src={assetPath('projects/atlas-logo.png')} alt="" className="h-5 w-5" />,
+    logo: assetPath('projects/atlas-logo.png'),
+    accent: 'green',
+    visual: {
+      label: 'Atlas',
+      nodes: [],
+      caption: 'Atlas learning platform: symbolic AI curriculum and interactive course pathway',
+      image: assetPath('projects/atlas-learning.png'),
+      imageAlt: 'Real screenshot of the Atlas symbolic AI course and its learning pathway',
+    },
+    links: [{ label: 'Visit Atlas', href: 'https://atlaslearning.es/', kind: 'website' }],
   },
   {
     title: 'Diffusion-based Generative AI for Images',
@@ -324,12 +353,23 @@ const ProjectVisual = ({ project, featured = false }: { project: Project; featur
   const usesDesignedCover = project.visual.image?.includes('blog-covers/');
   const usesTechnicalPlot = project.visual.image?.includes('blog-plots/');
 
+  if (project.logo && project.visual.image) {
+    return (
+      <figure className={`relative overflow-hidden rounded-lg bg-[#111214] ${heightClass}`}>
+        <img src={project.visual.image} alt={project.visual.imageAlt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
+        <figcaption className="sr-only">{project.visual.caption}</figcaption>
+      </figure>
+    );
+  }
+
   if (project.visual.image) {
     return (
       <figure className={`relative overflow-hidden rounded-lg border border-black/[0.08] ${usesDesignedCover || usesTechnicalPlot ? 'bg-white' : 'bg-[#111214]'} ${heightClass} shadow-sm`}>
         <img
           src={project.visual.image}
           alt={project.visual.imageAlt ?? project.visual.caption}
+          loading="lazy"
+          decoding="async"
           className={`absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.03] ${usesDesignedCover || usesTechnicalPlot ? 'object-contain p-3 opacity-100' : 'object-cover opacity-90'}`}
         />
         <div className={`absolute inset-0 ${usesDesignedCover || usesTechnicalPlot ? 'bg-gradient-to-t from-black/35 via-transparent to-transparent' : 'bg-gradient-to-t from-black/75 via-black/10 to-black/20'}`} />
@@ -340,7 +380,7 @@ const ProjectVisual = ({ project, featured = false }: { project: Project; featur
               <span className="truncate">{project.visual.label}</span>
             </span>
             <span className="rounded-full border border-white/15 bg-white/15 px-2.5 py-1 text-[11px] font-medium text-white/85 backdrop-blur-xl">
-              Case study
+              {project.logo ? 'Live product' : 'Case study'}
             </span>
           </div>
           <figcaption className="max-w-xl rounded-md border border-white/10 bg-black/35 p-3 text-sm font-medium leading-relaxed text-white/90 shadow-sm backdrop-blur-xl">
@@ -403,8 +443,15 @@ const LinkIcon = ({ kind }: { kind: ProjectLink['kind'] }) => {
 const Projects = () => {
   const scrollToSection = useSectionNavigation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const projectTrigger = useRef<HTMLButtonElement | null>(null);
   const featuredProject = projects[0];
-  const remainingProjects = projects.slice(1);
+  const liveProject = projects[1];
+  const remainingProjects = projects.slice(2);
+
+  const openProject = (project: Project, event: MouseEvent<HTMLButtonElement>) => {
+    projectTrigger.current = event.currentTarget;
+    setSelectedProject(project);
+  };
 
   const handleLiquidMove = (event: MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -435,7 +482,7 @@ const Projects = () => {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Featured Projects"
-          subtitle="Research-led AI, data systems, and statistical analysis projects, ordered by relevance and framed around method, artifact, and measurable outcome."
+          subtitle="Deep learning research, interactive learning, and data systems. Built, evaluated, and shared."
         />
 
         <div className="grid gap-6 xl:grid-cols-3">
@@ -481,7 +528,7 @@ const Projects = () => {
                     )
                   )}
                   <button
-                    onClick={() => setSelectedProject(featuredProject)}
+                    onClick={(event) => openProject(featuredProject, event)}
                     className="inline-flex items-center gap-2 rounded-full bg-[#3c83f6] px-4 py-2 text-sm font-medium text-white transition-all hover:bg-[#2d6edf] hover:shadow-[0_0_0_0.5px_#0544a9,inset_0_-1px_0_0_#022c70,inset_0_0.5px_0_0_#81b6ff]"
                   >
                     Details
@@ -495,35 +542,39 @@ const Projects = () => {
           </article>
 
           <div
-            className="liquid-project-card min-h-[540px] text-foreground"
+            className="liquid-project-card flex min-h-[540px] flex-col text-foreground"
             onMouseMove={handleLiquidMove}
           >
-            <div>
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#cfe2ff] bg-[#f3f8ff] text-primary-dark">
-                <Layers3 className="w-6 h-6" />
+            <div className="mb-5 flex items-center gap-3">
+              <img src={liveProject.logo} alt="Atlas logo" width={48} height={48} className="h-12 w-12 shrink-0" />
+              <div className="min-w-0">
+                <span className="text-xs font-semibold uppercase text-[#188038]">{liveProject.eyebrow}</span>
+                <h3 className="mt-1 text-2xl font-bold">{liveProject.title}</h3>
               </div>
-              <h3 className="text-2xl font-bold tracking-tight">Research stack</h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Each project is framed as a compact technical case study: the question, the modeling approach, the artifact, and the signal that made the result worth keeping.
-              </p>
             </div>
-
-            <div className="mt-8 space-y-3">
-              {projects.slice(0, 4).map((project) => (
-                <button
-                  key={project.title}
-                  onClick={() => setSelectedProject(project)}
-                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-[#e4e4e7] bg-white/75 px-4 py-3 text-left text-sm transition-colors hover:border-[#81b6ff] hover:bg-[#f3f8ff]"
-                >
-                  <span className="min-w-0 font-medium leading-snug text-foreground">{project.title.split(':')[0]}</span>
-                  <ArrowUpRight className="h-4 w-4 text-primary-dark/70" />
-                </button>
+            <ProjectVisual project={liveProject} />
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{liveProject.description}</p>
+            <div className="mt-5 grid grid-cols-3 gap-2">
+              {liveProject.metrics.map((metric) => (
+                <div key={metric.label} className="rounded-lg border border-[#e4e4e7] bg-white/75 p-2.5">
+                  <p className="text-lg font-bold leading-tight">{metric.value}</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground">{metric.label}</p>
+                </div>
               ))}
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {liveProject.technologies.map((tech) => <span key={tech} className="tech-chip border-gray-200 bg-white/70 text-muted-foreground">{tech}</span>)}
+            </div>
+            <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
+              {liveProject.links.map((link) => renderLink(link, 'inline-flex items-center gap-2 rounded-full bg-[#0071e3] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0062c4]'))}
+              <button onClick={(event) => openProject(liveProject, event)} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-primary-dark hover:bg-blue-50">
+                Details <ArrowUpRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-6 grid gap-6 md:auto-rows-fr md:grid-cols-2 xl:grid-cols-3">
           {remainingProjects.map((project) => {
             const accent = accentStyles[project.accent];
 
@@ -579,7 +630,7 @@ const Projects = () => {
                     )
                   )}
                   <button
-                    onClick={() => setSelectedProject(project)}
+                    onClick={(event) => openProject(project, event)}
                     className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-primary-dark transition-colors hover:bg-blue-50"
                   >
                     Details
@@ -601,32 +652,23 @@ const Projects = () => {
         </div>
       </div>
 
-      {selectedProject && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-3 backdrop-blur-sm"
-          onClick={() => setSelectedProject(null)}
-        >
-          <div
-            className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-lg border border-white/70 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl sm:p-8"
-            onClick={(event) => event.stopPropagation()}
+      <Dialog open={!!selectedProject} onOpenChange={(open) => { if (!open) setSelectedProject(null); }}>
+        {selectedProject && (
+          <DialogContent
+            data-lenis-prevent
+            className="max-h-[90dvh] w-[calc(100%_-_1.5rem)] max-w-5xl overflow-y-auto overscroll-contain rounded-lg border-white/70 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl sm:p-8"
+            onCloseAutoFocus={(event) => { event.preventDefault(); projectTrigger.current?.focus(); }}
           >
             <div className="flex items-start justify-between gap-4">
               <div>
                 <span className={`text-xs font-semibold uppercase tracking-[0.18em] ${accentStyles[selectedProject.accent].text}`}>
                   {selectedProject.eyebrow}
                 </span>
-                <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
+                <DialogTitle className="mt-2 pr-7 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
                   {selectedProject.title}
-                </h2>
-                <p className="mt-2 text-sm font-medium text-muted-foreground">{selectedProject.category}</p>
+                </DialogTitle>
+                <DialogDescription className="mt-2 text-sm font-medium text-muted-foreground">{selectedProject.category}</DialogDescription>
               </div>
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-gray-100 hover:text-foreground"
-                aria-label="Close project details"
-              >
-                <X className="w-5 h-5" />
-              </button>
             </div>
 
             <div className="mt-8 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -667,9 +709,9 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </DialogContent>
+        )}
+      </Dialog>
     </section>
   );
 };

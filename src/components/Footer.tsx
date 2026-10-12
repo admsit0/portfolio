@@ -19,6 +19,8 @@ const Footer = () => {
             <div className="flex gap-4">
               <a
                 href="https://github.com/admsit0"
+                aria-label="GitHub"
+                title="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-white transition-colors"
@@ -27,6 +29,8 @@ const Footer = () => {
               </a>
               <a
                 href="https://linkedin.com/in/adam-maltoni"
+                aria-label="LinkedIn"
+                title="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-white transition-colors"
@@ -35,6 +39,8 @@ const Footer = () => {
               </a>
               <a
                 href="mailto:adam.maltoni@gmail.com"
+                aria-label="Email Adam"
+                title="Email Adam"
                 className="text-white/70 hover:text-white transition-colors"
               >
                 <Mail className="w-5 h-5" />

@@ -58,6 +58,8 @@ const Hero = () => {
             <div className="bg-white/60 backdrop-blur-2xl rounded-full px-6 py-3 border border-white/80 shadow-sm flex justify-center space-x-6">
               <a
                 href="https://github.com/admsit0"
+                aria-label="GitHub"
+                title="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -66,6 +68,8 @@ const Hero = () => {
               </a>
               <a
                 href="https://linkedin.com/in/adam-maltoni"
+                aria-label="LinkedIn"
+                title="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -74,6 +78,8 @@ const Hero = () => {
               </a>
               <a
                 href="https://youtube.com/@admsito17"
+                aria-label="YouTube"
+                title="YouTube"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -82,6 +88,8 @@ const Hero = () => {
               </a>
               <a
                 href="mailto:adam.maltoni@gmail.com"
+                aria-label="Email Adam"
+                title="Email Adam"
                 className="text-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Mail className="w-6 h-6" />

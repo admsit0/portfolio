@@ -177,7 +177,7 @@ const Experience = () => {
 
             <div className="grid gap-6">
               {experiences.map((exp, index) => (
-                <div key={index} className="project-card relative flex min-h-[430px] flex-col overflow-hidden md:h-[430px] group">
+                <div key={index} className="project-card relative flex min-h-[430px] flex-col overflow-hidden md:h-[460px] lg:h-[540px] xl:h-[460px] group">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="min-w-0">
                       <h4 className="text-xl font-semibold leading-tight text-foreground group-hover:text-primary-dark transition-colors">
@@ -254,7 +254,7 @@ const Experience = () => {
 
             <div className="grid gap-6">
               {education.map((edu, index) => (
-                <div key={index} className="project-card relative flex min-h-[430px] flex-col overflow-hidden md:h-[430px] group">
+                <div key={index} className="project-card relative flex min-h-[430px] flex-col overflow-hidden md:h-[460px] lg:h-[540px] xl:h-[460px] group">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="min-w-0">
                       <h4 className="text-xl font-semibold leading-tight text-foreground group-hover:text-primary-dark transition-colors">

@@ -332,12 +332,12 @@
   }
 
   .blog-prose h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: 2rem;
   }
 
   .blog-prose h2 {
     margin-top: 3rem;
-    font-size: clamp(1.55rem, 3vw, 2rem);
+    font-size: 1.75rem;
   }
 
   .blog-prose h3 {
@@ -347,6 +347,37 @@
 
   .blog-prose p {
     color: hsl(var(--muted-foreground));
+  }
+
+  .blog-prose {
+    overflow-wrap: break-word;
+  }
+
+  .blog-table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+  }
+
+  .blog-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .blog-prose th,
+  .blog-prose td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .blog-prose th {
+    color: hsl(var(--foreground));
+    background: #eef4fb;
+    text-align: left;
   }
 
   .blog-prose strong {

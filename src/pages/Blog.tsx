@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ArrowLeft, ArrowUpRight, Calendar, Clock, Tag, UserRound } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const accentClasses = {
   blue: {
@@ -95,7 +96,7 @@ const BlogIndex = () => {
             Technical notes from the projects behind the portfolio.
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-            Short, research-oriented write-ups on thesis work, generative AI systems, and applied machine learning decisions.
+            Experiments, equations, and lessons from building and evaluating machine learning systems.
           </p>
         </div>
 
@@ -171,10 +172,13 @@ const BlogArticle = ({ post }: { post: BlogPost }) => {
                 return (
                   <img
                     {...props}
+                    loading="lazy"
+                    decoding="async"
                     className="my-9 w-full rounded-xl border border-black/[0.08] bg-white p-2 shadow-lg shadow-black/[0.06]"
                   />
                 );
               },
+              table: ({ children }) => <div className="blog-table-scroll" tabIndex={0} role="region" aria-label="Research results table"><table>{children}</table></div>,
               code: ({ node: _node, className, children, ...props }) => {
                 void _node;
                 const inline = !className;
@@ -201,6 +205,12 @@ const BlogArticle = ({ post }: { post: BlogPost }) => {
 const Blog = () => {
   const { slug } = useParams();
   const post = slug ? blogPosts.find((item) => item.slug === slug) : undefined;
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = `${post?.title ?? (slug ? 'Article not found' : 'Blog')} | Adam Maltoni`;
+    return () => { document.title = previousTitle; };
+  }, [post, slug]);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
