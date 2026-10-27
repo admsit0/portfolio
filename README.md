@@ -1,6 +1,6 @@
-# Adam Maltoni's portfolio
+# Adam Maltoni's personal website
 
-This is my personal project portfolio.
+My personal website, with a dedicated technical portfolio and bilingual long-form articles.
 
 Live site: [adammaltoni.com](https://adammaltoni.com/).
 
@@ -14,6 +14,16 @@ the permanent HTTP-to-HTTPS redirect.
 `npm run deploy` publishes the production build to the `gh-pages` branch.
 Keep `public/CNAME` in the build so the custom domain survives each deployment.
 Assets use Vite's root base path for the custom domain.
+
+The postbuild step reads the application's route and project definitions and generates
+static HTML entry points for direct GitHub Pages URLs, route-specific canonical metadata,
+a sitemap, and a non-indexable unknown-route fallback. Do not replace it with a single
+copied 404 page: known deep links should return HTTP 200.
+
+Personal home copy lives in `src/content/personal.ts`; longer personal notes live in
+`src/content/about.ts`. Both contain editable English and Spanish fields. The technical
+portfolio is at `/portfolio`; Atlas has linked product and engineering views at `/atlas`
+and `/portfolio/atlas`. No private notes, tokens, or local organization files are published.
 
 Atlas links to [atlaslearning.es](https://atlaslearning.es/). Its user metric is
 the owner's conservative reported figure (30+ unique users), not a live counter.

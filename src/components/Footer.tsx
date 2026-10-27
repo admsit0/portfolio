@@ -1,97 +1,71 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useSectionNavigation } from '@/hooks/useSectionNavigation';
-
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  const scrollToSection = useSectionNavigation();
-
+import { ArrowUpRight, Github, Linkedin, Mail, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "@/i18n/useLanguage";
+export default function Footer() {
+  const { t } = useLanguage();
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {/* Branding */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Adam Maltoni</h3>
-            <p className="text-white/70 mb-4">
-              Data Scientist & AI Engineer passionate about AI, cloud, and technology.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="https://github.com/admsit0"
-                aria-label="GitHub"
-                title="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/adam-maltoni"
-                aria-label="LinkedIn"
-                title="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="mailto:adam.maltoni@gmail.com"
-                aria-label="Email Adam"
-                title="Email Adam"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <div className="space-y-2">
-              {['About', 'Experience', 'Projects', 'Contact'].map((link) => (
-                <button
-                  key={link}
-                  onClick={() => scrollToSection(link.toLowerCase())}
-                  className="block text-white/70 hover:text-white transition-colors"
-                >
-                  {link}
-                </button>
-              ))}
-              <Link to="/blog" className="block text-white/70 hover:text-white transition-colors">
-                Blog
-              </Link>
-            </div>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <div className="space-y-2 text-white/70">
-              <p>adam.maltoni@gmail.com</p>
-              <p>+34 638 707 783</p>
-              <p>Madrid, Spain</p>
-            </div>
-          </div>
+    <footer className="personal-footer">
+      <div className="site-width footer-main">
+        <div>
+          <Link className="wordmark" to="/">
+            adam maltoni<span>.</span>
+          </Link>
+          <p>{t("Madrid, Spain")}</p>
         </div>
-
-        {/* Copyright */}
-        <div className="border-t border-white/10 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-white/50 text-sm">
-              © {currentYear} Adam Maltoni. All rights reserved.
-            </p>
-            <p className="text-white/50 text-sm flex items-center gap-1 mt-2 md:mt-0">
-              Personal project portfolio built with React.
-            </p>
-          </div>
+        <div className="footer-links">
+          {[
+            ["/portfolio", "Technical portfolio"],
+            ["/atlas", "Atlas"],
+            ["/gdg", "GDG UAM"],
+            ["/blog", "Writing"],
+            ["/about", "About"],
+          ].map(([href, label]) => (
+            <Link key={href} to={href}>
+              {t(label)}
+              <ArrowUpRight size={14} />
+            </Link>
+          ))}
         </div>
+        <div className="footer-social">
+          {[
+            {
+              Icon: Github,
+              name: "GitHub",
+              href: "https://github.com/admsit0",
+            },
+            {
+              Icon: Linkedin,
+              name: "LinkedIn",
+              href: "https://linkedin.com/in/adam-maltoni",
+            },
+            {
+              Icon: Youtube,
+              name: "YouTube",
+              href: "https://youtube.com/@admsito17",
+            },
+            {
+              Icon: Mail,
+              name: "Email Adam",
+              href: "mailto:adam.maltoni@gmail.com",
+            },
+          ].map(({ Icon, name, href }) => (
+            <a
+              key={href}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t(name)}
+              title={t(name)}
+            >
+              <Icon size={20} />
+            </a>
+          ))}
+        </div>
+      </div>
+      <div className="site-width footer-bottom">
+        <span>© {new Date().getFullYear()} Adam Maltoni</span>
+        <span>{t("Madrid, Spain")}</span>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

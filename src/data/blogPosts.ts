@@ -1,3 +1,4 @@
+import { atlasPost } from './atlasPost';
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 export type BlogPost = {
@@ -26,8 +27,8 @@ export const blogPosts: BlogPost[] = [
     displayDate: 'Published on 18 July 2026, 09:00',
     readTime: '21 min read',
     category: 'Thesis',
-    coverImage: asset('blog-covers/regularization.png'),
-    coverAlt: 'Stylized radar-chart cover for the thesis on CNN regularization mechanisms',
+    coverImage: asset('blog-plots/regularization-radar.png'),
+    coverAlt: 'Radar plot comparing CNN regularizers across evaluation metrics',
     accent: 'blue',
     content: `Most regularization explanations eventually collapse into one plot: the training curve keeps going down, the validation curve stops improving, and the gap between them is called overfitting. That picture is useful, but it hides the object that I actually wanted to study in my TFG: the internal representation learned by the network.
 
@@ -243,8 +244,8 @@ That was the value of the thesis for me. It turned the CNN from a black box that
     displayDate: 'Published on 28 May 2025, 09:00',
     readTime: '19 min read',
     category: 'Generative AI',
-    coverImage: asset('blog-covers/diffusion.png'),
-    coverAlt: 'Stylized diffusion cover with denoising samples, runtime bars, and imputation output',
+    coverImage: asset('blog-plots/diffusion-denoising-samples.png'),
+    coverAlt: 'Diffusion samples progressing from noise to generated images',
     accent: 'purple',
     content: `The one-sentence version of diffusion image generation is almost too clean: add noise until an image becomes Gaussian static, then learn how to reverse the process. It is a good intuition, but it hides the engineering question that made this project interesting:
 
@@ -497,8 +498,8 @@ That is the kind of generative AI project I like: not just a gallery of samples,
     displayDate: 'Published on 14 September 2026, 09:00',
     readTime: '20 min read',
     category: 'Applied ML',
-    coverImage: asset('blog-covers/athenai.png'),
-    coverAlt: 'Stylized AthenAI cover with the pipeline, clustering diagnostics, and market-state plots',
+    coverImage: asset('blog-plots/athenai-clusters.png'),
+    coverAlt: 'AthenAI strategy clustering diagnostics from the experimental report',
     accent: 'green',
     content: `The tempting version of a finance-RL competition project is to jump straight to the agent. Pick PPO, define an action space, train a policy, draw a beautiful equity curve. The AthenAI project pushed me in the opposite direction.
 
@@ -808,3 +809,5 @@ The AthenAI pipeline taught me that an offline finance-RL system should be built
 That is the kind of restraint that makes a competition project more useful after the competition is over.`,
   },
 ];
+
+blogPosts.push(atlasPost);

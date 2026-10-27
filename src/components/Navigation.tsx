@@ -1,196 +1,102 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Download, Github, Linkedin } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { useSectionNavigation } from '@/hooks/useSectionNavigation';
-
-const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
-  { id: 'blog', label: 'Blog', isRoute: true },
-];
+import { useEffect, useState } from "react";
+import { ArrowUpRight, Download, Menu, X } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useLanguage } from "@/i18n/useLanguage";
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
+  const [open, setOpen] = useState(false);
   const location = useLocation();
-  const navigateToSection = useSectionNavigation();
-  const [activeSection, setActiveSection] = useState('home');
-  const cvPath = `${import.meta.env.BASE_URL}cv-adam-maltoni.pdf`;
-
   useEffect(() => {
-    if (!isOpen) return;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-        document.querySelector<HTMLButtonElement>('button[aria-controls="mobile-navigation"]')?.focus();
-      }
-    };
-    window.addEventListener('keydown', closeOnEscape);
-    return () => window.removeEventListener('keydown', closeOnEscape);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (location.pathname.startsWith('/blog')) {
-      setActiveSection('blog');
-      return;
-    }
-
-    const handleScroll = () => {
-      const sections = navItems.filter(item => !item.isRoute).map(item => item.id);
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Call once to set initial state
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    setOpen(false);
   }, [location.pathname]);
-
-  const scrollToSection = (sectionId: string) => {
-    setIsOpen(false);
-    navigateToSection(sectionId);
-  };
-
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        document
+          .querySelector<HTMLButtonElement>('[aria-controls="personal-menu"]')
+          ?.focus();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
+  const links = [
+    ["/about", "About"],
+    ["/blog", "Writing"],
+  ];
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <span className="text-xl font-bold text-foreground">Adam Maltoni</span>
-          </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden xl:block">
-            <div className="ml-10 flex items-center space-x-6">
-              {navItems.map((item) => (
-                item.isRoute ? (
-                  <Link
-                    key={item.id}
-                    to={`/${item.id}`}
-                    className={`nav-link px-3 py-2 text-lg font-medium ${
-                      activeSection === item.id ? 'active' : ''
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`nav-link px-3 py-2 text-lg font-medium ${
-                      activeSection === item.id ? 'active' : ''
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                )
-              ))}
-              
-              {/* Social Icons Container - Properly aligned */}
-              <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-gray-200">
-                <a
-                  href="https://github.com/admsit0"
-                  aria-label="GitHub"
-                  title="GitHub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-purple-500 transition-colors rounded-md hover:bg-gray-100"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://linkedin.com/in/adam-maltoni"
-                  aria-label="LinkedIn"
-                  title="LinkedIn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary-dark transition-colors rounded-md hover:bg-gray-100"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href={cvPath}
-                  download="cv-adam-maltoni.pdf"
-                  className="bg-[#0071e3] text-white hover:bg-[#0077ED] px-4 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2 ml-2 transition-colors"
-                >
-                  <Download className="w-4 h-4" />
-                  CV
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="xl:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-muted-foreground hover:text-foreground p-2"
-              aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
-              aria-expanded={isOpen}
-              aria-controls="mobile-navigation"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+    <header className="personal-header">
+      <nav className="site-width nav-inner" aria-label={t("Main navigation")}>
+        <Link className="wordmark" to="/">
+          adam maltoni<span>.</span>
+        </Link>
+        <div className="nav-links">
+          {links.map(([href, label]) => (
+            <NavLink key={href} to={href}>
+              {t(label)}
+            </NavLink>
+          ))}
         </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div id="mobile-navigation" className="xl:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-xl border-b border-gray-200">
-            {navItems.map((item) => (
-              item.isRoute ? (
-                <Link
-                  key={item.id}
-                  to={`/${item.id}`}
-                  className={`block px-3 py-2 text-lg font-medium w-full text-left nav-link ${
-                    activeSection === item.id ? 'active' : ''
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block px-3 py-2 text-lg font-medium w-full text-left nav-link ${
-                    activeSection === item.id ? 'active' : ''
-                  }`}
-                >
-                  {item.label}
-                </button>
-              )
-            ))}
-            <div className="px-3 py-2">
-              <a
-                href={cvPath}
-                download
-                className="bg-[#0071e3] text-white hover:bg-[#0077ED] px-4 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2 transition-colors"
+        <div className="nav-actions">
+          <NavLink to="/portfolio" className="nav-portfolio">
+            {t("Portfolio")} <ArrowUpRight size={16} />
+          </NavLink>
+          <a
+            className="cv-icon"
+            href={`${import.meta.env.BASE_URL}cv-adam-maltoni.pdf`}
+            download
+            aria-label={t("Download CV")}
+            title={t("Download CV")}
+          >
+            <Download size={18} />
+          </a>
+          <div
+            className="language-switch"
+            role="group"
+            aria-label={t("Language", "Idioma")}
+          >
+            {(["en", "es"] as const).map((locale) => (
+              <button
+                key={locale}
+                lang={locale}
+                aria-pressed={language === locale}
+                aria-label={locale === "en" ? "English" : "Español"}
+                title={locale === "en" ? "English" : "Español"}
+                onClick={() => setLanguage(locale)}
               >
-                <Download className="w-4 h-4" />
-                Download CV
-              </a>
-            </div>
+                {locale.toUpperCase()}
+              </button>
+            ))}
           </div>
+          <button
+            className="menu-toggle"
+            aria-label={t(open ? "Close navigation" : "Open navigation")}
+            aria-expanded={open}
+            aria-controls="personal-menu"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
+      </nav>
+      {open && (
+        <nav
+          id="personal-menu"
+          className="mobile-menu site-width"
+          aria-label={t("Mobile navigation")}
+        >
+          {links.map(([href, label]) => (
+            <NavLink key={href} to={href}>
+              {t(label)}
+              <ArrowUpRight size={18} />
+            </NavLink>
+          ))}
+        </nav>
       )}
-    </nav>
+    </header>
   );
 };
-
 export default Navigation;

@@ -1,17 +1,25 @@
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const NotFound = () => {
+import PersonalLayout from "@/components/PersonalLayout";
+import { useLanguage } from "@/i18n/useLanguage";
+export default function NotFound() {
+  const { t } = useLanguage();
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <Link to="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
+    <PersonalLayout title={t("Page not found")}>
+      <section className="site-width page-intro min-h-[60vh]">
+        <span className="eyebrow">{t("404 / Page not found")}</span>
+        <h1>
+          {t("This page isn't here")}
+          <span>.</span>
+        </h1>
+        <p>
+          {t("The address may have changed, or the link may be incomplete.")}
+        </p>
+        <Link to="/" className="text-link">
+          <ArrowLeft size={17} />
+          {t("Back to home")}
         </Link>
-      </div>
-    </div>
+      </section>
+    </PersonalLayout>
   );
-};
-
-export default NotFound;
+}

@@ -1,0 +1,50 @@
+// Proposed public copy: edit each `en` and `es` field freely.
+
+export const aboutContent = {
+  intro: {
+    en: "I am an AI engineer and data scientist based in Madrid. That describes my training, but not everything I care about. This is the part for questions, interests, and the kind of work I would like to spend my time on.",
+    es: "Soy ingeniero de IA y científico de datos, y estoy en Madrid. Eso describe mi formación, pero no todo lo que me importa. Este es el espacio para las preguntas, los intereses y el tipo de cosas a las que me gustaría dedicar mi tiempo.",
+  },
+  sections: [
+    {
+      id: "interests",
+      title: { en: "What I am drawn to", es: "Lo que me interesa" },
+      body: {
+        en: "I am drawn to questions that resist a quick explanation. How do we arrive at an idea? What would make us change our minds? I find versions of those questions in research and in reading, and I like letting one inform the other.",
+        es: "Me atraen las preguntas que no se resuelven con una explicación rápida. ¿Cómo llegamos a una idea? ¿Qué nos haría cambiar de opinión? Encuentro versiones de esas preguntas en la investigación y en lo que leo, y me gusta que una cosa alimente a la otra.",
+      },
+    },
+    {
+      id: "why",
+      title: { en: "Why I build", es: "Por qué construyo" },
+      body: {
+        en: "Making something is a way of finding out whether I really understand it. An idea can sound convincing until someone tries to use it. I like that encounter with reality: the small decisions, the unexpected problems, and having to revise the original plan.",
+        es: "Hacer algo es una forma de descubrir si de verdad lo he entendido. Una idea puede sonar convincente hasta que alguien intenta usarla. Me gusta ese encuentro con la realidad: las decisiones pequeñas, los problemas que no esperabas y tener que revisar el plan original.",
+      },
+    },
+    {
+      id: "making",
+      title: { en: "Things I want to make", es: "Cosas que quiero crear" },
+      body: {
+        en: "I do not want everything I make to have the same form. Some ideas need software; others need a page, a conversation, or patient work with the details. I would rather find the right form for an idea than force it into the tool I already know.",
+        es: "No quiero que todo lo que haga tenga la misma forma. Algunas ideas necesitan software; otras, una página, una conversación o tiempo trabajando los detalles. Prefiero encontrar la forma que pide una idea a encajarla en la herramienta que ya conozco.",
+      },
+    },
+    {
+      id: "ambitions",
+      title: { en: "Where I want to go", es: "Hacia dónde quiero ir" },
+      body: {
+        en: "I want to become better at choosing what deserves my attention, not just at taking on more things. I care about doing rigorous work, learning from people with different backgrounds, and noticing whether what I build is actually useful.",
+        es: "Quiero aprender a elegir mejor a qué presto atención, no solo a hacer más cosas. Me importa trabajar con rigor, aprender de personas con otras experiencias y fijarme en si lo que construyo resulta útil de verdad.",
+      },
+    },
+    {
+      id: "moonshots",
+      title: { en: "Further down the road", es: "A más largo plazo" },
+      body: {
+        en: "There are ideas I am not ready to put a name or a date on. I would like to keep enough independence to explore them, enough patience to learn what they require, and enough perspective to change direction when it makes sense.",
+        es: "Hay ideas a las que todavía no quiero ponerles un nombre ni una fecha. Me gustaría conservar la independencia para explorarlas, la paciencia para aprender lo que exigen y la perspectiva para cambiar de dirección cuando tenga sentido.",
+      },
+    },
+  ],
+};

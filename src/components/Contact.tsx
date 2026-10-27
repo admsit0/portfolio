@@ -1,180 +1,99 @@
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Github, 
-  Linkedin, 
-  Youtube
-  } from 'lucide-react';
-  import { SectionHeader } from './ui/section-header';
-
-const Contact = () => {
-
-  const contactInfo = [
-    {
-      icon: <Mail className="w-5 h-5" />,
-      label: 'Email',
-      value: 'adam.maltoni@gmail.com',
-      href: 'mailto:adam.maltoni@gmail.com'
-    },
-    {
-      icon: <Phone className="w-5 h-5" />,
-      label: 'Phone',
-      value: '+34 638 707 783',
-      href: 'tel:+34638707783'
-    },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      label: 'Location',
-      value: 'Madrid, Spain',
-      href: 'https://maps.google.com/?q=Madrid,Spain'
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: <Github className="w-5 h-5" />,
-      label: 'GitHub',
-      value: '@admsit0',
-      href: 'https://github.com/admsit0',
-      hoverColor: 'hover:text-black'
-    },
-    {
-      icon: <Linkedin className="w-5 h-5" />,
-      label: 'LinkedIn',
-      value: '/in/adam-maltoni',
-      href: 'https://linkedin.com/in/adam-maltoni',
-      hoverColor: 'hover:text-blue-600'
-    },
-    {
-      icon: <Youtube className="w-5 h-5" />,
-      label: 'YouTube',
-      value: '@admsito17',
-      href: 'https://youtube.com/@admsito17',
-      hoverColor: 'hover:text-red-600'
-    }
-  ];
-
+import {
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Youtube,
+} from "lucide-react";
+import { useLanguage } from "@/i18n/useLanguage";
+export default function Contact() {
+  const { t } = useLanguage();
   return (
-  <section id="contact" className="py-12 bg-background">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Connect"
-            subtitle="I'm always interested in new opportunities, collaborations, and interesting projects. Let's discuss how we can work together!"
-          />
-
-        <div className="max-w-4xl mx-auto">
-          {/* Contact Information */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Details */}
-            <div className="flex flex-col">
-              <h3 className="text-xl font-semibold text-foreground mb-6">
-                Get In Touch
-              </h3>
-              <p className="text-muted-foreground mb-8 flex-grow">
-                Feel free to reach out for opportunities in data science, machine learning, 
-                full-stack development, or any interesting technical challenges. I'm particularly 
-                interested in projects involving AI, data systems, and innovative web solutions.
-              </p>
-
-              <div className="space-y-4">
-                {contactInfo.map((contact, index) => {
-                  let iconHoverColor = '';
-                  if (contact.label === 'Email') iconHoverColor = 'group-hover:text-blue-600';
-                  else if (contact.label === 'Phone') iconHoverColor = 'group-hover:text-green-600';
-                  else if (contact.label === 'Location') iconHoverColor = 'group-hover:text-orange-500';
-                  return (
-                    <a
-                      key={index}
-                      href={contact.href}
-                      target={contact.href.startsWith('http') ? '_blank' : undefined}
-                      rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group"
-                    >
-                      <div className={`text-primary-dark transition-colors ${iconHoverColor}`}>
-                        {contact.icon}
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{contact.label}</p>
-                        <p className="font-medium text-foreground transition-colors">
-                          {contact.value}
-                        </p>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex flex-col">
-              <h3 className="text-xl font-semibold text-foreground mb-6">
-                Connect Online
-              </h3>
-              <p className="text-muted-foreground mb-8 flex-grow">
-                Follow my work and connect with me on social platforms where I share insights 
-                about data science, AI developments, and technical tutorials.
-              </p>
-
-              <div className="space-y-4">
-                {socialLinks.map((social, index) => {
-                  // Map label to hover color for icon
-                  let iconHoverColor = '';
-                  if (social.label === 'GitHub') iconHoverColor = 'group-hover:text-black';
-                  else if (social.label === 'LinkedIn') iconHoverColor = 'group-hover:text-blue-600';
-                  else if (social.label === 'YouTube') iconHoverColor = 'group-hover:text-red-600';
-                  return (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover-lift group"
-                    >
-                      <div className={`text-primary-dark transition-colors ${iconHoverColor}`}>
-                        {social.icon}
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-muted-foreground">{social.label}</p>
-                        <p className="font-medium text-foreground transition-colors">
-                          {social.value}
-                        </p>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
+    <section id="contact" className="personal-contact">
+      <div className="site-width">
+        <div className="contact-heading">
+          <div>
+            <span className="eyebrow">{t("Contact")}</span>
+            <h2>
+              {t("Let's work on")}
+              <br />
+              {t("something worthwhile")}
+              <span>.</span>
+            </h2>
           </div>
-
-          {/* Additional Info */}
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/50 border border-gray-200 shadow-sm backdrop-blur-md">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-              <span className="font-semibold text-foreground tracking-wide">Available for Opportunities</span>
-            </div>
-            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-              Currently open to full-time AI Engineering positions, consulting projects, and collaborative research opportunities.
+          <div className="contact-availability">
+            <span className="eyebrow">{t("Available for opportunities")}</span>
+            <p>
+              {t(
+                "Open to full-time AI engineering roles, consulting projects, and collaborative research.",
+              )}
             </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-              <div>
-                <span className="font-medium text-foreground">Response Time:</span> &lt; 24 hours
-              </div>
-              <div>
-                <span className="font-medium text-foreground">Time Zone:</span> CET (Madrid)
-              </div>
-              <div>
-                <span className="font-medium text-foreground">Languages:</span> Spanish, English, Italian, French
-              </div>
-            </div>
           </div>
         </div>
+        <a className="contact-email" href="mailto:adam.maltoni@gmail.com">
+          <Mail size={23} />
+          <span>adam.maltoni@gmail.com</span>
+          <ArrowUpRight size={26} />
+        </a>
+        <div className="contact-details">
+          <a href="tel:+34638707783">
+            <Phone size={16} />
+            +34 638 707 783
+          </a>
+          <a
+            href="https://maps.google.com/?q=Madrid,Spain"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MapPin size={16} />
+            {t("Madrid, Spain")}
+          </a>
+          <div className="contact-social">
+            {[
+              {
+                Icon: Github,
+                name: "GitHub",
+                href: "https://github.com/admsit0",
+              },
+              {
+                Icon: Linkedin,
+                name: "LinkedIn",
+                href: "https://linkedin.com/in/adam-maltoni",
+              },
+              {
+                Icon: Youtube,
+                name: "YouTube",
+                href: "https://youtube.com/@admsito17",
+              },
+            ].map(({ Icon, name, href }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                title={name}
+              >
+                <Icon size={19} />
+              </a>
+            ))}
+          </div>
+        </div>
+        <dl className="contact-meta">
+          {[
+            ["Response time", "Less than 24 hours"],
+            ["Time zone", "Europe/Madrid"],
+            ["Languages", "Spanish, English, Italian, French"],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <dt>{t(label)}</dt>
+              <dd>{t(value)}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

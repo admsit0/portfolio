@@ -1,488 +1,148 @@
-import { useRef, useState, type MouseEvent } from 'react';
+import { useLanguage } from "@/i18n/useLanguage";
 import {
-  ArrowUpRight,
-  Brain,
-  Database,
-  FileText,
-  Github,
-  HeartPulse,
-  LineChart,
-  Network,
-  Sparkles,
-  Zap,
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useSectionNavigation } from '@/hooks/useSectionNavigation';
-import { SectionHeader } from './ui/section-header';
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from './ui/dialog';
-import stableDiffusionImage from '@/assets/project-stable-diffusion.jpg';
-import reinforcementLearningImage from '@/assets/project-reinforcement-learning.png';
-import databasePerformanceImage from '@/assets/project-database-performance.jpg';
-import clusteringImage from '@/assets/project-clustering.jpg';
-import cardiacHealthImage from '@/assets/cardiac-health.webp';
-
-const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
-
-type ProjectLink = {
-  label: string;
-  href: string;
-  kind: 'github' | 'report' | 'article' | 'website';
-  internal?: boolean;
-};
-
-type Project = {
-  title: string;
-  eyebrow: string;
-  category: string;
-  description: string;
-  technologies: string[];
-  highlights: string[];
-  metrics: { label: string; value: string }[];
-  icon: JSX.Element;
-  accent: 'blue' | 'green' | 'yellow' | 'red' | 'purple' | 'slate';
-  logo?: string;
-  visual: {
-    label: string;
-    nodes: string[];
-    caption: string;
-    image?: string;
-    imageAlt?: string;
-  };
-  links: ProjectLink[];
-};
-
+  projects,
+  type Project,
+  type ProjectLink,
+} from "@/data/projectCatalog";
+import { useRef, useState, type MouseEvent } from "react";
+import { ArrowUpRight, FileText, Github } from "lucide-react";
+import { projectImage } from "@/lib/projectRoutes";
+import { Link } from "react-router-dom";
+import { useSectionNavigation } from "@/hooks/useSectionNavigation";
+import { SectionHeader } from "./ui/section-header";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "./ui/dialog";
 const accentStyles = {
   blue: {
-    text: 'text-[#0071e3]',
-    bg: 'bg-[#e8f2ff]',
-    border: 'border-[#0071e3]/20',
-    stripe: 'bg-[#0071e3]',
-    soft: 'from-[#f6fbff] via-white to-[#e8f2ff]',
+    text: "text-[#0071e3]",
+    bg: "bg-[#e8f2ff]",
+    border: "border-[#0071e3]/20",
+    stripe: "bg-[#0071e3]",
+    soft: "from-[#f6fbff] via-white to-[#e8f2ff]",
   },
   green: {
-    text: 'text-[#188038]',
-    bg: 'bg-[#eaf7ef]',
-    border: 'border-[#34a853]/20',
-    stripe: 'bg-[#34a853]',
-    soft: 'from-[#f7fff9] via-white to-[#eaf7ef]',
+    text: "text-[#188038]",
+    bg: "bg-[#eaf7ef]",
+    border: "border-[#34a853]/20",
+    stripe: "bg-[#34a853]",
+    soft: "from-[#f7fff9] via-white to-[#eaf7ef]",
   },
   yellow: {
-    text: 'text-[#b06000]',
-    bg: 'bg-[#fff7df]',
-    border: 'border-[#fbbc04]/30',
-    stripe: 'bg-[#fbbc04]',
-    soft: 'from-[#fffdf5] via-white to-[#fff2c6]',
+    text: "text-[#b06000]",
+    bg: "bg-[#fff7df]",
+    border: "border-[#fbbc04]/30",
+    stripe: "bg-[#fbbc04]",
+    soft: "from-[#fffdf5] via-white to-[#fff2c6]",
   },
   red: {
-    text: 'text-[#c5221f]',
-    bg: 'bg-[#fdebea]',
-    border: 'border-[#ea4335]/20',
-    stripe: 'bg-[#ea4335]',
-    soft: 'from-[#fff7f6] via-white to-[#fdebea]',
+    text: "text-[#c5221f]",
+    bg: "bg-[#fdebea]",
+    border: "border-[#ea4335]/20",
+    stripe: "bg-[#ea4335]",
+    soft: "from-[#fff7f6] via-white to-[#fdebea]",
   },
   purple: {
-    text: 'text-[#7b2ff7]',
-    bg: 'bg-[#f0e9ff]',
-    border: 'border-[#7b2ff7]/20',
-    stripe: 'bg-[#7b2ff7]',
-    soft: 'from-[#fbf9ff] via-white to-[#f0e9ff]',
+    text: "text-[#7b2ff7]",
+    bg: "bg-[#f0e9ff]",
+    border: "border-[#7b2ff7]/20",
+    stripe: "bg-[#7b2ff7]",
+    soft: "from-[#fbf9ff] via-white to-[#f0e9ff]",
   },
   slate: {
-    text: 'text-[#344054]',
-    bg: 'bg-[#f2f4f7]',
-    border: 'border-[#98a2b3]/25',
-    stripe: 'bg-[#344054]',
-    soft: 'from-[#fbfcfd] via-white to-[#eef2f6]',
+    text: "text-[#344054]",
+    bg: "bg-[#f2f4f7]",
+    border: "border-[#98a2b3]/25",
+    stripe: "bg-[#344054]",
+    soft: "from-[#fbfcfd] via-white to-[#eef2f6]",
   },
-} satisfies Record<Project['accent'], Record<string, string>>;
-
-const projects: Project[] = [
-  {
-    title: 'Regularization in CNNs: Internal Activation Dynamics',
-    eyebrow: '01 / Thesis',
-    category: 'Deep Learning Research',
-    description:
-      'Final-year thesis studying how seven regularization techniques affect both external accuracy and the internal activation geometry of CNNs across CIFAR-10 and SVHN.',
-    technologies: ['Python', 'PyTorch', 'CNNs', 'Entropy', 'CIFAR-10', 'SVHN'],
-    highlights: [
-      'Compared L1, L2, Dropout, Early Stopping, Gaussian Noise, Data Augmentation, and Batch Normalization.',
-      'Measured internal behavior through Shannon entropy, dispersion ratios, and unique activation states.',
-      'Built a reproducible training and analysis pipeline with checkpoint extraction and robustness experiments.',
-    ],
-    metrics: [
-      { label: 'Regularizers', value: '7' },
-      { label: 'Datasets', value: '4' },
-      { label: 'Focus', value: 'Latent' },
-    ],
-    icon: <Brain className="w-5 h-5" />,
-    accent: 'blue',
-    visual: {
-      label: 'CNN',
-      nodes: ['input', 'conv', 'entropy', 'states'],
-      caption: 'Activation states across regularized convolutional layers',
-      image: assetPath('blog-plots/regularization-radar.png'),
-      imageAlt: 'Radar comparison of regularizers across datasets and robustness axes',
-    },
-    links: [
-      { label: 'Source', href: 'https://github.com/admsit0/tfg', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/tfgtfmthesisuam.pdf'), kind: 'report' },
-      { label: 'Blog', href: '/blog/regularization-in-cnns-internal-activations', kind: 'article', internal: true },
-    ],
-  },
-  {
-    title: 'Atlas',
-    eyebrow: 'Live / Learning Platform',
-    category: 'Interactive Learning & Full-Stack Engineering',
-    description:
-      'A bilingual learning platform I built to turn AI theory into interactive experiments, worked problems, and guided practice. Now used by 30+ unique users.',
-    technologies: ['JavaScript', 'Supabase', 'PostgreSQL', 'Google OAuth'],
-    highlights: [
-      '86 lessons and 20 interactive laboratories across symbolic AI and deep learning, available in English and Spanish.',
-      'Reusable course modules and independently tested simulation engines for reasoning, search, and neural-network experiments.',
-      'Google sign-in, private cloud profiles, cross-device progress, and a feedback pipeline backed by Supabase Edge Functions and PostgreSQL.',
-    ],
-    metrics: [
-      { label: 'Unique users', value: '30+' },
-      { label: 'Lessons', value: '86' },
-      { label: 'Languages', value: 'ES / EN' },
-    ],
-    icon: <img src={assetPath('projects/atlas-logo.png')} alt="" className="h-5 w-5" />,
-    logo: assetPath('projects/atlas-logo.png'),
-    accent: 'green',
-    visual: {
-      label: 'Atlas',
-      nodes: [],
-      caption: 'Atlas learning platform: symbolic AI curriculum and interactive course pathway',
-      image: assetPath('projects/atlas-learning.png'),
-      imageAlt: 'Real screenshot of the Atlas symbolic AI course and its learning pathway',
-    },
-    links: [{ label: 'Visit Atlas', href: 'https://atlaslearning.es/', kind: 'website' }],
-  },
-  {
-    title: 'Diffusion-based Generative AI for Images',
-    eyebrow: '02 / Generative AI',
-    category: 'Score-based Modeling',
-    description:
-      'Research-grade diffusion package for training, sampling, conditioning, and evaluating image generation systems with multiple stochastic processes and samplers.',
-    technologies: ['Python', 'PyTorch', 'SDEs', 'CUDA', 'FID', 'Samplers'],
-    highlights: [
-      'Implemented VE, VP, and Sub-VP diffusion processes with modular sampling strategies.',
-      'Supported class-conditional generation, colorization, imputation, and benchmarking utilities.',
-      'Evaluated models with FID, Inception Score, bits-per-dimension, and runtime profiling.',
-    ],
-    metrics: [
-      { label: 'Processes', value: '3' },
-      { label: 'Samplers', value: '4' },
-      { label: 'Reports', value: 'PDF' },
-    ],
-    icon: <Sparkles className="w-5 h-5" />,
-    accent: 'purple',
-    visual: {
-      label: 'SDE',
-      nodes: ['noise', 'score', 'sample', 'metric'],
-      caption: 'Reverse-time denoising pipeline from noise to samples',
-      image: stableDiffusionImage,
-      imageAlt: 'Generated samples and diffusion experiment output',
-    },
-    links: [
-      { label: 'Source', href: 'https://github.com/admsit0/imageGenerativeAI', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-stable-diffusion.pdf'), kind: 'report' },
-      { label: 'Blog', href: '/blog/diffusion-models-from-sdes-to-images', kind: 'article', internal: true },
-    ],
-  },
-  {
-    title: 'AthenAI Competition Project',
-    eyebrow: '03 / Challenge',
-    category: 'Applied ML Decision Systems',
-    description:
-      'Scholarship-winning challenge work focused on turning noisy tabular signals into a practical decision pipeline with validation, backtesting, and readable outputs.',
-    technologies: ['Python', 'Pandas', 'NumPy', 'Validation', 'Backtesting', 'Reporting'],
-    highlights: [
-      'Built an experiment loop for comparing feature sets, decision rules, and evaluation windows.',
-      'Prioritized interpretability and sensitivity checks over black-box confidence.',
-      'Translated model outputs into concise, judge-readable technical reasoning.',
-    ],
-    metrics: [
-      { label: 'Outcome', value: 'Scholarship' },
-      { label: 'Mode', value: 'Challenge' },
-      { label: 'Focus', value: 'Decisions' },
-    ],
-    icon: <LineChart className="w-5 h-5" />,
-    accent: 'green',
-    visual: {
-      label: 'AthenAI',
-      nodes: ['signals', 'model', 'risk', 'decision'],
-      caption: 'Signal validation and decision ranking under competition constraints',
-      image: assetPath('blog-covers/athenai.png'),
-      imageAlt: 'AthenAI Finance-RL technical report cover',
-    },
-    links: [
-      { label: 'Paper', href: assetPath('english/athenai.pdf'), kind: 'report' },
-      { label: 'Blog', href: '/blog/athenai-competition-decision-pipeline', kind: 'article', internal: true },
-    ],
-  },
-  {
-    title: 'Database Performance Comparison',
-    eyebrow: '04 / Data Systems',
-    category: 'Benchmarking & Profiling',
-    description:
-      'Benchmarking suite comparing PostgreSQL, MongoDB, SQLite, and DuckDB across CRUD workloads, cache behavior, indexing decisions, and profiling outputs.',
-    technologies: ['PostgreSQL', 'MongoDB', 'SQLite', 'DuckDB', 'Python', 'Memcached'],
-    highlights: [
-      'Automated data generation, schema setup, CRUD testing, and result export.',
-      'Compared primary-key lookups, joins, update workloads, cache behavior, and memory impact.',
-      'Produced plots and a modular pipeline for reproducible performance analysis.',
-    ],
-    metrics: [
-      { label: 'Databases', value: '4' },
-      { label: 'Layer', value: 'Cache' },
-      { label: 'Output', value: 'Plots' },
-    ],
-    icon: <Database className="w-5 h-5" />,
-    accent: 'slate',
-    visual: {
-      label: 'DB',
-      nodes: ['crud', 'cache', 'join', 'profile'],
-      caption: 'Multi-engine workload profiler with cache experiments',
-      image: databasePerformanceImage,
-      imageAlt: 'Database benchmarking charts and profiling output',
-    },
-    links: [
-      { label: 'Source', href: 'https://github.com/admsit0/DB-performance-comparison', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-database-performance.pdf'), kind: 'report' },
-    ],
-  },
-  {
-    title: 'Reinforcement Learning Analysis',
-    eyebrow: '05 / Agents',
-    category: 'RL Algorithms',
-    description:
-      'Implementation and analysis of Q-Learning, SARSA, and DQN agents in Gymnasium environments with training curves, policy comparisons, and behavior inspection.',
-    technologies: ['Python', 'Gymnasium', 'TensorFlow', 'Q-Learning', 'SARSA', 'DQN'],
-    highlights: [
-      'Trained tabular and neural agents on FrozenLake, CartPole, and LunarLander setups.',
-      'Visualized reward, episode length, exploration behavior, and convergence signals.',
-      'Compared hyperparameter sensitivity across exploration and learning-rate choices.',
-    ],
-    metrics: [
-      { label: 'Algorithms', value: '3' },
-      { label: 'Envs', value: '3' },
-      { label: 'Solved', value: 'CartPole' },
-    ],
-    icon: <Zap className="w-5 h-5" />,
-    accent: 'yellow',
-    visual: {
-      label: 'RL',
-      nodes: ['state', 'policy', 'reward', 'value'],
-      caption: 'Agent loop for policy learning and value updates',
-      image: reinforcementLearningImage,
-      imageAlt: 'Reinforcement learning training visualization',
-    },
-    links: [
-      { label: 'Source', href: 'https://github.com/admsit0/RL-analysis', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-reinforcement-learning.pdf'), kind: 'report' },
-    ],
-  },
-  {
-    title: 'Clustering Techniques Evaluation',
-    eyebrow: '06 / Machine Learning',
-    category: 'Unsupervised Learning',
-    description:
-      'Comparative evaluation of K-Means, Fuzzy C-Means, Spectral Clustering, and Gaussian Mixtures on synthetic and real-world datasets.',
-    technologies: ['Python', 'Scikit-learn', 'NumPy', 'PCA', 'GMM', 'Spectral'],
-    highlights: [
-      'Implemented and compared clustering methods across separable and non-linear structures.',
-      'Used Silhouette, Dunn Index, Adjusted Rand Index, NMI, accuracy, and F1-score.',
-      'Explained cluster interpretability through PCA projections and metric tradeoffs.',
-    ],
-    metrics: [
-      { label: 'Methods', value: '4' },
-      { label: 'Metrics', value: '6' },
-      { label: 'View', value: 'PCA' },
-    ],
-    icon: <Network className="w-5 h-5" />,
-    accent: 'blue',
-    visual: {
-      label: 'Clusters',
-      nodes: ['k-means', 'fuzzy', 'spectral', 'gmm'],
-      caption: 'Cluster geometry compared across algorithms and metrics',
-      image: clusteringImage,
-      imageAlt: 'Clustering evaluation plots and projected clusters',
-    },
-    links: [
-      { label: 'Source', href: 'https://github.com/admsit0/clustering-techniques-evaluation', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-clustering.pdf'), kind: 'report' },
-    ],
-  },
-  {
-    title: 'Cardiac Health Risk Analysis in R',
-    eyebrow: '07 / Statistics',
-    category: 'Clinical Data Analysis',
-    description:
-      'Statistical analysis of heart failure records with PCA, PLS, clustering, and LDA to study patient profiles, risk factors, and classification behavior.',
-    technologies: ['R', 'ggplot2', 'PCA', 'PLS', 'LDA', 'Clustering'],
-    highlights: [
-      'Explored a heart failure dataset with 299 observations and multivariate risk factors.',
-      'Combined dimensionality reduction, clustering, and discriminant analysis.',
-      'Summarized clinical patterns and modeling limitations in a compact technical report.',
-    ],
-    metrics: [
-      { label: 'Patients', value: '299' },
-      { label: 'Variables', value: '15' },
-      { label: 'Model', value: 'LDA' },
-    ],
-    icon: <HeartPulse className="w-5 h-5" />,
-    accent: 'red',
-    visual: {
-      label: 'Risk',
-      nodes: ['pca', 'pls', 'cluster', 'lda'],
-      caption: 'Multivariate analysis pipeline for patient risk profiles',
-      image: cardiacHealthImage,
-      imageAlt: 'Cardiac health analysis dashboard',
-    },
-    links: [
-      { label: 'Source', href: 'https://github.com/admsit0/heart-risk-analysis', kind: 'github' },
-      { label: 'Paper', href: assetPath('english/project-heart-risk.pdf'), kind: 'report' },
-    ],
-  },
-];
-
-const ProjectVisual = ({ project, featured = false }: { project: Project; featured?: boolean }) => {
-  const accent = accentStyles[project.accent];
-  const heightClass = featured ? 'min-h-[18rem]' : 'min-h-[14rem]';
-  const usesDesignedCover = project.visual.image?.includes('blog-covers/');
-  const usesTechnicalPlot = project.visual.image?.includes('blog-plots/');
-
-  if (project.logo && project.visual.image) {
-    return (
-      <figure className={`relative overflow-hidden rounded-lg bg-[#111214] ${heightClass}`}>
-        <img src={project.visual.image} alt={project.visual.imageAlt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
-        <figcaption className="sr-only">{project.visual.caption}</figcaption>
-      </figure>
-    );
-  }
-
-  if (project.visual.image) {
-    return (
-      <figure className={`relative overflow-hidden rounded-lg border border-black/[0.08] ${usesDesignedCover || usesTechnicalPlot ? 'bg-white' : 'bg-[#111214]'} ${heightClass} shadow-sm`}>
-        <img
-          src={project.visual.image}
-          alt={project.visual.imageAlt ?? project.visual.caption}
-          loading="lazy"
-          decoding="async"
-          className={`absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.03] ${usesDesignedCover || usesTechnicalPlot ? 'object-contain p-3 opacity-100' : 'object-cover opacity-90'}`}
-        />
-        <div className={`absolute inset-0 ${usesDesignedCover || usesTechnicalPlot ? 'bg-gradient-to-t from-black/35 via-transparent to-transparent' : 'bg-gradient-to-t from-black/75 via-black/10 to-black/20'}`} />
-        <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-between p-4 sm:p-5">
-          <div className="flex items-center justify-between gap-3">
-            <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-xs font-semibold text-white shadow-sm backdrop-blur-xl">
-              {project.icon}
-              <span className="truncate">{project.visual.label}</span>
-            </span>
-            <span className="rounded-full border border-white/15 bg-white/15 px-2.5 py-1 text-[11px] font-medium text-white/85 backdrop-blur-xl">
-              {project.logo ? 'Live product' : 'Case study'}
-            </span>
-          </div>
-          <figcaption className="max-w-xl rounded-md border border-white/10 bg-black/35 p-3 text-sm font-medium leading-relaxed text-white/90 shadow-sm backdrop-blur-xl">
-            {project.visual.caption}
-          </figcaption>
-        </div>
-      </figure>
-    );
-  }
-
+} satisfies Record<Project["accent"], Record<string, string>>;
+const ProjectVisual = ({
+  project,
+  featured = false,
+}: {
+  project: Project;
+  featured?: boolean;
+}) => {
+  const { t, language } = useLanguage();
   return (
-    <div className={`relative overflow-hidden rounded-lg border border-black/[0.08] bg-gradient-to-br ${accent.soft} ${heightClass} p-5 shadow-sm`}>
-      <div className="absolute inset-x-0 top-0 h-px bg-white/90" />
-      <div className="absolute inset-0 opacity-[0.55] [background-image:linear-gradient(to_right,rgba(29,29,31,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(29,29,31,0.055)_1px,transparent_1px)] [background-size:32px_32px]" />
-      <div className="relative z-10 flex h-full flex-col justify-between">
-        <div className="flex items-center justify-between">
-          <div className={`inline-flex min-w-0 max-w-full items-center gap-2 rounded-full ${accent.bg} ${accent.text} border ${accent.border} px-3 py-1 text-xs font-semibold shadow-sm`}>
-            {project.icon}
-            <span className="truncate">{project.visual.label}</span>
-          </div>
-          <span className="rounded-full border border-black/[0.06] bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm backdrop-blur-md">
-            Research artifact
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-          {project.visual.nodes.map((node, index) => (
-            <div
-              key={node}
-              className="rounded-lg border border-black/[0.06] bg-white/75 p-3 shadow-sm backdrop-blur-md"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <p className="min-w-0 truncate text-xs font-semibold uppercase text-muted-foreground">{node}</p>
-                <span className={`h-2 w-2 rounded-full ${index % 2 === 0 ? accent.stripe : 'bg-[#1d1d1f]'}`} />
-              </div>
-              <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-gray-200">
-                <div
-                  className={`h-full rounded-full ${index % 2 === 0 ? accent.stripe : 'bg-[#1d1d1f]'}`}
-                  style={{ width: `${68 + index * 7}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <p className="max-w-xl text-sm font-medium leading-relaxed text-muted-foreground">
-          {project.visual.caption}
-        </p>
-      </div>
-    </div>
+    <figure
+      className={`technical-project-visual ${featured ? "featured" : ""}`}
+    >
+      <img
+        src={projectImage(project, language)}
+        alt={t(project.visual.imageAlt ?? project.visual.caption)}
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>{t(project.visual.caption)}</figcaption>
+    </figure>
   );
 };
-
-const LinkIcon = ({ kind }: { kind: ProjectLink['kind'] }) => {
-  if (kind === 'github') return <Github className="w-4 h-4" />;
-  if (kind === 'report') return <FileText className="w-4 h-4" />;
+const LinkIcon = ({ kind }: { kind: ProjectLink["kind"] }) => {
+  if (kind === "github") return <Github className="w-4 h-4" />;
+  if (kind === "report") return <FileText className="w-4 h-4" />;
   return <ArrowUpRight className="w-4 h-4" />;
 };
-
 const Projects = () => {
+  const { t } = useLanguage();
   const scrollToSection = useSectionNavigation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const projectTrigger = useRef<HTMLButtonElement | null>(null);
   const featuredProject = projects[0];
   const liveProject = projects[1];
   const remainingProjects = projects.slice(2);
-
-  const openProject = (project: Project, event: MouseEvent<HTMLButtonElement>) => {
+  const openProject = (
+    project: Project,
+    event: MouseEvent<HTMLButtonElement>,
+  ) => {
     projectTrigger.current = event.currentTarget;
     setSelectedProject(project);
   };
-
   const handleLiquidMove = (event: MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    event.currentTarget.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
-    event.currentTarget.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+    event.currentTarget.style.setProperty(
+      "--mouse-x",
+      `${event.clientX - rect.left}px`,
+    );
+    event.currentTarget.style.setProperty(
+      "--mouse-y",
+      `${event.clientY - rect.top}px`,
+    );
   };
-
   const renderLink = (link: ProjectLink, className: string) => {
     if (link.internal) {
       return (
-        <Link key={link.label} to={link.href} className={className}>
+        <Link key={t(link.label)} to={link.href} className={className}>
           <LinkIcon kind={link.kind} />
-          {link.label}
+          {t(link.label)}
         </Link>
       );
     }
-
     return (
-      <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+      <a
+        key={t(link.label)}
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
         <LinkIcon kind={link.kind} />
-        {link.label}
+        {t(link.label)}
       </a>
     );
   };
-
   return (
     <section id="projects" className="py-20 bg-white">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Featured Projects"
-          subtitle="Deep learning research, interactive learning, and data systems. Built, evaluated, and shared."
+          title={t("Featured Projects")}
+          subtitle={t(
+            "Deep learning research, interactive learning, and data systems. Built, evaluated, and shared.",
+          )}
         />
 
         <div className="grid gap-6 xl:grid-cols-3">
@@ -493,29 +153,41 @@ const Projects = () => {
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
               <div className="flex flex-col">
                 <span className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-primary-dark">
-                  {featuredProject.eyebrow}
+                  {t(featuredProject.eyebrow)}
                 </span>
                 <h3 className="text-3xl font-bold tracking-tight text-foreground">
-                  {featuredProject.title}
+                  {t(featuredProject.title)}
                 </h3>
-                <p className="mt-2 text-sm font-semibold text-[#188038]">{featuredProject.category}</p>
+                <p className="mt-2 text-sm font-semibold text-[#188038]">
+                  {t(featuredProject.category)}
+                </p>
                 <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                  {featuredProject.description}
+                  {t(featuredProject.description)}
                 </p>
 
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {featuredProject.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-lg border border-[#e4e4e7] bg-white/80 p-3">
-                      <p className="break-words text-xl font-bold leading-tight text-foreground">{metric.value}</p>
-                      <p className="mt-1 text-xs text-muted-foreground">{metric.label}</p>
+                    <div
+                      key={t(metric.label)}
+                      className="rounded-lg border border-[#e4e4e7] bg-white/80 p-3"
+                    >
+                      <p className="break-words text-xl font-bold leading-tight text-foreground">
+                        {t(metric.value)}
+                      </p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {t(metric.label)}
+                      </p>
                     </div>
                   ))}
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {featuredProject.technologies.map((tech) => (
-                    <span key={tech} className="tech-chip border-blue-100 bg-blue-50 text-blue-700">
-                      {tech}
+                    <span
+                      key={t(tech)}
+                      className="tech-chip border-blue-100 bg-blue-50 text-blue-700"
+                    >
+                      {t(tech)}
                     </span>
                   ))}
                 </div>
@@ -524,14 +196,14 @@ const Projects = () => {
                   {featuredProject.links.map((link) =>
                     renderLink(
                       link,
-                      'inline-flex items-center gap-2 rounded-full border border-[#e4e4e7] bg-white px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-[#81b6ff] hover:text-primary-dark'
-                    )
+                      "inline-flex items-center gap-2 rounded-full border border-[#e4e4e7] bg-white px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-[#81b6ff] hover:text-primary-dark",
+                    ),
                   )}
                   <button
                     onClick={(event) => openProject(featuredProject, event)}
                     className="inline-flex items-center gap-2 rounded-full bg-[#3c83f6] px-4 py-2 text-sm font-medium text-white transition-all hover:bg-[#2d6edf] hover:shadow-[0_0_0_0.5px_#0544a9,inset_0_-1px_0_0_#022c70,inset_0_0.5px_0_0_#81b6ff]"
                   >
-                    Details
+                    {t("Details")}
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -546,29 +218,64 @@ const Projects = () => {
             onMouseMove={handleLiquidMove}
           >
             <div className="mb-5 flex items-center gap-3">
-              <img src={liveProject.logo} alt="Atlas logo" width={48} height={48} className="h-12 w-12 shrink-0" />
+              <img
+                src={liveProject.logo}
+                alt={t("Atlas logo")}
+                width={48}
+                height={48}
+                className="h-12 w-12 shrink-0"
+              />
               <div className="min-w-0">
-                <span className="text-xs font-semibold uppercase text-[#188038]">{liveProject.eyebrow}</span>
-                <h3 className="mt-1 text-2xl font-bold">{liveProject.title}</h3>
+                <span className="text-xs font-semibold uppercase text-[#188038]">
+                  {t(liveProject.eyebrow)}
+                </span>
+                <h3 className="mt-1 text-2xl font-bold">
+                  {t(liveProject.title)}
+                </h3>
               </div>
             </div>
             <ProjectVisual project={liveProject} />
-            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{liveProject.description}</p>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              {t(liveProject.description)}
+            </p>
             <div className="mt-5 grid grid-cols-3 gap-2">
               {liveProject.metrics.map((metric) => (
-                <div key={metric.label} className="rounded-lg border border-[#e4e4e7] bg-white/75 p-2.5">
-                  <p className="text-lg font-bold leading-tight">{metric.value}</p>
-                  <p className="mt-1 text-[11px] text-muted-foreground">{metric.label}</p>
+                <div
+                  key={t(metric.label)}
+                  className="rounded-lg border border-[#e4e4e7] bg-white/75 p-2.5"
+                >
+                  <p className="text-lg font-bold leading-tight">
+                    {t(metric.value)}
+                  </p>
+                  <p className="mt-1 text-[11px] text-muted-foreground">
+                    {t(metric.label)}
+                  </p>
                 </div>
               ))}
             </div>
             <div className="mt-5 flex flex-wrap gap-2">
-              {liveProject.technologies.map((tech) => <span key={tech} className="tech-chip border-gray-200 bg-white/70 text-muted-foreground">{tech}</span>)}
+              {liveProject.technologies.map((tech) => (
+                <span
+                  key={t(tech)}
+                  className="tech-chip border-gray-200 bg-white/70 text-muted-foreground"
+                >
+                  {t(tech)}
+                </span>
+              ))}
             </div>
             <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
-              {liveProject.links.map((link) => renderLink(link, 'inline-flex items-center gap-2 rounded-full bg-[#0071e3] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0062c4]'))}
-              <button onClick={(event) => openProject(liveProject, event)} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-primary-dark hover:bg-blue-50">
-                Details <ArrowUpRight className="h-4 w-4" />
+              {liveProject.links.map((link) =>
+                renderLink(
+                  link,
+                  "inline-flex items-center gap-2 rounded-full bg-[#0071e3] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0062c4]",
+                ),
+              )}
+              <button
+                onClick={(event) => openProject(liveProject, event)}
+                className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-primary-dark hover:bg-blue-50"
+              >
+                {t("Details")}
+                <ArrowUpRight className="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -577,10 +284,9 @@ const Projects = () => {
         <div className="mt-6 grid gap-6 md:auto-rows-fr md:grid-cols-2 xl:grid-cols-3">
           {remainingProjects.map((project) => {
             const accent = accentStyles[project.accent];
-
             return (
               <article
-                key={project.title}
+                key={t(project.title)}
                 className="liquid-project-card flex min-h-[620px] flex-col overflow-hidden"
                 onMouseMove={handleLiquidMove}
               >
@@ -588,36 +294,52 @@ const Projects = () => {
 
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
-                    <span className={`text-xs font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
-                      {project.eyebrow}
+                    <span
+                      className={`text-xs font-semibold uppercase tracking-[0.16em] ${accent.text}`}
+                    >
+                      {t(project.eyebrow)}
                     </span>
                     <h3 className="mt-2 text-xl font-bold leading-tight text-foreground">
-                      {project.title}
+                      {t(project.title)}
                     </h3>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">{project.category}</p>
+                    <p className="mt-1 text-sm font-medium text-muted-foreground">
+                      {t(project.category)}
+                    </p>
                   </div>
-                  <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${accent.bg} ${accent.text}`}>
+                  <div
+                    className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${accent.bg} ${accent.text}`}
+                  >
                     {project.icon}
                   </div>
                 </div>
 
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground line-clamp-4">
-                  {project.description}
+                  {t(project.description)}
                 </p>
 
                 <div className="mt-5 grid grid-cols-3 gap-2">
                   {project.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-lg border border-[#e4e4e7] bg-white/75 p-2">
-                      <p className="break-words text-sm font-bold leading-tight text-foreground">{metric.value}</p>
-                      <p className="mt-1 text-[11px] text-muted-foreground">{metric.label}</p>
+                    <div
+                      key={t(metric.label)}
+                      className="rounded-lg border border-[#e4e4e7] bg-white/75 p-2"
+                    >
+                      <p className="break-words text-sm font-bold leading-tight text-foreground">
+                        {t(metric.value)}
+                      </p>
+                      <p className="mt-1 text-[11px] text-muted-foreground">
+                        {t(metric.label)}
+                      </p>
                     </div>
                   ))}
                 </div>
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.technologies.slice(0, 5).map((tech) => (
-                    <span key={tech} className="tech-chip border-gray-200 bg-white/70 text-muted-foreground">
-                      {tech}
+                    <span
+                      key={t(tech)}
+                      className="tech-chip border-gray-200 bg-white/70 text-muted-foreground"
+                    >
+                      {t(tech)}
                     </span>
                   ))}
                 </div>
@@ -626,14 +348,14 @@ const Projects = () => {
                   {project.links.map((link) =>
                     renderLink(
                       link,
-                      'inline-flex items-center gap-1.5 rounded-full border border-[#e4e4e7] bg-white px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-[#81b6ff] hover:text-primary-dark'
-                    )
+                      "inline-flex items-center gap-1.5 rounded-full border border-[#e4e4e7] bg-white px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-[#81b6ff] hover:text-primary-dark",
+                    ),
                   )}
                   <button
                     onClick={(event) => openProject(project, event)}
                     className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-primary-dark transition-colors hover:bg-blue-50"
                   >
-                    Details
+                    {t("Details")}
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -644,30 +366,42 @@ const Projects = () => {
 
         <div className="text-center mt-12">
           <button
-            onClick={() => scrollToSection('contact')}
+            onClick={() => scrollToSection("contact")}
             className="btn-primary px-6 py-3 rounded-full text-base font-medium"
           >
-            Get In Touch
+            {t("Get In Touch")}
           </button>
         </div>
       </div>
 
-      <Dialog open={!!selectedProject} onOpenChange={(open) => { if (!open) setSelectedProject(null); }}>
+      <Dialog
+        open={!!selectedProject}
+        onOpenChange={(open) => {
+          if (!open) setSelectedProject(null);
+        }}
+      >
         {selectedProject && (
           <DialogContent
             data-lenis-prevent
             className="max-h-[90dvh] w-[calc(100%_-_1.5rem)] max-w-5xl overflow-y-auto overscroll-contain rounded-lg border-white/70 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl sm:p-8"
-            onCloseAutoFocus={(event) => { event.preventDefault(); projectTrigger.current?.focus(); }}
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              projectTrigger.current?.focus();
+            }}
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <span className={`text-xs font-semibold uppercase tracking-[0.18em] ${accentStyles[selectedProject.accent].text}`}>
-                  {selectedProject.eyebrow}
+                <span
+                  className={`text-xs font-semibold uppercase tracking-[0.18em] ${accentStyles[selectedProject.accent].text}`}
+                >
+                  {t(selectedProject.eyebrow)}
                 </span>
                 <DialogTitle className="mt-2 pr-7 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-                  {selectedProject.title}
+                  {t(selectedProject.title)}
                 </DialogTitle>
-                <DialogDescription className="mt-2 text-sm font-medium text-muted-foreground">{selectedProject.category}</DialogDescription>
+                <DialogDescription className="mt-2 text-sm font-medium text-muted-foreground">
+                  {t(selectedProject.category)}
+                </DialogDescription>
               </div>
             </div>
 
@@ -676,16 +410,23 @@ const Projects = () => {
 
               <div>
                 <p className="text-base leading-relaxed text-muted-foreground">
-                  {selectedProject.description}
+                  {t(selectedProject.description)}
                 </p>
 
                 <div className="mt-6">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground">Highlights</h3>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground">
+                    {t("Highlights")}
+                  </h3>
                   <ul className="mt-4 space-y-3">
                     {selectedProject.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                        <span className={`mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full ${accentStyles[selectedProject.accent].stripe}`} />
-                        {highlight}
+                      <li
+                        key={t(highlight)}
+                        className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        <span
+                          className={`mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full ${accentStyles[selectedProject.accent].stripe}`}
+                        />
+                        {t(highlight)}
                       </li>
                     ))}
                   </ul>
@@ -693,8 +434,11 @@ const Projects = () => {
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech) => (
-                    <span key={tech} className="tech-chip border-gray-200 bg-white text-muted-foreground">
-                      {tech}
+                    <span
+                      key={t(tech)}
+                      className="tech-chip border-gray-200 bg-white text-muted-foreground"
+                    >
+                      {t(tech)}
                     </span>
                   ))}
                 </div>
@@ -703,8 +447,8 @@ const Projects = () => {
                   {selectedProject.links.map((link) =>
                     renderLink(
                       link,
-                      'inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-primary-dark'
-                    )
+                      "inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-primary-dark",
+                    ),
                   )}
                 </div>
               </div>
@@ -715,5 +459,4 @@ const Projects = () => {
     </section>
   );
 };
-
 export default Projects;

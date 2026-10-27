@@ -10,18 +10,25 @@ const RouteScroll = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const frame = requestAnimationFrame(() => {
+    let attempts = 0;
+    let frame: number;
+    const ready = () => {
       lenis?.resize();
       const sectionId = (location.state as { sectionId?: string } | null)?.sectionId;
 
-      if (location.pathname === '/' && sectionId) {
+      if (sectionId && !document.getElementById(sectionId) && attempts++ < 60) {
+        frame = requestAnimationFrame(ready);
+        return;
+      }
+      if (sectionId) {
         scrollToSectionWithOffset(sectionId, 80, lenis);
       } else if (lenis) {
         lenis.scrollTo(0, { immediate: true });
       } else {
         window.scrollTo({ top: 0, behavior: 'instant' });
       }
-    });
+    };
+    frame = requestAnimationFrame(ready);
 
     return () => cancelAnimationFrame(frame);
   }, [lenis, location.key, location.pathname, location.state]);

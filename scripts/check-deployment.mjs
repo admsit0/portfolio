@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { getStaticPages } from './build-static-pages.mjs';
 
 const base = new URL(process.argv[2] ?? 'https://adammaltoni.com/');
 const build = fileURLToPath(new URL('../dist/', import.meta.url));
@@ -55,6 +56,29 @@ await Promise.all(Array.from({ length: 4 }, async () => {
 const failures = results.filter(result => !result.ok);
 console.log(JSON.stringify({ base: base.href, checked: files.length, passed: results.length - failures.length, failures }, null, 2));
 assert.equal(failures.length, 0, 'Published assets must exist and retain their expected content types');
+
+const entryScripts = files.filter(file => file.startsWith('assets/index-') && file.endsWith('.js'));
+assert.equal(entryScripts.length, 1, 'The build must have one main entry script');
+const { stdout: homepage } = await run(process.platform === 'win32' ? 'curl.exe' : 'curl', [
+  '--silent', '--show-error', '--fail', '--max-time', '20', '--header', 'Cache-Control: no-cache', base.href,
+]);
+assert.ok(homepage.includes(entryScripts[0]), 'The public homepage must reference this release, not an older build');
+assert.ok(!/noindex|nofollow/i.test(homepage), 'The public homepage must be indexable');
+
+const pages = await getStaticPages();
+let routeCursor = 0;
+const routeFailures = [];
+await Promise.all(Array.from({ length: 4 }, async () => {
+  while (routeCursor < pages.length) {
+    const page = pages[routeCursor++];
+    try {
+      const response = await head(new URL(page.path.slice(1), base));
+      if (response.http_code !== 200 || !response.content_type?.includes('text/html')) routeFailures.push(page.path);
+    } catch { routeFailures.push(page.path); }
+  }
+}));
+assert.deepEqual(routeFailures, [], 'Direct page URLs must return HTML with HTTP 200');
+console.log(`Current release and ${pages.length} direct routes verified.`);
 
 if (base.protocol === 'https:') {
   const http = new URL(base);
