@@ -25,6 +25,11 @@ Personal home copy lives in `src/content/personal.ts`; longer personal notes liv
 portfolio is at `/portfolio`; Atlas has linked product and engineering views at `/atlas`
 and `/portfolio/atlas`. No private notes, tokens, or local organization files are published.
 
+Home motion is decorative only: a DPR-capped canvas draws faint contour lines at up to
+30 fps and pauses offscreen or in hidden tabs. Reduced-motion preferences stop the canvas
+and name entrance. Section headings reveal once, without hiding body text or changing
+the reading order; preference changes cancel running heading animations immediately.
+
 Atlas links to [atlaslearning.es](https://atlaslearning.es/). Its user metric is
 the owner's conservative reported figure (30+ unique users), not a live counter.
 The logo is the original Atlas asset; the screenshot contains no account details.

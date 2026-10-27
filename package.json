@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.app.json",
-    "test": "node --experimental-strip-types --test tests/scroll-navigation.test.mjs tests/i18n-content.test.mjs tests/static-pages.test.mjs",
+    "test": "node --experimental-strip-types --test tests/scroll-navigation.test.mjs tests/i18n-content.test.mjs tests/static-pages.test.mjs tests/heading-motion.test.mjs tests/hero-motion.test.mjs",
     "check:deployment": "node scripts/check-deployment.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
