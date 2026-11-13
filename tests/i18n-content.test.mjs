@@ -176,7 +176,9 @@ test('"Right now" is dated and every line exists in English and Spanish', () => 
     (p) => p.name?.getText(personal) === "updated",
   );
   assert.match(updated.initializer.text, /^\d{4}-\d{2}-\d{2}$/);
-  const items = now.properties.find((p) => p.name?.getText(personal) === "items");
+  const items = now.properties.find(
+    (p) => p.name?.getText(personal) === "items",
+  );
   assert.ok(items.initializer.elements.length >= 5);
   for (const item of items.initializer.elements) {
     for (const field of ["label", "text"]) {
