@@ -1,7 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   BrowserRouter,
   Routes,
@@ -18,7 +14,6 @@ import LanguageProvider from "./i18n/LanguageProvider";
 import { useLanguage } from "./i18n/useLanguage";
 import RouteBoundary from "./components/RouteBoundary";
 
-const queryClient = new QueryClient();
 const Blog = lazy(() => import("./pages/Blog"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const ProjectIndex = lazy(() => import("./pages/ProjectIndex"));
@@ -51,41 +46,35 @@ const LegacyHashLinks = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <LanguageProvider>
-        <BrowserRouter>
-          <LegacyHashLinks />
-          <SmoothScroll>
-            <RouteBoundary>
-              <Suspense fallback={<Loading />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:slug" element={<Blog />} />
-                  <Route path="/portfolio" element={<Portfolio />} />
-                  <Route path="/projects" element={<ProjectIndex />} />
-                  <Route
-                    path="/projects/atlas"
-                    element={<Navigate to="/atlas" replace />}
-                  />
-                  <Route path="/projects/:slug" element={<Project />} />
-                  <Route path="/atlas" element={<Atlas />} />
-                  <Route path="/gdg" element={<Gdg />} />
-                  <Route path="/portfolio/atlas" element={<AtlasTechnical />} />
-                  <Route path="/portfolio/:slug" element={<Project />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </RouteBoundary>
-          </SmoothScroll>
-        </BrowserRouter>
-      </LanguageProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <LanguageProvider>
+    <BrowserRouter>
+      <LegacyHashLinks />
+      <SmoothScroll>
+        <RouteBoundary>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<Blog />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/projects" element={<ProjectIndex />} />
+              <Route
+                path="/projects/atlas"
+                element={<Navigate to="/atlas" replace />}
+              />
+              <Route path="/projects/:slug" element={<Project />} />
+              <Route path="/atlas" element={<Atlas />} />
+              <Route path="/gdg" element={<Gdg />} />
+              <Route path="/portfolio/atlas" element={<AtlasTechnical />} />
+              <Route path="/portfolio/:slug" element={<Project />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </RouteBoundary>
+      </SmoothScroll>
+    </BrowserRouter>
+  </LanguageProvider>
 );
 
 export default App;
