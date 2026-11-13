@@ -1,4 +1,6 @@
 // Proposed public copy. Private notes informed the tone, not the details.
+import { atlasFacts } from "./atlas";
+
 export const personalContent = {
   hero: {
     statement: {
@@ -17,6 +19,75 @@ export const personalContent = {
     { lang: "en", name: "English" },
     { lang: "fr", name: "Français" },
   ],
+  // "Right now" section on the home page. Update `updated` whenever a line changes.
+  // `facet` picks the accent colour: research, community, build or personal.
+  now: {
+    updated: "2026-11-13",
+    items: [
+      {
+        id: "research",
+        facet: "research",
+        label: { en: "Researching", es: "Investigando" },
+        text: {
+          en: "My MSc thesis: editing latent representations in LLMs so they unlearn deceptive behaviour.",
+          es: "Mi TFM: editar representaciones latentes en LLMs para que desaprendan el comportamiento engañoso.",
+        },
+        link: {
+          href: "https://github.com/admsit0/slides-llm-alignment-sota",
+          en: "State-of-the-art slides",
+          es: "Diapositivas del estado del arte",
+        },
+      },
+      {
+        id: "building",
+        facet: "build",
+        label: { en: "Building", es: "Construyendo" },
+        text: {
+          en: `Atlas, a bilingual place to learn AI by experimenting: ${atlasFacts.lessons} lessons and ${atlasFacts.laboratories} interactive labs so far.`,
+          es: `Atlas, un sitio bilingüe para aprender IA experimentando: ${atlasFacts.lessons} lecciones y ${atlasFacts.laboratories} laboratorios interactivos por ahora.`,
+        },
+        link: { href: "/atlas", en: "About Atlas", es: "Sobre Atlas" },
+      },
+      {
+        id: "organising",
+        facet: "community",
+        label: { en: "Organising", es: "Organizando" },
+        text: {
+          en: "GDG on Campus UAM, which I co-founded and have led as president since July 2026. We are 275 members.",
+          es: "GDG on Campus UAM, que cofundé y presido desde julio de 2026. Somos 275 miembros.",
+        },
+        link: { href: "/gdg", en: "About GDG UAM", es: "Sobre GDG UAM" },
+      },
+      {
+        id: "studying",
+        facet: "research",
+        label: { en: "Studying", es: "Estudiando" },
+        text: {
+          en: "MSc in Artificial Intelligence at Universidad Autónoma de Madrid (2026–2027).",
+          es: "Máster en Inteligencia Artificial en la Universidad Autónoma de Madrid (2026–2027).",
+        },
+      },
+      {
+        id: "basketball",
+        facet: "personal",
+        label: { en: "Playing", es: "Jugando" },
+        text: {
+          en: "Basketball. I just like playing it.",
+          es: "Al baloncesto. Simplemente me gusta jugar.",
+        },
+      },
+      {
+        id: "reading",
+        facet: "personal",
+        cite: "The Intelligent Investor",
+        label: { en: "Reading", es: "Leyendo" },
+        text: {
+          en: "The Intelligent Investor, by Benjamin Graham.",
+          es: "The Intelligent Investor, de Benjamin Graham.",
+        },
+      },
+    ],
+  },
   introduction: {
     en: "I work in AI, but most of what interests me starts before the code: a question I cannot quite leave alone, an idea worth testing, or a conversation that changes how I see something.",
     es: "Trabajo en IA, pero muchas de las cosas que me interesan empiezan antes del código: una pregunta que no consigo quitarme de la cabeza, una idea que merece una prueba o una conversación que cambia cómo veo algo.",

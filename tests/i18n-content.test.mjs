@@ -156,12 +156,40 @@ test("home leads with personal interests and keeps projects as compact evidence"
   assert.ok(home.includes('scroll("personal-intro")'));
   assert.ok(!home.includes("home-region") && !home.includes("atlasMedia"));
   assert.ok(
-    narrative.indexOf('id="personal-intro"') <
-      narrative.indexOf('id="selected-work"'),
+    narrative.indexOf('id="personal-intro"') < narrative.indexOf('id="now"'),
   );
   assert.ok(narrative.includes("personalContent.interests.map"));
-  for (const route of ["/atlas", "/gdg", "/portfolio", "/about"])
+  assert.ok(narrative.includes("personalContent.now.items.map"));
+  for (const route of ["/portfolio", "/about"])
     assert.ok(narrative.includes(`to="${route}"`));
+  // Atlas and GDG stay linked, as two lines among several in "Right now".
+  const personal = source("src/content/personal.ts");
+  for (const route of ["/atlas", "/gdg"])
+    assert.ok(personal.includes(`href: "${route}"`));
+});
+
+test('"Right now" is dated and every line exists in English and Spanish', () => {
+  const personal = tree("src/content/personal.ts");
+  const [now] = properties(personal, "now");
+  assert.ok(ts.isObjectLiteralExpression(now));
+  const updated = now.properties.find(
+    (p) => p.name?.getText(personal) === "updated",
+  );
+  assert.match(updated.initializer.text, /^\d{4}-\d{2}-\d{2}$/);
+  const items = now.properties.find((p) => p.name?.getText(personal) === "items");
+  assert.ok(items.initializer.elements.length >= 5);
+  for (const item of items.initializer.elements) {
+    for (const field of ["label", "text"]) {
+      const value = item.properties.find(
+        (p) => p.name?.getText(personal) === field,
+      ).initializer;
+      for (const language of ["en", "es"])
+        assert.ok(
+          value.properties.some((p) => p.name?.getText(personal) === language),
+          `${field} needs ${language}`,
+        );
+    }
+  }
 });
 
 test("public personal copy does not expose private plans or name their source", () => {

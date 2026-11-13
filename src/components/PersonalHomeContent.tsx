@@ -2,7 +2,6 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/useLanguage";
 import { personalContent } from "@/content/personal";
-import gdgLogo from "@/assets/gdg-logo.webp";
 
 export default function PersonalHomeContent() {
   const { language, t } = useLanguage();
@@ -64,44 +63,64 @@ export default function PersonalHomeContent() {
         </div>
       </section>
 
-      <section id="selected-work" className="site-width person-work">
+      <section
+        id="now"
+        className="site-width person-work"
+        aria-labelledby="now-title"
+      >
         <div className="person-work-heading">
-          <span className="eyebrow">
-            {t(
-              "Some of that, in practice",
-              "Un poco de todo eso, en la práctica",
-            )}
-          </span>
-          <h2>{t("Things I am part of.", "Cosas de las que formo parte.")}</h2>
+          <span className="eyebrow">{t("Right now", "Ahora mismo")}</span>
+          <h2 id="now-title">{t("What I am up to.", "En qué estoy.")}</h2>
+          <p className="now-updated">
+            {t("Updated", "Actualizado el")}{" "}
+            <time dateTime={personalContent.now.updated}>
+              {new Intl.DateTimeFormat(language === "es" ? "es-ES" : "en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                timeZone: "UTC",
+              }).format(new Date(personalContent.now.updated))}
+            </time>
+          </p>
         </div>
-        <div className="person-work-links">
-          <Link className="person-work-link" to="/atlas">
-            <img src="/projects/atlas-logo.png" alt="" width={34} height={34} />
-            <div>
-              <h3>Atlas</h3>
+        <ul className="now-list">
+          {personalContent.now.items.map((item) => (
+            <li className="now-row" data-facet={item.facet} key={item.id}>
+              <span className="now-label">{item.label[language]}</span>
               <p>
-                {t(
-                  "A place I am building to learn AI by experimenting, not just reading.",
-                  "Un lugar que estoy construyendo para aprender IA experimentando, no solo leyendo.",
+                {"cite" in item && item.cite
+                  ? item.text[language]
+                      .split(item.cite)
+                      .flatMap((part, index) =>
+                        index === 0
+                          ? [part]
+                          : [<cite key={index}>{item.cite}</cite>, part],
+                      )
+                  : item.text[language]}
+                {"link" in item && item.link && (
+                  <>
+                    {item.link.href.startsWith("/") ? (
+                      <Link className="now-link" to={item.link.href}>
+                        {item.link[language]}
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </Link>
+                    ) : (
+                      <a
+                        className="now-link"
+                        href={item.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.link[language]}
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                  </>
                 )}
               </p>
-            </div>
-            <ArrowUpRight size={20} aria-hidden="true" />
-          </Link>
-          <Link className="person-work-link" to="/gdg">
-            <img src={gdgLogo} alt="" width={34} height={34} />
-            <div>
-              <h3>GDG UAM</h3>
-              <p>
-                {t(
-                  "A community I co-founded and now lead, learning and building with others.",
-                  "Una comunidad que cofundé y ahora presido, para aprender y construir con otros.",
-                )}
-              </p>
-            </div>
-            <ArrowUpRight size={20} aria-hidden="true" />
-          </Link>
-        </div>
+            </li>
+          ))}
+        </ul>
         <div className="person-technical-link">
           <div>
             <h3>{t("The technical side", "La parte técnica")}</h3>
