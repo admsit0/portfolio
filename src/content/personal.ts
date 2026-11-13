@@ -1,5 +1,22 @@
 // Proposed public copy. Private notes informed the tone, not the details.
 export const personalContent = {
+  hero: {
+    statement: {
+      en: "AI engineer in Madrid. I'm trying to stop LLMs from lying, I lead a community of 275 students, and I'm building Atlas so people can learn AI hands-on.",
+      es: "Ingeniero de IA en Madrid. Intento que los LLMs dejen de mentir, presido una comunidad de 275 estudiantes y construyo Atlas para aprender IA tocando.",
+    },
+    aside: {
+      en: "Off-screen: I play basketball, and one day I'll start a non-profit.",
+      es: "Fuera de la pantalla: juego al baloncesto y algún día fundaré una asociación sin ánimo de lucro.",
+    },
+  },
+  // Each name is written in its own language; levels match the CV.
+  languages: [
+    { lang: "es", name: "Español" },
+    { lang: "it", name: "Italiano" },
+    { lang: "en", name: "English" },
+    { lang: "fr", name: "Français" },
+  ],
   introduction: {
     en: "I work in AI, but most of what interests me starts before the code: a question I cannot quite leave alone, an idea worth testing, or a conversation that changes how I see something.",
     es: "Trabajo en IA, pero muchas de las cosas que me interesan empiezan antes del código: una pregunta que no consigo quitarme de la cabeza, una idea que merece una prueba o una conversación que cambia cómo veo algo.",

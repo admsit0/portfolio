@@ -12,13 +12,14 @@ import Contact from "@/components/Contact";
 import { useSectionNavigation } from "@/hooks/useSectionNavigation";
 import { useLanguage } from "@/i18n/useLanguage";
 import PersonalHomeContent from "@/components/PersonalHomeContent";
+import { personalContent } from "@/content/personal";
 import portrait from "@/assets/adam-profile.png";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { useHeadingReveals } from "@/hooks/useHeadingReveals";
 
 export default function Index() {
   const scroll = useSectionNavigation();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const reveals = useHeadingReveals();
   return (
     <PersonalLayout title={t("Adam Maltoni", "Adam Maltoni")}>
@@ -35,10 +36,12 @@ export default function Index() {
                 )}
               </span>
               <span className="intro-location">
-                {t(
-                  "Based in Madrid. Building beyond it.",
-                  "En Madrid, construyendo más allá.",
-                )}
+                {personalContent.languages.map(({ name, lang }, index) => (
+                  <span key={lang}>
+                    {index > 0 && " · "}
+                    <span lang={lang}>{name}</span>
+                  </span>
+                ))}
               </span>
             </div>
           </div>
@@ -53,16 +56,9 @@ export default function Index() {
             </span>
           </h1>
           <p className="hero-statement">
-            {t(
-              "I like understanding things.",
-              "Me interesa entender las cosas.",
-            )}
-            <br className="desktop-break" />
-            {t(
-              " And doing something with what I learn.",
-              " Y hacer algo con lo que aprendo.",
-            )}
+            {personalContent.hero.statement[language]}
           </p>
+          <p className="hero-aside">{personalContent.hero.aside[language]}</p>
           <div className="hero-actions">
             <button
               className="solid-link"
