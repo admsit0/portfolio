@@ -29,7 +29,7 @@ The deployment checker uses curl with normal certificate validation. The local N
 ## Changes
 
 - Added Atlas prominently beside the thesis, with its original logo, a real product screenshot, and a link to https://atlaslearning.es/.
-- The conservative 30+ unique-user figure comes from the owner. It is not a live analytics counter. The 86-lesson figure reflects the inspected catalog snapshot.
+- The conservative 30+ unique-user figure comes from the owner. It is not a live analytics counter. The 157-lesson and 26-laboratory figures come from the catalog snapshot of 13 October 2026 (`src/content/atlas.ts`), which the site shows next to them.
 - The Atlas screenshot excludes account identity and profile details; its private repository was not published or linked.
 - Preserved the original hero visuals. Only accessible names and hover titles were added to its social links.
 - Corrected icon-link labels, the CV's duplicate open/download action, project dialog accessibility, article table overflow, and card clipping.

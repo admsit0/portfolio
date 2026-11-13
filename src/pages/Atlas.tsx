@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import PersonalLayout from "@/components/PersonalLayout";
 import { useLanguage } from "@/i18n/useLanguage";
-import { atlasFacts, atlasMedia } from "@/content/atlas";
+import { atlasFacts, atlasFactsDate, atlasMedia } from "@/content/atlas";
 
 export default function Atlas() {
   const { language, t } = useLanguage();
@@ -78,8 +78,8 @@ export default function Atlas() {
         </div>
         <p className="evidence-note">
           {t(
-            "Usage count reported by me. Content snapshot: 13 October 2026.",
-            "Cifra de uso comunicada por mí. Catálogo a 13 de octubre de 2026.",
+            `Usage count reported by me. Content snapshot: ${atlasFactsDate("en")}.`,
+            `Cifra de uso comunicada por mí. Catálogo a ${atlasFactsDate("es")}.`,
           )}
         </p>
       </section>

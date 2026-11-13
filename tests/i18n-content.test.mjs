@@ -266,3 +266,22 @@ test("home photos are optional, local, and captioned in both languages", () => {
       `${match[1]} must exist in public/photos/`,
     );
 });
+
+test("Atlas figures have one source and are dated wherever they appear", () => {
+  const atlas = source("src/content/atlas.ts");
+  const lessons = atlas.match(/lessons: (\d+)/)[1];
+  const labs = atlas.match(/laboratories: (\d+)/)[1];
+  assert.match(atlas, /date: "\d{4}-\d{2}-\d{2}"/);
+  const catalog = source("src/data/projectCatalog.tsx");
+  assert.ok(catalog.includes(`${lessons} lessons and ${labs} interactive`));
+  assert.ok(catalog.includes(`{ label: "Lessons", value: "${lessons}" }`));
+  assert.ok(
+    source("src/data/atlasPost.ts").includes(`${lessons} lessons and ${labs}`),
+  );
+  assert.ok(source("QA.md").includes(`${lessons}-lesson`));
+  for (const page of ["src/pages/Atlas.tsx", "src/pages/AtlasTechnical.tsx"])
+    assert.ok(
+      source(page).includes("atlasFactsDate("),
+      `${page} shows the date`,
+    );
+});

@@ -6,6 +6,14 @@ export const atlasFacts = {
   subjects: 3,
   date: "2026-10-13",
 };
+// Visible date for the figures above, e.g. "13 October 2026".
+export const atlasFactsDate = (language: "en" | "es") =>
+  new Intl.DateTimeFormat(language === "es" ? "es-ES" : "en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(atlasFacts.date));
 export const atlasMedia = {
   overview: "/projects/atlas-learning.png",
   simulations: [

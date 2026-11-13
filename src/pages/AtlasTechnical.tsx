@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import PersonalLayout from "@/components/PersonalLayout";
 import { useLanguage } from "@/i18n/useLanguage";
-import { atlasFacts, atlasMedia } from "@/content/atlas";
+import { atlasFacts, atlasFactsDate, atlasMedia } from "@/content/atlas";
 
 export default function AtlasTechnical() {
   const { t, language } = useLanguage();
@@ -78,6 +78,12 @@ export default function AtlasTechnical() {
             </span>
           </div>
         </div>
+        <p className="evidence-note">
+          {t(
+            `Catalog snapshot: ${atlasFactsDate("en")}.`,
+            `Catálogo a ${atlasFactsDate("es")}.`,
+          )}
+        </p>
         <div className="technical-section">
           <h2>{t("Architecture", "Arquitectura")}</h2>
           <p>
