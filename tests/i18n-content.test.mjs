@@ -251,3 +251,18 @@ test("Spanish dictionary covers technical project titles, descriptions, and high
         if (ts.isStringLiteral(value))
           assert.ok(keys.has(value.text), `Missing translation: ${value.text}`);
 });
+
+test("home photos are optional, local, and captioned in both languages", () => {
+  const personal = source("src/content/personal.ts");
+  assert.ok(personal.includes("const photos: HomePhoto[]"));
+  const narrative = source("src/components/PersonalHomeContent.tsx");
+  assert.ok(narrative.includes("personalContent.photos.length > 0"));
+  // Placeholders must never reach production builds.
+  assert.ok(narrative.includes("import.meta.env.DEV"));
+  for (const match of personal.matchAll(/src: "([^"]+)"/g))
+    assert.ok(
+      match[1].startsWith("/photos/") &&
+        fs.existsSync(new URL("../public" + match[1], import.meta.url)),
+      `${match[1]} must exist in public/photos/`,
+    );
+});

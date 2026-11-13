@@ -45,6 +45,37 @@ export default function PersonalHomeContent() {
         </div>
       </section>
 
+      {(personalContent.photos.length > 0 || import.meta.env.DEV) && (
+        <section
+          className="site-width person-photos"
+          aria-labelledby="photos-title"
+        >
+          <span className="eyebrow" id="photos-title">
+            {t("Workshops and events", "Talleres y eventos")}
+          </span>
+          <div className="photo-grid">
+            {personalContent.photos.length > 0
+              ? personalContent.photos.map((photo) => (
+                  <figure key={photo.src}>
+                    <img
+                      src={photo.src}
+                      alt={photo.alt[language]}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>{photo.caption[language]}</figcaption>
+                  </figure>
+                ))
+              : import.meta.env.DEV &&
+                [1, 2, 3].map((slot) => (
+                  <div className="photo-placeholder" key={slot}>
+                    {`Photo ${slot} · public/photos/ · personal.ts → photos`}
+                  </div>
+                ))}
+          </div>
+        </section>
+      )}
+
       <section className="person-direction-band">
         <div className="site-width person-direction">
           <span className="eyebrow">

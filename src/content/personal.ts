@@ -1,6 +1,13 @@
 // Proposed public copy. Private notes informed the tone, not the details.
 import { atlasFacts } from "./atlas";
 
+type Localized = { en: string; es: string };
+// Workshop and event photos for the home page. Put the files in
+// public/photos/ and add 2 or 3 entries; the section stays hidden while
+// this list is empty (a dashed placeholder shows only in `npm run dev`).
+export type HomePhoto = { src: string; alt: Localized; caption: Localized };
+const photos: HomePhoto[] = [];
+
 export const personalContent = {
   // Home page title. The English one must match index.html and
   // scripts/build-static-pages.mjs (checked by tests/static-pages.test.mjs).
@@ -105,6 +112,7 @@ export const personalContent = {
     en: "That is why my two theses look inside networks, why I build Atlas, and why I spend part of the week organising workshops at GDG UAM.",
     es: "Por eso mis dos trabajos de fin de estudios miran dentro de las redes, por eso construyo Atlas y por eso dedico parte de la semana a organizar talleres en GDG UAM.",
   },
+  photos,
   interests: [
     {
       id: "understanding",
