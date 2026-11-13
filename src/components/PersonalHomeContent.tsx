@@ -16,12 +16,7 @@ export default function PersonalHomeContent() {
         </div>
         <div className="person-introduction-copy">
           <p>{personalContent.introduction[language]}</p>
-          <p>
-            {t(
-              "I am based in Madrid, studying for an MSc in Artificial Intelligence at UAM. Engineering is my background; curiosity tends to decide where I go next.",
-              "Estoy en Madrid y curso el Máster en Inteligencia Artificial de la UAM. La ingeniería es mi formación; la curiosidad suele decidir qué viene después.",
-            )}
-          </p>
+          <p>{personalContent.context[language]}</p>
         </div>
       </section>
 

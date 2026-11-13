@@ -89,8 +89,13 @@ export const personalContent = {
     ],
   },
   introduction: {
-    en: "I work in AI, but most of what interests me starts before the code: a question I cannot quite leave alone, an idea worth testing, or a conversation that changes how I see something.",
-    es: "Trabajo en IA, pero muchas de las cosas que me interesan empiezan antes del código: una pregunta que no consigo quitarme de la cabeza, una idea que merece una prueba o una conversación que cambia cómo veo algo.",
+    en: "My background is engineering: a degree in Data Science and Engineering at UAM, then internships at GMV, building a RAG system over intelligence data, and at Accenture Song, building MCP servers and AI agents. What keeps pulling me in, though, is what happens inside a model, and explaining it to someone who is just starting.",
+    es: "Mi base es la ingeniería: el grado en Ciencia e Ingeniería de Datos en la UAM y prácticas en GMV, montando un sistema RAG sobre datos de inteligencia, y en Accenture Song, construyendo servidores MCP y agentes de IA. Pero lo que más me tira es lo que pasa dentro de un modelo, y contárselo a quien está empezando.",
+  },
+  // Second paragraph of the introduction.
+  context: {
+    en: "That is why my two theses look inside networks, why I build Atlas, and why I spend part of the week organising workshops at GDG UAM.",
+    es: "Por eso mis dos trabajos de fin de estudios miran dentro de las redes, por eso construyo Atlas y por eso dedico parte de la semana a organizar talleres en GDG UAM.",
   },
   interests: [
     {
@@ -100,16 +105,16 @@ export const personalContent = {
         es: "Entender, no solo utilizar.",
       },
       body: {
-        en: "AI is one way into a much wider interest: how we learn, think, and make sense of things. I enjoy the point where a technical question becomes a question about people, and the other way around.",
-        es: "La IA es una puerta a un interés más amplio: cómo aprendemos, pensamos y damos sentido a las cosas. Me interesa ese punto en el que una pregunta técnica acaba siendo una pregunta sobre las personas, y al revés.",
+        en: "In my bachelor's thesis I measured how seven regularisation techniques change the internal activations of a CNN, not just its accuracy. My MSc thesis asks the same kind of question of LLMs: can you find where deceptive behaviour lives in the latent representations, and edit it out?",
+        es: "En el TFG medí cómo siete técnicas de regularización cambian las activaciones internas de una CNN, no solo su precisión. El TFM le hace la misma pregunta a los LLMs: ¿se puede encontrar dónde vive el comportamiento engañoso en las representaciones latentes y quitarlo editándolas?",
       },
     },
     {
       id: "making",
       title: { en: "Giving an idea a shape.", es: "Darle forma a una idea." },
       body: {
-        en: "Sometimes that means building something. Sometimes it means reading a little more, writing it down, or taking it apart until I understand it. I like moving between thinking and making; neither feels complete on its own.",
-        es: "A veces significa construir algo. Otras, leer un poco más, escribirlo o desmontarlo hasta entenderlo. Me gusta ir de pensar a hacer y volver: por separado, las dos cosas se me quedan cortas.",
+        en: `Atlas is where I do this most. Instead of only explaining how a diffusion model removes noise, it shows a small CNN learning to predict that noise, on Atlas's own simulation engine. It now has ${atlasFacts.lessons} lessons and ${atlasFacts.laboratories} interactive labs, in English and Spanish.`,
+        es: `Donde más lo hago es en Atlas. En vez de solo explicar cómo un modelo de difusión quita ruido, enseña a una CNN pequeña aprendiendo a predecirlo, con el motor de simulación del propio Atlas. Ya tiene ${atlasFacts.lessons} lecciones y ${atlasFacts.laboratories} laboratorios interactivos, en español e inglés.`,
       },
     },
     {
@@ -119,8 +124,8 @@ export const personalContent = {
         es: "Mirar fuera de mi campo.",
       },
       body: {
-        en: "Not everything needs to become a project. Books, art, music, and unfamiliar places matter to me in their own right. They are also a good reminder that there are other ways of paying attention.",
-        es: "No todo tiene que convertirse en un proyecto. Los libros, el arte, la música y los lugares que no conozco me interesan por sí mismos. También me recuerdan que hay otras formas de prestar atención.",
+        en: "Not everything has to become a project. I play basketball because I like it. I also got into investing: I won the UAM Investors' League in 2025, and right now I am reading The Intelligent Investor.",
+        es: "No todo tiene que convertirse en un proyecto. Juego al baloncesto porque me gusta. También me metí en la inversión: gané la Liga de Inversores de la UAM en 2025 y ahora estoy leyendo The Intelligent Investor.",
       },
     },
     {
@@ -130,13 +135,13 @@ export const personalContent = {
         es: "Hacer cosas con otras personas.",
       },
       body: {
-        en: "I like the moment when a conversation turns into something we can actually do together. Sharing what I am learning, hearing a different approach, and helping someone get started are part of the work I want to keep doing.",
-        es: "Me gusta cuando una conversación se convierte en algo que podemos hacer juntos. Compartir lo que aprendo, escuchar otra forma de hacerlo y ayudar a alguien a empezar también forman parte del trabajo que quiero seguir haciendo.",
+        en: "With Ibón de Mingo I have given the GDG UAM Git and GitHub workshop twice. In October 2025 it was what we wished someone had told us in first year; in September 2026 we brought real merge conflicts to solve. Most of the people in the room were first- and second-year students.",
+        es: "Con Ibón de Mingo he dado dos veces el taller de Git y GitHub de GDG UAM. En octubre de 2025 fue lo que nos habría gustado que nos contaran en primero; en septiembre de 2026 llevamos conflictos de merge reales para resolver. La mayoría de quienes vinieron eran de primero y segundo.",
       },
     },
   ],
   direction: {
-    en: "I do not have a neat label for everything I want to do. The direction is clearer: keep learning deeply, make things that help someone, and leave room for ideas that need more time.",
-    es: "No tengo una etiqueta que reúna todo lo que quiero hacer. Sí tengo algo más clara la dirección: seguir aprendiendo a fondo, hacer cosas que le sirvan a alguien y dejar sitio a ideas que necesitan más tiempo.",
+    en: "For the next year: finish the thesis, keep adding to Atlas, and keep GDG UAM running workshops for people who are just getting started. Further ahead, I want to start a non-profit.",
+    es: "Para el próximo año: terminar el TFM, seguir ampliando Atlas y que GDG UAM siga haciendo talleres para quien está empezando. Más adelante, quiero fundar una asociación sin ánimo de lucro.",
   },
 };
