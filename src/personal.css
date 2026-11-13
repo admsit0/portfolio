@@ -4,6 +4,12 @@
   --line: #e3e6e9;
   --blue: #2455ee;
   --lime: #d5ef78;
+  /* Google accents. Not text-safe on light backgrounds (3.6:1 at best,
+     yellow 1.7:1): use them for dots, underlines and bars only. */
+  --g-blue: #4285f4;
+  --g-red: #ea4335;
+  --g-yellow: #fbbc04;
+  --g-green: #34a853;
   --background: 0 0% 100%;
   --foreground: 220 9% 10%;
   --primary: 225 85% 54%;
@@ -153,6 +159,28 @@ body {
   border-top: 1px solid var(--line);
   padding-block: 18px;
 }
+.now-row {
+  --facet: var(--g-blue);
+}
+.now-row[data-facet="community"] {
+  --facet: var(--g-red);
+}
+.now-row[data-facet="build"] {
+  --facet: var(--g-green);
+}
+.now-row[data-facet="personal"] {
+  --facet: var(--g-yellow);
+}
+.now-label::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--facet);
+  margin-right: 10px;
+  vertical-align: 1px;
+}
 .now-label {
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
   font-size: 12px;
@@ -176,12 +204,13 @@ body {
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: var(--line);
+  text-decoration-color: var(--facet, var(--line));
   white-space: nowrap;
 }
 .now-link:hover,
 .now-link:focus-visible {
   color: var(--blue);
+  text-decoration-thickness: 2px;
 }
 @media (max-width: 700px) {
   .now-row {
@@ -721,7 +750,7 @@ button:focus-visible,
   color: var(--ink);
 }
 .wordmark span {
-  color: var(--blue);
+  color: var(--g-blue);
 }
 .nav-links {
   display: flex;
@@ -736,6 +765,15 @@ button:focus-visible,
 .nav-links a.active,
 .nav-links a:hover {
   color: var(--blue);
+}
+.nav-links a:hover,
+.nav-links a.active {
+  text-decoration: underline 2px var(--g-blue);
+  text-underline-offset: 8px;
+}
+.nav-links a:nth-child(2):hover,
+.nav-links a:nth-child(2).active {
+  text-decoration-color: var(--g-red);
 }
 .nav-actions {
   display: flex;
@@ -877,7 +915,8 @@ button:focus-visible,
   animation: none;
 }
 .name-period {
-  color: var(--blue);
+  /* 116px display text: 3:1 is the large-text threshold; this is 3.3:1. */
+  color: var(--g-blue);
 }
 .hero-statement {
   font-size: 24px;
@@ -931,8 +970,17 @@ button:focus-visible,
   line-height: 1.5;
   transition: color 0.2s;
 }
-.text-link:hover {
+.text-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  text-decoration-color: var(--line);
+}
+.text-link:hover,
+.text-link:focus-visible {
   color: var(--blue);
+  text-decoration-color: var(--g-blue);
+  text-decoration-thickness: 2px;
 }
 .hero-foot {
   display: flex;
@@ -1460,7 +1508,8 @@ button:focus-visible,
 }
 .footer-social a:hover,
 .footer-links a:hover {
-  color: var(--lime);
+  /* Yellow is text-safe on the dark footer (10.2:1). */
+  color: var(--g-yellow);
 }
 .footer-bottom {
   display: flex;
@@ -1528,7 +1577,7 @@ button:focus-visible,
   scroll-margin-top: 80px;
 }
 .technical-content .research-callout {
-  border-left: 3px solid var(--blue);
+  border-left: 3px solid var(--g-blue);
   padding: 6px 0 6px 28px;
 }
 .research-callout h2 {
