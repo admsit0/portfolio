@@ -4,6 +4,7 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import CurrentResearch from "@/components/CurrentResearch";
 import { useSectionNavigation } from "@/hooks/useSectionNavigation";
 import { useLanguage } from "@/i18n/useLanguage";
 export default function Portfolio() {
@@ -41,6 +42,7 @@ export default function Portfolio() {
         </div>
         <div className="portfolio-jumps">
           {[
+            ["research", "Current research"],
             ["projects", "Projects"],
             ["experience", "Experience & education"],
             ["about", "Skills & awards"],
@@ -54,6 +56,7 @@ export default function Portfolio() {
         </div>
       </section>
       <div className="technical-content">
+        <CurrentResearch />
         <Projects />
         <Experience />
         <About />

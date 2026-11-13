@@ -167,6 +167,7 @@ export const spanish: Record<string, string> = {
   "Close navigation": "Cerrar menú",
   "Email Adam": "Escribir a Adam",
   Projects: "Proyectos",
+  "Current research": "Investigación en curso",
   "All projects": "Todos los proyectos",
   Research: "Investigación",
   Products: "Productos",
