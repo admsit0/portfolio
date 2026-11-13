@@ -83,7 +83,7 @@ export default function Gdg() {
             <span>{t("Attendees", "Asistentes")}</span>
           </div>
           <div>
-            <strong>200+</strong>
+            <strong>275</strong>
             <span>{t("Community members", "Miembros de la comunidad")}</span>
           </div>
           <div>
@@ -98,8 +98,8 @@ export default function Gdg() {
         </div>
         <p className="evidence-note">
           {t(
-            "Figures from my CV. These are cumulative, not per-event counts.",
-            "Cifras de mi CV. Son acumuladas, no por evento.",
+            "Figures as of November 2026. Events and attendees are cumulative, not per-event counts.",
+            "Datos de noviembre de 2026. Eventos y asistentes son acumulados, no por evento.",
           )}
         </p>
       </section>

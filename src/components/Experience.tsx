@@ -39,7 +39,7 @@ const Experience = () => {
       period: "Jul 2025 - Present",
       description: [
         "Elected President in Jul 2026 after co-founding the chapter and serving as Treasurer.",
-        "Led 10+ technical events with 250+ attendees and helped grow the community beyond 200 members.",
+        "Led 10+ technical events with 250+ attendees and helped grow the community to 275 members.",
         "Managed teams of 6 to 13 people across AI, software, and student innovation initiatives.",
       ],
       technologies: ["Leadership", "Events", "AI", "Community", "Web"],

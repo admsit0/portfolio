@@ -225,8 +225,8 @@ export const spanish: Record<string, string> = {
   "Jul 2025 - Present": "Jul 2025 - Actualidad",
   "Elected President in Jul 2026 after co-founding the chapter and serving as Treasurer.":
     "Elegido presidente en julio de 2026 tras cofundar el grupo y ejercer como tesorero.",
-  "Led 10+ technical events with 250+ attendees and helped grow the community beyond 200 members.":
-    "He liderado más de 10 eventos técnicos con más de 250 asistentes y contribuido a una comunidad de más de 200 miembros.",
+  "Led 10+ technical events with 250+ attendees and helped grow the community to 275 members.":
+    "He liderado más de 10 eventos técnicos con más de 250 asistentes y contribuido a que la comunidad llegue a 275 miembros.",
   "Managed teams of 6 to 13 people across AI, software, and student innovation initiatives.":
     "He coordinado equipos de entre 6 y 13 personas en iniciativas de IA, software e innovación estudiantil.",
   Leadership: "Liderazgo",
