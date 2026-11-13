@@ -457,6 +457,12 @@ a.region-media:hover img {
   color: var(--quiet);
   margin-bottom: 22px;
 }
+.event-empty {
+  font-size: 15px;
+  color: var(--quiet);
+  padding-block: 22px;
+  border-top: 1px solid var(--line);
+}
 .evidence-note {
   font-family: ui-monospace, Consolas, monospace;
   font-size: 10px;

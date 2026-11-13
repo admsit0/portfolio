@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, CalendarDays } from "lucide-react";
 import PersonalLayout from "@/components/PersonalLayout";
 import { useLanguage } from "@/i18n/useLanguage";
 import { gdgEvents, gdgPhoto } from "@/content/gdg";
 import gdgLogo from "@/assets/gdg-logo.webp";
+import { eventsByStatus } from "@/lib/eventStatus";
 
 export default function Gdg() {
   const { language, t } = useLanguage();
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
+  const [now, setNow] = useState(() => new Date());
+  // Re-check every minute so an open tab moves events to "past" on time.
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  const visibleEvents = eventsByStatus(gdgEvents, tab, now);
   return (
     <PersonalLayout title="GDG on Campus UAM">
       <section className="site-width page-intro gdg-intro">
@@ -162,31 +170,39 @@ export default function Gdg() {
           ))}
         </div>
         <div className="event-list">
-          {gdgEvents
-            .filter((event) => event.status === tab)
-            .map((event) => (
-              <a
-                className="event-row"
-                key={event.date + event.en}
-                href={event.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <time dateTime={event.date}>
-                  {new Intl.DateTimeFormat(
-                    language === "es" ? "es-ES" : "en-GB",
-                    {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                      timeZone: "Europe/Madrid",
-                    },
-                  ).format(new Date(event.date))}
-                </time>
-                <span>{event[language]}</span>
-                <ArrowUpRight size={18} />
-              </a>
-            ))}
+          {visibleEvents.length === 0 && (
+            <p className="event-empty">
+              {tab === "upcoming"
+                ? t(
+                    "No upcoming events in this snapshot. The full calendar may have newer ones.",
+                    "No hay próximos eventos en esta lista. Puede que el calendario completo tenga alguno más reciente.",
+                  )
+                : t("No past events yet.", "Aún no hay eventos pasados.")}
+            </p>
+          )}
+          {visibleEvents.map((event) => (
+            <a
+              className="event-row"
+              key={event.date + event.en}
+              href={event.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <time dateTime={event.date}>
+                {new Intl.DateTimeFormat(
+                  language === "es" ? "es-ES" : "en-GB",
+                  {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                    timeZone: "Europe/Madrid",
+                  },
+                ).format(new Date(event.date))}
+              </time>
+              <span>{event[language]}</span>
+              <ArrowUpRight size={18} />
+            </a>
+          ))}
         </div>
         <p className="evidence-note">
           {t(
