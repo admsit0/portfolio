@@ -201,16 +201,7 @@ export const spanish: Record<string, string> = {
   "Research. Products. Community.": "Investigación, proyectos y comunidad.",
   "Madrid, Spain": "Madrid, España",
   "04 / Get in touch": "Contacto",
-  "Let's work on": "Trabajemos en",
-  "something worthwhile": "algo que merezca la pena",
-  "Available for opportunities": "Disponible para oportunidades",
-  "Open to full-time AI engineering roles, consulting projects, and collaborative research.":
-    "Busco oportunidades en ingeniería de IA, proyectos de consultoría y colaboración en investigación.",
-  "Response time": "Tiempo de respuesta",
-  "Less than 24 hours": "Menos de 24 horas",
-  "Time zone": "Zona horaria",
   Languages: "Idiomas",
-  "Spanish, English, Italian, French": "Español, inglés, italiano y francés",
   "AI Engineering / Data Science / Research":
     "Ingeniería de IA / Ciencia de datos / Investigación",
   "The technical portfolio": "El portfolio técnico",

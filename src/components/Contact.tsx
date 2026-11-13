@@ -4,7 +4,6 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Phone,
   Youtube,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/useLanguage";
@@ -17,17 +16,18 @@ export default function Contact() {
           <div>
             <span className="eyebrow">{t("Contact")}</span>
             <h2>
-              {t("Let's work on")}
-              <br />
-              {t("something worthwhile")}
+              {t("Write to me", "Escríbeme")}
               <span>.</span>
             </h2>
           </div>
           <div className="contact-availability">
-            <span className="eyebrow">{t("Available for opportunities")}</span>
+            <span className="eyebrow">
+              {t("What I am looking for", "Qué busco")}
+            </span>
             <p>
               {t(
-                "Open to full-time AI engineering roles, consulting projects, and collaborative research.",
+                "An AI engineering role where I can keep working on making language models more reliable. If you are organising something for students, or want to talk about Atlas or GDG UAM, write too.",
+                "Un puesto de ingeniería de IA en el que seguir trabajando para que los modelos de lenguaje sean más fiables. Si organizas algo para estudiantes o quieres hablar de Atlas o de GDG UAM, escríbeme también.",
               )}
             </p>
           </div>
@@ -38,10 +38,6 @@ export default function Contact() {
           <ArrowUpRight size={26} />
         </a>
         <div className="contact-details">
-          <a href="tel:+34638707783">
-            <Phone size={16} />
-            +34 638 707 783
-          </a>
           <a
             href="https://maps.google.com/?q=Madrid,Spain"
             target="_blank"
@@ -83,13 +79,18 @@ export default function Contact() {
         </div>
         <dl className="contact-meta">
           {[
-            ["Response time", "Less than 24 hours"],
-            ["Time zone", "Europe/Madrid"],
-            ["Languages", "Spanish, English, Italian, French"],
+            [t("Time zone", "Zona horaria"), "Europe/Madrid"],
+            [
+              t("Languages", "Idiomas"),
+              t(
+                "Spanish and Italian (native), English (C1), French (B2+)",
+                "Español e italiano (nativos), inglés (C1), francés (B2+)",
+              ),
+            ],
           ].map(([label, value]) => (
             <div key={label}>
-              <dt>{t(label)}</dt>
-              <dd>{t(value)}</dd>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
             </div>
           ))}
         </dl>
