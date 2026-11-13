@@ -2,6 +2,7 @@ import { type ReactNode, useEffect } from "react";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import { useLanguage } from "@/i18n/useLanguage";
+import { personalContent } from "@/content/personal";
 export default function PersonalLayout({
   children,
   title,
@@ -9,11 +10,13 @@ export default function PersonalLayout({
   children: ReactNode;
   title: string;
 }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   useEffect(() => {
     document.title =
-      title === "Adam Maltoni" ? "Adam Maltoni" : `${t(title)} | Adam Maltoni`;
-  }, [title, t]);
+      title === "Adam Maltoni"
+        ? personalContent.meta.title[language]
+        : `${t(title)} | Adam Maltoni`;
+  }, [title, t, language]);
   return (
     <div className="personal-site">
       <a className="skip-link" href="#main">

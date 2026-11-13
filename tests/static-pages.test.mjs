@@ -36,3 +36,13 @@ test('production pages retain assets and CNAME, with route metadata and an index
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test('the home title is the same in index.html, the postbuild script and the app', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const personal = await readFile(new URL('../src/content/personal.ts', import.meta.url), 'utf8');
+  const escaped = site.title.replaceAll('&', '&amp;');
+  assert.ok(html.includes(`<title>${escaped}</title>`));
+  assert.ok(html.includes(`content="${site.description}"`));
+  assert.ok(personal.includes(`en: "${site.title}"`));
+  assert.ok(!/Curiosity &(amp;)? Things I Build/.test(html + site.title));
+});

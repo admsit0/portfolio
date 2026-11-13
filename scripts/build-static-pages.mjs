@@ -7,8 +7,8 @@ import ts from 'typescript';
 const root = fileURLToPath(new URL('../', import.meta.url));
 export const site = {
   url: 'https://adammaltoni.com/',
-  title: 'Adam Maltoni | AI, Curiosity & Things I Build',
-  description: 'Adam Maltoni: AI engineer, data scientist, and curious builder based in Madrid. Personal interests, projects, research, and technical writing.',
+  title: 'Adam Maltoni | AI engineer: LLM alignment, Atlas, GDG UAM',
+  description: 'AI engineer in Madrid and MSc student at UAM. Researching how to make LLMs less deceptive, building Atlas to learn AI hands-on, and leading GDG UAM (275 members).',
 };
 const escape = (value) => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const slash = (value) => value === '/' ? value : value.replace(/\/$/, '') + '/';

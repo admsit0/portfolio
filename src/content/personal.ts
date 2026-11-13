@@ -2,6 +2,14 @@
 import { atlasFacts } from "./atlas";
 
 export const personalContent = {
+  // Home page title. The English one must match index.html and
+  // scripts/build-static-pages.mjs (checked by tests/static-pages.test.mjs).
+  meta: {
+    title: {
+      en: "Adam Maltoni | AI engineer: LLM alignment, Atlas, GDG UAM",
+      es: "Adam Maltoni | Ingeniero de IA: alineamiento de LLMs, Atlas, GDG UAM",
+    },
+  },
   hero: {
     statement: {
       en: "AI engineer in Madrid. I'm trying to stop LLMs from lying, I lead a community of 275 students, and I'm building Atlas so people can learn AI hands-on.",
