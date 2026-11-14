@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import PersonalLayout from "@/components/PersonalLayout";
 import { useLanguage } from "@/i18n/useLanguage";
-import { atlasFacts, atlasFactsDate, atlasMedia } from "@/content/atlas";
+import { atlasFacts, atlasFactsNote, atlasMedia } from "@/content/atlas";
 
 export default function AtlasTechnical() {
   const { t, language } = useLanguage();
@@ -78,12 +78,7 @@ export default function AtlasTechnical() {
             </span>
           </div>
         </div>
-        <p className="evidence-note">
-          {t(
-            `Catalog snapshot: ${atlasFactsDate("en")}.`,
-            `Catálogo a ${atlasFactsDate("es")}.`,
-          )}
-        </p>
+        <p className="evidence-note">{atlasFactsNote(language, false)}</p>
         <div className="technical-section">
           <h2>{t("Architecture", "Arquitectura")}</h2>
           <p>
@@ -159,7 +154,7 @@ export default function AtlasTechnical() {
               {atlasMedia.simulations.map((media) => (
                 <figure key={media.src}>
                   <img
-                    src={language === "en" ? media.enSrc : media.src}
+                    src={language === "es" ? media.src : media.enSrc}
                     alt={media[language]}
                     loading="lazy"
                   />

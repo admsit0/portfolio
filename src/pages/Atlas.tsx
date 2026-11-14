@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import PersonalLayout from "@/components/PersonalLayout";
 import { useLanguage } from "@/i18n/useLanguage";
-import { atlasFacts, atlasFactsDate, atlasMedia } from "@/content/atlas";
+import { atlasFacts, atlasFactsNote, atlasMedia } from "@/content/atlas";
 
 export default function Atlas() {
   const { language, t } = useLanguage();
@@ -45,9 +45,9 @@ export default function Atlas() {
         <figure>
           <img
             src={
-              (language === "en"
-                ? atlasMedia.simulations[0]?.enSrc
-                : atlasMedia.simulations[0]?.src) ?? atlasMedia.overview
+              (language === "es"
+                ? atlasMedia.simulations[0]?.src
+                : atlasMedia.simulations[0]?.enSrc) ?? atlasMedia.overview
             }
             alt={t(
               "Atlas image-denoising experiment: clean image, noise prediction, and reconstruction",
@@ -76,12 +76,7 @@ export default function Atlas() {
             <span>{t("AI subjects", "Asignaturas de IA")}</span>
           </div>
         </div>
-        <p className="evidence-note">
-          {t(
-            `Usage count reported by me. Content snapshot: ${atlasFactsDate("en")}.`,
-            `Cifra de uso comunicada por mí. Catálogo a ${atlasFactsDate("es")}.`,
-          )}
-        </p>
+        <p className="evidence-note">{atlasFactsNote(language, true)}</p>
       </section>
       <section className="site-width narrative-section">
         <h2>
@@ -110,7 +105,7 @@ export default function Atlas() {
           {atlasMedia.simulations.slice(1).map((media) => (
             <figure key={media.src}>
               <img
-                src={language === "en" ? media.enSrc : media.src}
+                src={language === "es" ? media.src : media.enSrc}
                 alt={media[language]}
                 loading="lazy"
               />

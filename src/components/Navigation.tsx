@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Download, Menu, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLanguage } from "@/i18n/useLanguage";
+import { languageNames, languages } from "@/i18n/context";
 
 const Navigation = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -58,13 +59,13 @@ const Navigation = () => {
             role="group"
             aria-label={t("Language", "Idioma")}
           >
-            {(["en", "es"] as const).map((locale) => (
+            {languages.map((locale) => (
               <button
                 key={locale}
                 lang={locale}
                 aria-pressed={language === locale}
-                aria-label={locale === "en" ? "English" : "Español"}
-                title={locale === "en" ? "English" : "Español"}
+                aria-label={languageNames[locale]}
+                title={languageNames[locale]}
                 onClick={() => setLanguage(locale)}
               >
                 {locale.toUpperCase()}

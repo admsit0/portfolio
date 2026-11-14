@@ -3,12 +3,15 @@ import diffusion from "@/content/blog/es/diffusion.md?raw";
 import athenai from "@/content/blog/es/athenai.md?raw";
 import atlas from "@/content/blog/es/atlas.md?raw";
 import { blogPosts, type BlogPost } from "./blogPosts";
-import type { Language } from "@/i18n/context";
+import { localeFor, type Language } from "@/i18n/languages";
 
-const translations: Record<
-  string,
-  Pick<BlogPost, "title" | "subtitle" | "excerpt" | "content" | "coverAlt">
-> = {
+type Translation = Pick<
+  BlogPost,
+  "title" | "subtitle" | "excerpt" | "coverAlt"
+> &
+  Partial<Pick<BlogPost, "content">>;
+
+const spanish: Record<string, Translation> = {
   "regularization-in-cnns-internal-activations": {
     title: "Regularización en CNN: mirar dentro de la red",
     subtitle:
@@ -47,17 +50,67 @@ const translations: Record<
   },
 };
 
+// Italian titles and summaries. A post without Italian `content` keeps
+// its English body.
+const italian: Record<string, Translation> = {
+  "regularization-in-cnns-internal-activations": {
+    title: "Regolarizzazione nelle CNN: guardare dentro la rete",
+    subtitle:
+      "Come la mia tesi triennale ha trattato la regolarizzazione come un cambiamento nella geometria delle rappresentazioni, non solo come una curva di validazione migliore.",
+    excerpt:
+      "Ho confrontato sette regolarizzatori sulla stessa CNN per studiare attivazioni nascoste, robustezza e generalizzazione.",
+    coverAlt: "Radar dei regolarizzatori per accuratezza e robustezza",
+  },
+  "diffusion-models-from-sdes-to-images": {
+    title: "Modelli di diffusione: dalle SDE alle immagini",
+    subtitle:
+      "Un percorso nel sistema di generazione basato sullo score che ho costruito con processi VE, VP e Sub-VP e diversi sampler.",
+    excerpt:
+      "Una piattaforma modulare in PyTorch per sperimentare con SDE, schedule del rumore, sampler, condizionamento, imputazione e valutazione.",
+    coverAlt: "Campioni di diffusione che passano dal rumore alle immagini",
+  },
+  "athenai-competition-decision-pipeline": {
+    title: "AthenAI: comprimere migliaia di algoritmi in uno stato di RL",
+    subtitle:
+      "Una pipeline offline con clustering degli algoritmi, proxy macroeconomici e limiti espliciti del backtesting.",
+    excerpt:
+      "Ho ricostruito un universo giornaliero di algoritmi, raggruppato i loro comportamenti in superasset e costruito lo stato per il RL di portafoglio.",
+    coverAlt: "Diagnostica del clustering delle strategie di AthenAI",
+  },
+  "atlas-building-a-place-to-learn": {
+    title: "Atlas: un posto per imparare, non solo per leggere",
+    subtitle:
+      "Le scelte di prodotto e di ingegneria dietro una piattaforma interattiva e bilingue.",
+    excerpt:
+      "Perché ho costruito Atlas attorno a esperimenti veri, componenti riutilizzabili e profili privati, e cosa voglio imparare dai primi utenti.",
+    coverAlt: "La vera interfaccia di apprendimento di Atlas",
+  },
+};
+
+const translations: Partial<Record<Language, Record<string, Translation>>> = {
+  es: spanish,
+  it: italian,
+};
+const readTime: Record<Language, string> = {
+  en: "min read",
+  es: "min de lectura",
+  it: "min di lettura",
+};
+
 export function localizedBlogs(language: Language): BlogPost[] {
   if (language === "en") return blogPosts;
+  const posts = translations[language] ?? {};
   return blogPosts.map((post) => ({
     ...post,
-    ...translations[post.slug],
-    displayDate: new Intl.DateTimeFormat("es-ES", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      timeZone: "Europe/Madrid",
-    }).format(new Date(post.date + "T12:00:00Z")) + (post.displayDate.includes('09:00') ? ', 09:00' : ''),
-    readTime: post.readTime.replace("min read", "min de lectura"),
+    ...posts[post.slug],
+    displayDate:
+      new Intl.DateTimeFormat(localeFor(language), {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "Europe/Madrid",
+      }).format(new Date(post.date + "T12:00:00Z")) +
+      (post.displayDate.includes("09:00") ? ", 09:00" : ""),
+    readTime: post.readTime.replace("min read", readTime[language]),
   }));
 }

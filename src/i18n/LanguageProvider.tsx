@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { LanguageContext, type Language } from "./context";
 import { spanish } from "./spanish";
+import { italian } from "./italian";
 import {
   resolveLanguage,
   updateExplicitLanguageUrl,
@@ -31,12 +32,12 @@ export default function LanguageProvider({
     updateLanguage(next);
   }, []);
   const t = useCallback(
-    (english: string, translated?: string) =>
-      language === "en"
-        ? english
-        : (translated ??
-          spanish[english.trim().replace(/\s+/g, " ")] ??
-          english),
+    (english: string, translated?: string) => {
+      if (language === "en") return english;
+      const key = english.trim().replace(/\s+/g, " ");
+      if (language === "it") return italian[key] ?? english;
+      return translated ?? spanish[key] ?? english;
+    },
     [language],
   );
   useEffect(() => {

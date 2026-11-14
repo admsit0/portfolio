@@ -23,7 +23,9 @@ export const projectGroup = (project: Project) =>
       : "Data & ML";
 export const projectImage = (project: Project, language: Language = "en") => {
   const slug = projectSlug(project);
-  if (slug === "atlas") return `/projects/atlas-denoising-${language}.jpg`;
+  // Atlas captures exist in English and Spanish; Italian uses the English one.
+  if (slug === "atlas")
+    return `/projects/atlas-denoising-${language === "es" ? "es" : "en"}.jpg`;
   if (slug === "diffusion")
     return `${import.meta.env.BASE_URL}blog-plots/diffusion-denoising-samples.png`;
   if (slug === "athenai")

@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/useLanguage";
+import { localeFor } from "@/i18n/context";
 import { personalContent } from "@/content/personal";
 
 export default function PersonalHomeContent() {
@@ -100,7 +101,7 @@ export default function PersonalHomeContent() {
           <p className="now-updated">
             {t("Updated", "Actualizado el")}{" "}
             <time dateTime={personalContent.now.updated}>
-              {new Intl.DateTimeFormat(language === "es" ? "es-ES" : "en-GB", {
+              {new Intl.DateTimeFormat(localeFor(language), {
                 day: "numeric",
                 month: "long",
                 year: "numeric",

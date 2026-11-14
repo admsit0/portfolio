@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, CalendarDays } from "lucide-react";
 import PersonalLayout from "@/components/PersonalLayout";
 import { useLanguage } from "@/i18n/useLanguage";
+import { localeFor } from "@/i18n/context";
 import { gdgEvents, gdgPhoto } from "@/content/gdg";
 import gdgLogo from "@/assets/gdg-logo.webp";
 import { eventsByStatus } from "@/lib/eventStatus";
@@ -223,15 +224,12 @@ export default function Gdg() {
               rel="noopener noreferrer"
             >
               <time dateTime={event.date}>
-                {new Intl.DateTimeFormat(
-                  language === "es" ? "es-ES" : "en-GB",
-                  {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                    timeZone: "Europe/Madrid",
-                  },
-                ).format(new Date(event.date))}
+                {new Intl.DateTimeFormat(localeFor(language), {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                  timeZone: "Europe/Madrid",
+                }).format(new Date(event.date))}
               </time>
               <span>{event[language]}</span>
               <ArrowUpRight size={18} />

@@ -1,12 +1,15 @@
-import type { Language } from "./context";
+import { languages, type Language } from "./languages.ts";
+
+const isLanguage = (value: string | null): value is Language =>
+  (languages as readonly (string | null)[]).includes(value);
 
 export function resolveLanguage(
   search: string,
   stored: string | null,
 ): Language {
   const query = new URLSearchParams(search).get("lang");
-  if (query === "en" || query === "es") return query;
-  return stored === "es" ? "es" : "en";
+  if (isLanguage(query)) return query;
+  return isLanguage(stored) ? stored : "en";
 }
 
 export function updateExplicitLanguageUrl(

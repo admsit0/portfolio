@@ -281,7 +281,94 @@ test("Atlas figures have one source and are dated wherever they appear", () => {
   assert.ok(source("QA.md").includes(`${lessons}-lesson`));
   for (const page of ["src/pages/Atlas.tsx", "src/pages/AtlasTechnical.tsx"])
     assert.ok(
-      source(page).includes("atlasFactsDate("),
+      source(page).includes("atlasFactsNote("),
       `${page} shows the date`,
     );
+});
+
+test("Italian is a supported language and can be chosen explicitly or remembered", () => {
+  assert.equal(resolveLanguage("?lang=it", "es"), "it");
+  assert.equal(resolveLanguage("", "it"), "it");
+  assert.equal(resolveLanguage("?lang=fr", "it"), "it");
+  const updated = new URL(
+    updateExplicitLanguageUrl("http://127.0.0.1:5180/gdg?lang=es#events", "it"),
+  );
+  assert.equal(updated.searchParams.get("lang"), "it");
+  assert.equal(updated.hash, "#events");
+});
+
+test("every UI string has an Italian translation", () => {
+  const keysOf = (path) => {
+    const root = tree(path);
+    const keys = new Set();
+    const visit = (n) => {
+      if (ts.isPropertyAssignment(n))
+        keys.add(
+          ts.isStringLiteral(n.name) ? n.name.text : n.name.getText(root),
+        );
+      ts.forEachChild(n, visit);
+    };
+    visit(root);
+    return keys;
+  };
+  const norm = (s) => s.trim().replace(/\s+/g, " ");
+  const italian = keysOf("src/i18n/italian.ts");
+  const missing = new Set();
+  for (const key of keysOf("src/i18n/spanish.ts"))
+    if (!italian.has(norm(key))) missing.add(key);
+  const files = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(new URL("../" + dir, import.meta.url), {
+      withFileTypes: true,
+    }))
+      if (entry.isDirectory()) walk(`${dir}/${entry.name}`);
+      else if (/\.tsx?$/.test(entry.name)) files.push(`${dir}/${entry.name}`);
+  };
+  walk("src");
+  for (const file of files) {
+    if (/i18n\/(spanish|italian)\.ts$/.test(file)) continue;
+    const root = tree(file);
+    const visit = (n) => {
+      if (
+        ts.isCallExpression(n) &&
+        ts.isIdentifier(n.expression) &&
+        n.expression.text === "t"
+      ) {
+        const [first] = n.arguments;
+        if (
+          first &&
+          (ts.isStringLiteral(first) ||
+            ts.isNoSubstitutionTemplateLiteral(first)) &&
+          !italian.has(norm(first.text))
+        )
+          missing.add(`${file}: ${first.text}`);
+      }
+      ts.forEachChild(n, visit);
+    };
+    visit(root);
+  }
+  assert.deepEqual([...missing], []);
+});
+
+test("localised content objects carry en, es and it together", () => {
+  for (const file of [
+    "src/content/personal.ts",
+    "src/content/about.ts",
+    "src/content/atlas.ts",
+    "src/content/gdg.ts",
+  ]) {
+    const root = tree(file);
+    const visit = (n) => {
+      if (ts.isObjectLiteralExpression(n)) {
+        const names = n.properties.map((p) => p.name?.getText(root));
+        if (names.includes("es"))
+          assert.ok(
+            names.includes("en") && names.includes("it"),
+            `${file}: ${n.getText(root).slice(0, 80)}`,
+          );
+      }
+      ts.forEachChild(n, visit);
+    };
+    visit(root);
+  }
 });
