@@ -133,6 +133,40 @@ export default function Gdg() {
           </p>
         </div>
       </section>
+      <section
+        className="site-width narrative-section gdg-contest"
+        aria-labelledby="contest-title"
+      >
+        <h2 id="contest-title">
+          {t(
+            "Our first machine learning contest.",
+            "Nuestro primer concurso de machine learning.",
+          )}
+        </h2>
+        <div>
+          <p>
+            {t(
+              "From 29 October to 12 November 2026, teams of one to three people had two weeks to classify time series into eight classes: four channels of 256 steps, with missing values, and a test set that does not look quite like the training data. Every model ran on one CPU thread with no GPU, and every answer was timed, so the score balanced accuracy against speed.",
+              "Del 29 de octubre al 12 de noviembre de 2026, equipos de una a tres personas tuvieron dos semanas para clasificar series temporales en ocho clases: cuatro canales de 256 pasos, con valores perdidos y un test que no se parece del todo a los datos de entrenamiento. Cada modelo corría en un solo hilo de CPU y sin GPU, y cada respuesta se cronometraba, así que la puntuación equilibraba acierto y velocidad.",
+            )}
+          </p>
+          <p>
+            {t(
+              "I organised it with Ibón de Mingo and Héctor Tablero, with €250 in prizes. Whatever the result, everyone left with a machine learning project on a real problem.",
+              "Lo organicé con Ibón de Mingo y Héctor Tablero, con 250 € en premios. Ganaran o no, todos se llevaron un proyecto de machine learning sobre un problema real.",
+            )}
+          </p>
+          <a
+            className="text-link"
+            href="https://gdguam.es/blog/guia-concurso-de-ml"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("Read the contest guide", "Leer la guía del concurso")}
+            <ArrowUpRight size={17} />
+          </a>
+        </div>
+      </section>
       <section className="site-width gdg-calendar">
         <div className="section-heading">
           <div>
@@ -206,8 +240,8 @@ export default function Gdg() {
         </div>
         <p className="evidence-note">
           {t(
-            "Calendar snapshot: 13 October 2026. Check the chapter site for changes and registration.",
-            "Calendario a 13 de octubre de 2026. Consulta la web del grupo para cambios e inscripción.",
+            "Calendar snapshot: 14 November 2026. Check the chapter site for changes and registration.",
+            "Calendario a 14 de noviembre de 2026. Consulta la web del grupo para cambios e inscripción.",
           )}
         </p>
       </section>

@@ -68,8 +68,8 @@ export const personalContent = {
         facet: "community",
         label: { en: "Organising", es: "Organizando" },
         text: {
-          en: "GDG on Campus UAM, which I co-founded and have led as president since July 2026. We are 275 members.",
-          es: "GDG on Campus UAM, que cofundé y presido desde julio de 2026. Somos 275 miembros.",
+          en: "GDG on Campus UAM, which I co-founded and have led as president since July 2026. We are 275 members, and we have just closed our first machine learning contest.",
+          es: "GDG on Campus UAM, que cofundé y presido desde julio de 2026. Somos 275 miembros y acabamos de cerrar nuestro primer concurso de machine learning.",
         },
         link: { href: "/gdg", en: "About GDG UAM", es: "Sobre GDG UAM" },
       },
@@ -151,8 +151,8 @@ export const personalContent = {
         es: "Hacer cosas con otras personas.",
       },
       body: {
-        en: "With Ibón de Mingo I have given the GDG UAM Git and GitHub workshop twice. In October 2025 it was what we wished someone had told us in first year; in September 2026 we brought real merge conflicts to solve. Most of the people in the room were first- and second-year students.",
-        es: "Con Ibón de Mingo he dado dos veces el taller de Git y GitHub de GDG UAM. En octubre de 2025 fue lo que nos habría gustado que nos contaran en primero; en septiembre de 2026 llevamos conflictos de merge reales para resolver. La mayoría de quienes vinieron eran de primero y segundo.",
+        en: "With Ibón de Mingo I have given the GDG UAM Git and GitHub workshop twice. In October 2025 it was what we wished someone had told us in first year; in September 2026 we brought real merge conflicts to solve. Most of the people in the room were first- and second-year students. This autumn, together with Héctor Tablero, we also ran the chapter's first machine learning contest.",
+        es: "Con Ibón de Mingo he dado dos veces el taller de Git y GitHub de GDG UAM. En octubre de 2025 fue lo que nos habría gustado que nos contaran en primero; en septiembre de 2026 llevamos conflictos de merge reales para resolver. La mayoría de quienes vinieron eran de primero y segundo. Este otoño, junto a Héctor Tablero, organizamos también el primer concurso de machine learning del grupo.",
       },
     },
   ],
