@@ -76,11 +76,6 @@ export default function Index() {
             <div className="social-pill">
               {[
                 {
-                  Icon: Github,
-                  name: "GitHub",
-                  href: "https://github.com/admsit0",
-                },
-                {
                   Icon: Linkedin,
                   name: "LinkedIn",
                   href: "https://linkedin.com/in/adam-maltoni",
@@ -94,6 +89,11 @@ export default function Index() {
                   Icon: Mail,
                   name: t("Email Adam"),
                   href: "mailto:adam.maltoni@gmail.com",
+                },
+                {
+                  Icon: Github,
+                  name: "GitHub",
+                  href: "https://github.com/admsit0",
                 },
               ].map(({ Icon, name, href }) => (
                 <a

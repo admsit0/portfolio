@@ -29,11 +29,6 @@ export default function Footer() {
         <div className="footer-social">
           {[
             {
-              Icon: Github,
-              name: "GitHub",
-              href: "https://github.com/admsit0",
-            },
-            {
               Icon: Linkedin,
               name: "LinkedIn",
               href: "https://linkedin.com/in/adam-maltoni",
@@ -47,6 +42,11 @@ export default function Footer() {
               Icon: Mail,
               name: "Email Adam",
               href: "mailto:adam.maltoni@gmail.com",
+            },
+            {
+              Icon: Github,
+              name: "GitHub",
+              href: "https://github.com/admsit0",
             },
           ].map(({ Icon, name, href }) => (
             <a

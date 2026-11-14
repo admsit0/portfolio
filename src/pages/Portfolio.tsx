@@ -1,4 +1,4 @@
-import { ArrowDown, Download, Github } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 import PersonalLayout from "@/components/PersonalLayout";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
@@ -29,15 +29,6 @@ export default function Portfolio() {
           <a className="solid-link" href="/cv-adam-maltoni.pdf" download>
             <Download size={17} />
             {t("Download CV")}
-          </a>
-          <a
-            className="text-link"
-            href="https://github.com/admsit0"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github size={17} />
-            GitHub
           </a>
         </div>
         <div className="portfolio-jumps">

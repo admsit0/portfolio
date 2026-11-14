@@ -48,7 +48,7 @@ export const personalContent = {
           es: "Mi TFM: editar representaciones latentes en LLMs para que desaprendan el comportamiento engañoso.",
         },
         link: {
-          href: "https://github.com/admsit0/slides-llm-alignment-sota",
+          href: "https://admsit0.github.io/slides-llm-alignment-sota/",
           en: "State-of-the-art slides",
           es: "Diapositivas del estado del arte",
         },

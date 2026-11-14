@@ -49,11 +49,6 @@ export default function Contact() {
           <div className="contact-social">
             {[
               {
-                Icon: Github,
-                name: "GitHub",
-                href: "https://github.com/admsit0",
-              },
-              {
                 Icon: Linkedin,
                 name: "LinkedIn",
                 href: "https://linkedin.com/in/adam-maltoni",
@@ -62,6 +57,11 @@ export default function Contact() {
                 Icon: Youtube,
                 name: "YouTube",
                 href: "https://youtube.com/@admsito17",
+              },
+              {
+                Icon: Github,
+                name: "GitHub",
+                href: "https://github.com/admsit0",
               },
             ].map(({ Icon, name, href }) => (
               <a

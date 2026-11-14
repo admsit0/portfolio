@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Presentation } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/useLanguage";
 
@@ -36,14 +36,14 @@ export default function CurrentResearch() {
         <div className="research-links">
           <a
             className="text-link"
-            href="https://github.com/admsit0/slides-llm-alignment-sota"
+            href="https://admsit0.github.io/slides-llm-alignment-sota/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Github size={16} />
+            <Presentation size={16} />
             {t(
-              "State-of-the-art slides: inside LLM activations",
-              "Diapositivas del estado del arte: activaciones internas de los LLM",
+              "Slides: the state of the art on LLM internal activations",
+              "Diapositivas: estado del arte sobre las activaciones internas de los LLM",
             )}
           </a>
           <Link
