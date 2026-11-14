@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import SmoothScroll from "./components/SmoothScroll";
 import Index from "./pages/index";
-import { lazy, Suspense, useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import NotFound from "./pages/NotFound";
 import PersonalLayout from "./components/PersonalLayout";
 import LanguageProvider from "./i18n/LanguageProvider";
@@ -15,14 +15,16 @@ import { useLanguage } from "./i18n/useLanguage";
 import type { Language } from "./i18n/languages";
 import RouteBoundary from "./components/RouteBoundary";
 
-const Blog = lazy(() => import("./pages/Blog"));
-const Portfolio = lazy(() => import("./pages/Portfolio"));
-const ProjectIndex = lazy(() => import("./pages/ProjectIndex"));
-const Project = lazy(() => import("./pages/Project"));
-const Atlas = lazy(() => import("./pages/Atlas"));
-const About = lazy(() => import("./pages/About"));
-const Gdg = lazy(() => import("./pages/Gdg"));
-const AtlasTechnical = lazy(() => import("./pages/AtlasTechnical"));
+import {
+  About,
+  Atlas,
+  AtlasTechnical,
+  Blog,
+  Gdg,
+  Portfolio,
+  Project,
+  ProjectIndex,
+} from "./pages/lazyPages";
 const Loading = () => {
   const { t } = useLanguage();
   return (

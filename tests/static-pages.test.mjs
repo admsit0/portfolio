@@ -75,3 +75,12 @@ test('prerendered HTML goes into #root for canonical routes only, and empty outp
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test('every lazy route in App.tsx can be preloaded before hydration', async () => {
+  const app = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const pages = await readFile(new URL('../src/pages/lazyPages.ts', import.meta.url), 'utf8');
+  const lazyNames = [...pages.matchAll(/export const (\w+) = lazyRoute/g)].map((m) => m[1]);
+  for (const [, route, name] of app.matchAll(/<Route\s+path="([^"]+)"\s+element=\{<(\w+) \/>\}/g))
+    if (lazyNames.includes(name)) assert.ok(pages.includes(`["${route}", ${name}]`), `${route} -> ${name} is not preloadable`);
+  assert.ok(!/\blazy\(/.test(app), 'App.tsx should use lazyRoute pages, not React.lazy');
+});
