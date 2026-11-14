@@ -100,7 +100,10 @@ export default function PersonalHomeContent() {
           <h2 id="now-title">{t("What I am up to.", "En qué estoy.")}</h2>
           <p className="now-updated">
             {t("Updated", "Actualizado el")}{" "}
-            <time dateTime={personalContent.now.updated}>
+            <time
+              dateTime={personalContent.now.updated}
+              suppressHydrationWarning
+            >
               {new Intl.DateTimeFormat(localeFor(language), {
                 day: "numeric",
                 month: "long",

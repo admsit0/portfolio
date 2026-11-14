@@ -21,3 +21,14 @@ export function updateExplicitLanguageUrl(
   url.searchParams.set("lang", language);
   return url.href;
 }
+
+// The language to start with in the browser: ?lang=, then the stored choice.
+export function detectLanguage(): Language {
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem("adam-language");
+  } catch {
+    /* Storage can be blocked. */
+  }
+  return resolveLanguage(window.location.search, stored);
+}

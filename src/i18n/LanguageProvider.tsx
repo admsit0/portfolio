@@ -1,26 +1,16 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { LanguageContext, type Language } from "./context";
-import { spanish } from "./spanish";
-import { italian } from "./italian";
-import {
-  resolveLanguage,
-  updateExplicitLanguageUrl,
-} from "./languagePreference";
+import { dictionaryFor, loadDictionary } from "./dictionaries";
+import { updateExplicitLanguageUrl } from "./languagePreference";
 
-const initialLanguage = (): Language => {
-  let stored: string | null = null;
-  try {
-    stored = localStorage.getItem("adam-language");
-  } catch {
-    /* Storage can be blocked. */
-  }
-  return resolveLanguage(window.location.search, stored);
-};
-
+// `initialLanguage` comes from detectLanguage() in the browser and is "en"
+// when prerendering. Its dictionary must already be loaded.
 export default function LanguageProvider({
   children,
+  initialLanguage,
 }: {
   children: ReactNode;
+  initialLanguage: Language;
 }) {
   const [language, updateLanguage] = useState<Language>(initialLanguage);
   const setLanguage = useCallback((next: Language) => {
@@ -29,14 +19,15 @@ export default function LanguageProvider({
     if (nextHref !== href) {
       window.history.replaceState(window.history.state, "", nextHref);
     }
-    updateLanguage(next);
+    void loadDictionary(next).then(() => updateLanguage(next));
   }, []);
   const t = useCallback(
     (english: string, translated?: string) => {
       if (language === "en") return english;
       const key = english.trim().replace(/\s+/g, " ");
-      if (language === "it") return italian[key] ?? english;
-      return translated ?? spanish[key] ?? english;
+      const dictionary = dictionaryFor(language);
+      if (language === "it") return dictionary[key] ?? english;
+      return translated ?? dictionary[key] ?? english;
     },
     [language],
   );

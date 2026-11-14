@@ -46,3 +46,32 @@ test('the home title is the same in index.html, the postbuild script and the app
   assert.ok(personal.includes(`en: "${site.title}"`));
   assert.ok(!/Curiosity &(amp;)? Things I Build/.test(html + site.title));
 });
+
+test('prerendered HTML goes into #root for canonical routes only, and empty output fails the build', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'portfolio-prerender-'));
+  try {
+    const template = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+    await writeFile(path.join(directory, 'index.html'), template);
+    const rendered = [];
+    const render = async (route) => {
+      rendered.push(route);
+      return `<main id="main"><h1>Prerendered ${route}</h1>${'<p>content</p>'.repeat(40)}</main>`;
+    };
+    await buildStaticPages(directory, render);
+    const gdg = await readFile(path.join(directory, 'gdg', 'index.html'), 'utf8');
+    assert.ok(gdg.includes('<div id="root"><main id="main"><h1>Prerendered /gdg/</h1>'));
+    assert.ok(gdg.includes('<title>GDG UAM | Adam Maltoni</title>'));
+    // The alias redirects to /atlas/ in the browser, so it is not prerendered.
+    const alias = await readFile(path.join(directory, 'projects', 'atlas', 'index.html'), 'utf8');
+    assert.ok(alias.includes('<div id="root"></div>'));
+    assert.ok(!rendered.includes('/projects/atlas/'));
+    const notFound = await readFile(path.join(directory, '404.html'), 'utf8');
+    assert.ok(notFound.includes('<div id="root"></div>') && notFound.includes('noindex'));
+    // The root page overwrote index.html; a second run needs a fresh template.
+    await assert.rejects(buildStaticPages(directory), /empty #root/);
+    await writeFile(path.join(directory, 'index.html'), template);
+    await assert.rejects(buildStaticPages(directory, async () => ''), /Prerender is empty/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

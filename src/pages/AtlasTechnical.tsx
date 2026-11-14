@@ -78,7 +78,9 @@ export default function AtlasTechnical() {
             </span>
           </div>
         </div>
-        <p className="evidence-note">{atlasFactsNote(language, false)}</p>
+        <p className="evidence-note" suppressHydrationWarning>
+          {atlasFactsNote(language, false)}
+        </p>
         <div className="technical-section">
           <h2>{t("Architecture", "Arquitectura")}</h2>
           <p>

@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import PersonalLayout from "./components/PersonalLayout";
 import LanguageProvider from "./i18n/LanguageProvider";
 import { useLanguage } from "./i18n/useLanguage";
+import type { Language } from "./i18n/languages";
 import RouteBoundary from "./components/RouteBoundary";
 
 const Blog = lazy(() => import("./pages/Blog"));
@@ -45,34 +46,42 @@ const LegacyHashLinks = () => {
   return null;
 };
 
-const App = () => (
-  <LanguageProvider>
+// Routes and shared shell, without a router: the browser wraps them in
+// BrowserRouter (App below), the prerender in StaticRouter (entry-server).
+export const AppRoutes = () => (
+  <>
+    <LegacyHashLinks />
+    <SmoothScroll>
+      <RouteBoundary>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<Blog />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/projects" element={<ProjectIndex />} />
+            <Route
+              path="/projects/atlas"
+              element={<Navigate to="/atlas" replace />}
+            />
+            <Route path="/projects/:slug" element={<Project />} />
+            <Route path="/atlas" element={<Atlas />} />
+            <Route path="/gdg" element={<Gdg />} />
+            <Route path="/portfolio/atlas" element={<AtlasTechnical />} />
+            <Route path="/portfolio/:slug" element={<Project />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </RouteBoundary>
+    </SmoothScroll>
+  </>
+);
+
+const App = ({ initialLanguage }: { initialLanguage: Language }) => (
+  <LanguageProvider initialLanguage={initialLanguage}>
     <BrowserRouter>
-      <LegacyHashLinks />
-      <SmoothScroll>
-        <RouteBoundary>
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<Blog />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/projects" element={<ProjectIndex />} />
-              <Route
-                path="/projects/atlas"
-                element={<Navigate to="/atlas" replace />}
-              />
-              <Route path="/projects/:slug" element={<Project />} />
-              <Route path="/atlas" element={<Atlas />} />
-              <Route path="/gdg" element={<Gdg />} />
-              <Route path="/portfolio/atlas" element={<AtlasTechnical />} />
-              <Route path="/portfolio/:slug" element={<Project />} />
-              <Route path="/about" element={<About />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </RouteBoundary>
-      </SmoothScroll>
+      <AppRoutes />
     </BrowserRouter>
   </LanguageProvider>
 );

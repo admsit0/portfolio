@@ -1,8 +1,12 @@
 import { ArrowUpRight, Github, Linkedin, Mail, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/i18n/useLanguage";
 export default function Footer() {
   const { t } = useLanguage();
+  // Set after mounting so prerendered HTML never carries a stale year.
+  const [year, setYear] = useState<number | null>(null);
+  useEffect(() => setYear(new Date().getFullYear()), []);
   return (
     <footer className="personal-footer">
       <div className="site-width footer-main">
@@ -63,7 +67,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="site-width footer-bottom">
-        <span>© {new Date().getFullYear()} Adam Maltoni</span>
+        <span>© {year && `${year} `}Adam Maltoni</span>
         <span>{t("Madrid, Spain")}</span>
       </div>
     </footer>

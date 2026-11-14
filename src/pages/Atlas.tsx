@@ -76,7 +76,9 @@ export default function Atlas() {
             <span>{t("AI subjects", "Asignaturas de IA")}</span>
           </div>
         </div>
-        <p className="evidence-note">{atlasFactsNote(language, true)}</p>
+        <p className="evidence-note" suppressHydrationWarning>
+          {atlasFactsNote(language, true)}
+        </p>
       </section>
       <section className="site-width narrative-section">
         <h2>

@@ -85,32 +85,45 @@ export async function getStaticPages() {
   return [...pages.values()].sort((a, b) => a.path.localeCompare(b.path));
 }
 
-export function renderPage(template, page) {
+const emptyRoot = '<div id="root"></div>';
+
+export function renderPage(template, page, appHtml = '') {
   const canonical = new URL(page.canonical, site.url).href;
   // Replace owned template values, leaving Vite's generated asset tags intact.
   return template
+    .replace(emptyRoot, `<div id="root">${appHtml}</div>`)
     .replaceAll(escape(site.title), escape(page.title))
     .replaceAll(escape(site.description), escape(page.description))
     .replaceAll(`href="${site.url}"`, `href="${canonical}"`)
     .replaceAll(`content="${site.url}"`, `content="${canonical}"`);
 }
 
-export async function buildStaticPages(directory = path.join(root, 'dist')) {
+// `render(path)` returns the route's HTML (see src/entry-server.tsx). Without
+// it, pages keep an empty root and are rendered in the browser as before.
+export async function buildStaticPages(directory = path.join(root, 'dist'), render) {
   const template = await readFile(path.join(directory, 'index.html'), 'utf8');
   assert.ok(template.includes(escape(site.title)) && template.includes(site.url), 'Production metadata template must match');
   assert.ok(!/noindex|nofollow/i.test(template), 'Production pages must be indexable');
+  assert.ok(template.includes(emptyRoot), 'Template must contain an empty #root');
   const pages = await getStaticPages();
   for (const page of pages) {
     const target = path.join(directory, page.path.slice(1), 'index.html');
+    // Aliases (canonical elsewhere) stay client-rendered; some only redirect.
+    const isCanonical = page.path === page.canonical;
+    const appHtml = render && isCanonical ? await render(page.path) : '';
+    if (render && isCanonical) assert.ok(appHtml.length > 500, `Prerender is empty for ${page.path}`);
     await mkdir(path.dirname(target), { recursive: true });
-    await writeFile(target, renderPage(template, page));
+    await writeFile(target, renderPage(template, page, appHtml));
   }
   await writeFile(path.join(directory, '404.html'), template.replace('</head>', '<meta name="robots" content="noindex" /></head>'));
   await writeFile(path.join(directory, '.nojekyll'), '');
   const urls = [...new Set(pages.map((page) => new URL(page.canonical, site.url).href))];
   await writeFile(path.join(directory, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escape(url)}</loc></url>`).join('\n')}\n</urlset>\n`);
-  console.log(`Generated ${pages.length} static route entry points and ${urls.length} canonical sitemap entries.`);
+  console.log(`Generated ${pages.length} static route entry points${render ? ' (prerendered)' : ''} and ${urls.length} canonical sitemap entries.`);
   return pages;
 }
 
-if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) await buildStaticPages();
+if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
+  const { render } = await import(pathToFileURL(path.join(root, 'dist-ssr', 'entry-server.js')).href);
+  await buildStaticPages(path.join(root, 'dist'), render);
+}

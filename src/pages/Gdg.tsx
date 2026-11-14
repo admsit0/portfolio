@@ -10,13 +10,18 @@ import { eventsByStatus } from "@/lib/eventStatus";
 export default function Gdg() {
   const { language, t } = useLanguage();
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
-  const [now, setNow] = useState(() => new Date());
-  // Re-check every minute so an open tab moves events to "past" on time.
+  // The current time is read after mounting, so the prerendered page (and
+  // its hydration) lists the whole calendar; then events split by date.
+  // Re-checked every minute so an open tab moves events to "past" on time.
+  const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
+    setNow(new Date());
     const timer = window.setInterval(() => setNow(new Date()), 60_000);
     return () => window.clearInterval(timer);
   }, []);
-  const visibleEvents = eventsByStatus(gdgEvents, tab, now);
+  const visibleEvents = now
+    ? eventsByStatus(gdgEvents, tab, now)
+    : [...gdgEvents].sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
   return (
     <PersonalLayout title="GDG on Campus UAM">
       <section className="site-width page-intro gdg-intro">
@@ -205,7 +210,7 @@ export default function Gdg() {
           ))}
         </div>
         <div className="event-list">
-          {visibleEvents.length === 0 && (
+          {now && visibleEvents.length === 0 && (
             <p className="event-empty">
               {tab === "upcoming"
                 ? t(
@@ -223,7 +228,7 @@ export default function Gdg() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <time dateTime={event.date}>
+              <time dateTime={event.date} suppressHydrationWarning>
                 {new Intl.DateTimeFormat(localeFor(language), {
                   day: "numeric",
                   month: "short",
