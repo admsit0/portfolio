@@ -1,49 +1,53 @@
-// Proposed public copy: edit each `en` and `es` field freely.
+// Public copy for /about: edit each `en` and `es` field freely.
+// Keep figures out of this page; they live (dated) on /atlas and /gdg.
 
 export const aboutContent = {
   intro: {
-    en: "I am an AI engineer and data scientist based in Madrid. That describes my training, but not everything I care about. This is the part for questions, interests, and the kind of work I would like to spend my time on.",
-    es: "Soy ingeniero de IA y científico de datos, y estoy en Madrid. Eso describe mi formación, pero no todo lo que me importa. Este es el espacio para las preguntas, los intereses y el tipo de cosas a las que me gustaría dedicar mi tiempo.",
+    en: "This is the longer version of the home page: what I work on, why, and what I would like to do next. The CV, projects and results are in the technical portfolio.",
+    es: "Esta es la versión larga de la home: en qué trabajo, por qué y qué me gustaría hacer después. El CV, los proyectos y los resultados están en el portfolio técnico.",
   },
   sections: [
     {
-      id: "interests",
-      title: { en: "What I am drawn to", es: "Lo que me interesa" },
+      id: "inside-models",
+      title: {
+        en: "Looking inside models",
+        es: "Mirar dentro de los modelos",
+      },
       body: {
-        en: "I am drawn to questions that resist a quick explanation. How do we arrive at an idea? What would make us change our minds? I find versions of those questions in research and in reading, and I like letting one inform the other.",
-        es: "Me atraen las preguntas que no se resuelven con una explicación rápida. ¿Cómo llegamos a una idea? ¿Qué nos haría cambiar de opinión? Encuentro versiones de esas preguntas en la investigación y en lo que leo, y me gusta que una cosa alimente a la otra.",
+        en: "Both of my theses ask what happens inside a network, not only at its output. In the bachelor's thesis that meant measuring entropy and activation states in CNNs trained with seven different regularisers. In the MSc thesis it means looking for deceptive behaviour in the latent representations of an LLM. If a model can deceive, I would rather find where that happens and change it than only filter what it says.",
+        es: "Mis dos trabajos de fin de estudios se preguntan qué pasa dentro de una red, no solo a la salida. En el TFG eso significó medir entropía y estados de activación en CNNs entrenadas con siete regularizadores distintos. En el TFM significa buscar el comportamiento engañoso en las representaciones latentes de un LLM. Si un modelo puede engañar, prefiero encontrar dónde ocurre y cambiarlo a limitarme a filtrar lo que dice.",
       },
     },
     {
-      id: "why",
-      title: { en: "Why I build", es: "Por qué construyo" },
+      id: "atlas",
+      title: { en: "Why Atlas exists", es: "Por qué existe Atlas" },
       body: {
-        en: "Making something is a way of finding out whether I really understand it. An idea can sound convincing until someone tries to use it. I like that encounter with reality: the small decisions, the unexpected problems, and having to revise the original plan.",
-        es: "Hacer algo es una forma de descubrir si de verdad lo he entendido. Una idea puede sonar convincente hasta que alguien intenta usarla. Me gusta ese encuentro con la realidad: las decisiones pequeñas, los problemas que no esperabas y tener que revisar el plan original.",
+        en: "Reading about an algorithm and understanding its decisions are not the same thing. So instead of another set of notes, Atlas lets you change a search heuristic, see which nodes an algorithm visits, or follow a gradient through a small network. It covers symbolic AI, deep learning and generative AI, in English and Spanish, and I keep adding to it.",
+        es: "Leer sobre un algoritmo y entender sus decisiones no es lo mismo. Por eso, en vez de otros apuntes, Atlas te deja cambiar una heurística de búsqueda, ver qué nodos visita un algoritmo o seguir un gradiente a través de una red pequeña. Cubre IA simbólica, aprendizaje profundo e IA generativa, en español e inglés, y lo sigo ampliando.",
       },
     },
     {
-      id: "making",
-      title: { en: "Things I want to make", es: "Cosas que quiero crear" },
+      id: "organising",
+      title: { en: "Organising for others", es: "Organizar para otros" },
       body: {
-        en: "I do not want everything I make to have the same form. Some ideas need software; others need a page, a conversation, or patient work with the details. I would rather find the right form for an idea than force it into the tool I already know.",
-        es: "No quiero que todo lo que haga tenga la misma forma. Algunas ideas necesitan software; otras, una página, una conversación o tiempo trabajando los detalles. Prefiero encontrar la forma que pide una idea a encajarla en la herramienta que ya conozco.",
+        en: "I helped found GDG on Campus UAM, kept its accounts as treasurer, and have been its president since July 2026. Most of the work is not on stage: finding rooms and speakers, coordinating teams of six to thirteen people, preparing a Git workshop twice with Ibón de Mingo, or organising our first machine learning contest, and writing its guide, with Ibón and Héctor Tablero.",
+        es: "Ayudé a fundar GDG on Campus UAM, llevé sus cuentas como tesorero y lo presido desde julio de 2026. Casi todo el trabajo no se ve desde el público: conseguir salas y ponentes, coordinar equipos de seis a trece personas, preparar dos veces un taller de Git con Ibón de Mingo u organizar nuestro primer concurso de machine learning, y escribir su guía, con Ibón y Héctor Tablero.",
       },
     },
     {
-      id: "ambitions",
-      title: { en: "Where I want to go", es: "Hacia dónde quiero ir" },
+      id: "next",
+      title: { en: "What comes next", es: "Lo que viene" },
       body: {
-        en: "I want to become better at choosing what deserves my attention, not just at taking on more things. I care about doing rigorous work, learning from people with different backgrounds, and noticing whether what I build is actually useful.",
-        es: "Quiero aprender a elegir mejor a qué presto atención, no solo a hacer más cosas. Me importa trabajar con rigor, aprender de personas con otras experiencias y fijarme en si lo que construyo resulta útil de verdad.",
+        en: "In 2027 I finish the MSc. After that I want to work as an AI engineer on making language models more reliable, close enough to research to keep asking why a model does what it does. I also want to keep explaining things: Atlas and GDG UAM are where I practise that.",
+        es: "En 2027 termino el máster. Después quiero trabajar como ingeniero de IA en hacer que los modelos de lenguaje sean más fiables, lo bastante cerca de la investigación como para seguir preguntándome por qué un modelo hace lo que hace. También quiero seguir explicando cosas: Atlas y GDG UAM son donde lo practico.",
       },
     },
     {
-      id: "moonshots",
+      id: "non-profit",
       title: { en: "Further down the road", es: "A más largo plazo" },
       body: {
-        en: "There are ideas I am not ready to put a name or a date on. I would like to keep enough independence to explore them, enough patience to learn what they require, and enough perspective to change direction when it makes sense.",
-        es: "Hay ideas a las que todavía no quiero ponerles un nombre ni una fecha. Me gustaría conservar la independencia para explorarlas, la paciencia para aprender lo que exigen y la perspectiva para cambiar de dirección cuando tenga sentido.",
+        en: "One day I want to start a non-profit. It does not have a name or a date yet, and I would rather not describe it before it is real. What I do have is practice in the unglamorous part of making something exist for other people, and that is what I want to bring to it.",
+        es: "Algún día quiero fundar una asociación sin ánimo de lucro. Todavía no tiene nombre ni fecha, y prefiero no describirla antes de que sea real. Lo que sí tengo es práctica en la parte menos vistosa de hacer que algo exista para otras personas, y eso es lo que quiero llevar a ella.",
       },
     },
   ],

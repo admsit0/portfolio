@@ -49,7 +49,7 @@ export async function getStaticPages() {
     ['/atlas', 'Atlas', 'Why I am building Atlas: a bilingual place to learn AI through explanations, experiments, and practice.'],
     ['/portfolio/atlas', 'Atlas: Engineering', 'Atlas architecture, independently tested simulation engines, account services, and telemetry boundaries.'],
     ['/gdg', 'GDG UAM', 'Community, technical workshops, and my work as co-founder and president of GDG on Campus UAM.'],
-    ['/about', 'Beyond the CV', 'Personal notes on curiosity, learning, making things, and the direction I want to explore.'],
+    ['/about', 'Beyond the CV', 'Why I look inside models, why Atlas exists, what organising GDG UAM involves, and the non-profit I want to start one day.'],
     ['/blog', 'Writing', 'Technical articles on CNN regularization, diffusion models, and the AthenAI decision pipeline.'],
   ]) add(route, `${title} | Adam Maltoni`, description);
 
