@@ -372,3 +372,56 @@ test("localised content objects carry en, es and it together", () => {
     visit(root);
   }
 });
+
+test("Italian articles are complete translations that keep plots and key values", () => {
+  for (const [file, plots, minimum] of [
+    ["regularization", ["regularization-radar"], 1400],
+    [
+      "diffusion",
+      [
+        "diffusion-denoising-samples",
+        "diffusion-imputation",
+        "diffusion-sampler-runtime",
+      ],
+      1400,
+    ],
+    [
+      "athenai",
+      [
+        "athenai-pipeline",
+        "athenai-clusters",
+        "athenai-state",
+        "athenai-benchmark",
+      ],
+      1400,
+    ],
+    ["atlas", [], 500],
+  ]) {
+    const body = source(`src/content/blog/it/${file}.md`);
+    assert.ok(body.split(/\s+/).length > minimum, `${file}: not a summary`);
+    assert.equal((body.match(/```/g) || []).length % 2, 0, `${file}: fences`);
+    for (const plot of plots) assert.ok(body.includes(plot + ".png"), plot);
+  }
+  const thesis = source("src/content/blog/it/regularization.md");
+  for (const value of ["0.785", "89.22%", "83.1%", "42.0%", "15 + 85"])
+    assert.ok(thesis.includes(value), value);
+  const athenai = source("src/content/blog/it/athenai.md");
+  for (const value of [
+    "14,761",
+    "8,879,120",
+    "9,491",
+    "80.6%",
+    "22.95%",
+    "-1.87%",
+  ])
+    assert.ok(athenai.includes(value), value);
+  assert.ok(source("src/content/blog/it/atlas.md").includes("157"));
+  const blogs = source("src/data/localizedBlogs.ts");
+  for (const name of [
+    "regularizationIt",
+    "diffusionIt",
+    "athenaiIt",
+    "atlasIt",
+  ])
+    assert.ok(blogs.includes(`content: ${name}`), name);
+});

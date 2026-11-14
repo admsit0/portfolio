@@ -2,6 +2,10 @@ import regularization from "@/content/blog/es/regularization.md?raw";
 import diffusion from "@/content/blog/es/diffusion.md?raw";
 import athenai from "@/content/blog/es/athenai.md?raw";
 import atlas from "@/content/blog/es/atlas.md?raw";
+import regularizationIt from "@/content/blog/it/regularization.md?raw";
+import diffusionIt from "@/content/blog/it/diffusion.md?raw";
+import athenaiIt from "@/content/blog/it/athenai.md?raw";
+import atlasIt from "@/content/blog/it/atlas.md?raw";
 import { blogPosts, type BlogPost } from "./blogPosts";
 import { localeFor, type Language } from "@/i18n/languages";
 
@@ -50,8 +54,7 @@ const spanish: Record<string, Translation> = {
   },
 };
 
-// Italian titles and summaries. A post without Italian `content` keeps
-// its English body.
+// Italian titles, summaries and articles (src/content/blog/it).
 const italian: Record<string, Translation> = {
   "regularization-in-cnns-internal-activations": {
     title: "Regolarizzazione nelle CNN: guardare dentro la rete",
@@ -60,6 +63,7 @@ const italian: Record<string, Translation> = {
     excerpt:
       "Ho confrontato sette regolarizzatori sulla stessa CNN per studiare attivazioni nascoste, robustezza e generalizzazione.",
     coverAlt: "Radar dei regolarizzatori per accuratezza e robustezza",
+    content: regularizationIt,
   },
   "diffusion-models-from-sdes-to-images": {
     title: "Modelli di diffusione: dalle SDE alle immagini",
@@ -68,6 +72,7 @@ const italian: Record<string, Translation> = {
     excerpt:
       "Una piattaforma modulare in PyTorch per sperimentare con SDE, schedule del rumore, sampler, condizionamento, imputazione e valutazione.",
     coverAlt: "Campioni di diffusione che passano dal rumore alle immagini",
+    content: diffusionIt,
   },
   "athenai-competition-decision-pipeline": {
     title: "AthenAI: comprimere migliaia di algoritmi in uno stato di RL",
@@ -76,6 +81,7 @@ const italian: Record<string, Translation> = {
     excerpt:
       "Ho ricostruito un universo giornaliero di algoritmi, raggruppato i loro comportamenti in superasset e costruito lo stato per il RL di portafoglio.",
     coverAlt: "Diagnostica del clustering delle strategie di AthenAI",
+    content: athenaiIt,
   },
   "atlas-building-a-place-to-learn": {
     title: "Atlas: un posto per imparare, non solo per leggere",
@@ -84,6 +90,7 @@ const italian: Record<string, Translation> = {
     excerpt:
       "Perché ho costruito Atlas attorno a esperimenti veri, componenti riutilizzabili e profili privati, e cosa voglio imparare dai primi utenti.",
     coverAlt: "La vera interfaccia di apprendimento di Atlas",
+    content: atlasIt,
   },
 };
 
