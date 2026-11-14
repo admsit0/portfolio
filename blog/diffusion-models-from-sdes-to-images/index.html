@@ -20,11 +20,158 @@
     <meta name="twitter:description" content="A modular PyTorch diffusion platform for image generation, with configurable SDEs, schedulers, samplers, conditioning, imputation, and metrics." />
     <meta name="twitter:image" content="https://adammaltoni.com/adam-maltoni.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <script type="module" crossorigin src="/assets/index-DB6fKWEG.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-FzCagDHY.css">
+    <script type="module" crossorigin src="/assets/index-Bo6A3CzV.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-eJKJD4w_.css">
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root"><!--$--><div class="blog-page flex min-h-screen flex-col bg-background"><a class="skip-link" href="#main">Skip to content</a><header class="personal-header"><nav class="site-width nav-inner" aria-label="Main navigation"><a class="wordmark" href="/">adam maltoni<span>.</span></a><div class="nav-links"><a class="" href="/about">About</a><a aria-current="page" class="active" href="/blog">Writing</a></div><div class="nav-actions"><a class="nav-portfolio" href="/portfolio">Portfolio<!-- --> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a class="cv-icon" href="/cv-adam-maltoni.pdf" download="" aria-label="Download CV" title="Download CV"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></a><div class="language-switch" role="group" aria-label="Language"><button lang="en" aria-pressed="true" aria-label="English" title="English">EN</button><button lang="es" aria-pressed="false" aria-label="Español" title="Español">ES</button><button lang="it" aria-pressed="false" aria-label="Italiano" title="Italiano">IT</button></div><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="personal-menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button></div></nav></header><main id="main" tabindex="-1" class="flex-1 w-full bg-[#f5f5f7] pt-28 pb-20"><article class="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8"><a class="mb-10 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-muted-foreground shadow-sm transition-colors hover:text-primary-dark" href="/blog"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left h-4 w-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to blog</a><header><span class="meta-pill border-[#7b2ff7]/20 bg-[#f0e9ff] text-[#7b2ff7]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-4 w-4"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>Generative AI</span><h1 class="mt-6 text-4xl font-bold tracking-tight text-foreground md:text-6xl">Diffusion Models from SDEs to Images</h1><p class="mt-5 text-xl leading-relaxed text-muted-foreground">A practical walk through the score-based image generation system I built with VE, VP, Sub-VP processes and multiple samplers.</p><div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground"><span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round h-4 w-4"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Adam Maltoni</span><span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Published on 28 May 2025, 09:00</span><span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-4 w-4"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>19 min read</span></div><div class="mt-8 overflow-hidden rounded-lg border border-black/[0.08] bg-white shadow-sm"><div class="relative overflow-hidden bg-white min-h-[380px]"><img src="/blog-plots/diffusion-denoising-samples.png" alt="Diffusion samples progressing from noise to generated images" class="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.025]"/></div></div></header><div class="blog-prose mt-10"><p>The one-sentence version of diffusion image generation is almost too clean: add noise until an image becomes Gaussian static, then learn how to reverse the process. It is a good intuition, but it hides the engineering question that made this project interesting:</p>
+<p><strong>What exactly is &quot;the process&quot; that we reverse, and how many ways can we reverse it?</strong></p>
+<p>In this project, I worked on a modular generative image system built around score-based diffusion. The goal was not to train a giant production model. It was to build a practical experimental platform where the user could swap the diffusion process, the noise schedule, the sampler, and the conditioning mode without rewriting the whole system.</p>
+<p>The system supported grayscale and RGB image datasets, trained a U-Net-style score model, generated samples from noise, evaluated them with standard metrics, and included controlled generation modes such as class conditioning and imputation.</p>
+<p>The part I liked most was that the project refused to stay as a single notebook. Diffusion code becomes misleading very quickly when the SDE, the scheduler, the sampler, and the visualization are all tangled together. You can get a grid of images, but you cannot tell whether an improvement came from the process, the integration method, a conditioning trick, or just a lucky seed. I wanted the package to make those choices explicit enough that a bad experiment would at least fail for a traceable reason.</p>
+<h2>The score is the direction back to data</h2>
+<p>The forward process starts from a clean image x_0 and progressively corrupts it into x_t. For a continuous-time diffusion model, this corruption can be described as an SDE:</p>
+<pre><code class="language-text">dx = f(x, t) dt + g(t) dw
+</code></pre>
+<p>Here f is the drift, g controls the diffusion magnitude, and dw is Brownian noise. The model does not need to learn this forward process; we choose it.</p>
+<p>Learning happens in the reverse direction. The model learns a score function:</p>
+<pre><code class="language-text">score(x_t, t) ~= gradient_x log p_t(x_t)
+</code></pre>
+<p>Intuitively, the score points toward regions where the noisy sample looks more like something that could have come from the data distribution at that noise level. Sampling then becomes numerical navigation: start at noise, repeatedly ask the score network which way data lies, and integrate backward.</p>
+<p>The two equations I kept coming back to were the denoising score-matching objective and the reverse-time dynamics. In implementation terms, the model is learning a time-conditioned vector field:</p>
+<pre><code class="language-text">theta* = argmin_theta E_t,x0,z [
+  lambda(t) || s_theta(x_t, t, y) - target_score(x_t, x0, t) ||_2^2
+]
+
+reverse SDE:
+dx = [f(x,t) - g(t)^2 * s_theta(x,t)] dt + g(t) d_w_bar
+
+probability-flow ODE:
+dx = [f(x,t) - 0.5 * g(t)^2 * s_theta(x,t)] dt
+</code></pre>
+<p>That is why the sampler abstraction mattered. Euler-Maruyama, Predictor-Corrector, and Probability Flow ODE are not cosmetic variants; they are different ways of using the same learned score field.</p>
+<p>A very compressed training loop looks like this:</p>
+<pre><code class="language-text">for image x0 in dataset:
+  sample time t
+  sample noise z
+  construct noisy image xt from the chosen SDE
+  ask ScoreNet(xt, t, condition) to predict the score/noise direction
+  update the network with a denoising score-matching loss
+</code></pre>
+<p>That is the conceptual core. The rest of the project is about making each block explicit and replaceable.</p>
+<h2>Three forward processes: VE, VP, and Sub-VP</h2>
+<p>The report implemented three diffusion-process families.</p>
+<p><strong>Variance Exploding (VE)</strong> behaves like a Brownian-motion-style process where the variance grows over time. There is no drift term pulling the sample back; the image degrades because dispersion increases. VE is conceptually direct and useful for understanding score-based SDEs, but its noise scale can grow aggressively.</p>
+<p><strong>Variance Preserving (VP)</strong> adds noise while keeping the overall variance controlled. In the project report, VP is described through an Ornstein-Uhlenbeck-style process where both drift and diffusion depend on time. The image becomes progressively less informative, but the distribution does not simply explode outward.</p>
+<p><strong>Sub-Variance Preserving (Sub-VP)</strong> modifies the VP coefficients so the transition from image to noise is more progressive. It is close enough to VP to share much of the machinery, but different enough to make comparisons interesting.</p>
+<p>The user-facing point of implementing all three was simple: the diffusion process is not a background detail. It changes the signal-to-noise geometry seen during training and the numerical behavior encountered during sampling.</p>
+<h2>Noise schedules: linear versus cosine</h2>
+<p>For VP and Sub-VP, the system needed a schedule that controls how quickly noise is introduced. I implemented two options:</p>
+<ul>
+<li>A linear schedule, which is easy to reason about and changes noise intensity in a direct way.</li>
+<li>A cosine schedule, which changes more smoothly and often gives a more natural degradation path.</li>
+</ul>
+<p>The schedule is one of those small choices that becomes large in practice. If the model sees too much noise too early, learning becomes inefficient. If corruption is too gentle, the model may not learn the high-noise regime needed at the start of sampling. A diffusion system is less like a single algorithm and more like a chain of compatible numerical decisions.</p>
+<h2>The ScoreNet and why U-Net is a natural fit</h2>
+<p>The score model used a U-Net-style architecture with time information injected into the network. U-Nets work well here because denoising is both local and global. Local texture matters, but the model also needs long-range context to reconstruct coherent structure.</p>
+<p>The system used Fourier embeddings for time, and, in conditional cases, class information was injected alongside the temporal embedding. So the model learned not only:</p>
+<pre><code class="language-text">score(x_t, t)
+</code></pre>
+<p>but, when labels were available:</p>
+<pre><code class="language-text">score(x_t, t | y)
+</code></pre>
+<p>That distinction matters for controlled generation. If y is a class label such as a digit in MNIST, the score field changes: the model should guide the noisy sample toward images that are plausible and also belong to that class.</p>
+<h2>Sampling is numerical analysis wearing a generative-AI jacket</h2>
+<p>Once the score network is trained, image generation becomes integration. Start from random noise and step backward through the learned reverse dynamics. The project implemented four samplers.</p>
+<p><strong>Euler-Maruyama</strong> is the basic stochastic integrator. It combines a drift-like update with a random noise term. It is simple, fast, and a good baseline, but it may need many steps for high-quality results.</p>
+<p><strong>Predictor-Corrector</strong> improves the basic reverse path by alternating two moves: a predictor step that advances the reverse SDE, and a corrector step that refines the sample, often with Langevin-style updates. It can produce better images, but extra corrector steps increase compute.</p>
+<p><strong>Probability Flow ODE</strong> turns the reverse stochastic process into a deterministic ordinary differential equation. This removes the random component during sampling. The result is often more deterministic and repeatable; diversity depends more directly on the initial noise.</p>
+<p><strong>Exponential Integrator</strong> uses exponential functions to handle parts of the reverse dynamics more carefully. In the implementation, it can also become deterministic when the noise parameter is set to zero, making it conceptually close to Probability Flow ODE in that regime. The report notes one important compatibility constraint: the VE process is not used with the Exponential Integrator.</p>
+<p>The sampling API made the tradeoff explicit:</p>
+<pre><code class="language-text">load trained model
+choose diffusion process
+choose compatible sampler
+choose number of steps and sampler parameters
+generate a batch
+plot samples
+</code></pre>
+<p>This may sound like ordinary software modularity, but for diffusion models it is a big deal. A sampler is not just an implementation detail; it is part of the model&#x27;s behavior.</p>
+<p>One of the useful sanity checks was timing the sampler combinations instead of only looking at final images. The plot below is not a universal benchmark; it came from a small experimental setting, so I would not over-interpret CPU versus CUDA ratios. But it captures the engineering shape of the problem: Predictor-Corrector is cheap in this configuration, Euler-Maruyama is heavier, and the Exponential Integrator sits in the middle while behaving differently from the stochastic samplers.</p>
+<p><img src="/blog-plots/diffusion-sampler-runtime.png" alt="Average sampling time per sampler grouped by device for a digit-3 MNIST Sub-VP experiment." loading="lazy" decoding="async" class="my-9 w-full rounded-xl border border-black/[0.08] bg-white p-2 shadow-lg shadow-black/[0.06]"/></p>
+<p>That matters because sampler choice is not only about visual quality. It changes latency, repeatability, and the number of reverse steps you can afford. In a teaching notebook, that tradeoff can be hidden. In a reusable package, it needs to be surfaced because the &quot;best&quot; sampler under a metric may be the wrong sampler for an interactive workflow.</p>
+<h2>Conditioning: pushing the sample toward a class</h2>
+<p>The system included class-conditioned generation when the dataset supported labels. The model can be trained with class embeddings, so generation can ask for a specific category:</p>
+<pre><code class="language-text">sample class = 3
+start from Gaussian noise
+run reverse process using score(x_t, t | class=3)
+return images that should look like that class
+</code></pre>
+<p>The report also discusses classifier-free guidance. The basic idea is to learn both conditional and unconditional behavior, then combine them during sampling:</p>
+<pre><code class="language-text">guided_score =
+  unconditional_score
+  + guidance_scale * (conditional_score - unconditional_score)
+</code></pre>
+<p>Increasing the guidance scale pushes harder toward the class condition. Too little guidance and the class signal is weak; too much and diversity can suffer. One of the useful observations from the project was that guidance intensity can be adjusted over time to balance visual precision and variety.</p>
+<h2>Imputation: diffusion as constrained editing</h2>
+<p>Imputation was the other control mechanism. Instead of generating the whole image freely, the model receives a partially observed image and a binary mask indicating which region is missing. The reverse process is constrained so the observed pixels stay fixed while the missing region is regenerated.</p>
+<p>The conceptual loop is:</p>
+<pre><code class="language-text">given original image x and mask M:
+  keep observed region fixed
+  diffuse or initialize the missing region
+  during each reverse step:
+    update only the masked region with the score model
+    restore observed pixels from the known image
+</code></pre>
+<p>This turns diffusion from &quot;make me an image&quot; into &quot;complete this image in a way that is consistent with its context.&quot; It is a small version of the same principle behind many modern image-editing workflows: the model has learned a distribution over images, and the mask constrains where it is allowed to move.</p>
+<p><img src="/blog-plots/diffusion-imputation.png" alt="Image imputation demo showing original MNIST digits, masked inputs, and reconstructed missing regions." loading="lazy" decoding="async" class="my-9 w-full rounded-xl border border-black/[0.08] bg-white p-2 shadow-lg shadow-black/[0.06]"/></p>
+<p>The imputation demo is small, but it is a good test of whether the implementation is really doing conditional generation and not just unconditional sampling with a mask drawn on top. The observed pixels have to be re-imposed during the reverse process, otherwise the sample drifts away from the known context. That tiny implementation detail is exactly the kind of thing that separates a diffusion explanation from a diffusion tool.</p>
+<h2>Evaluation: do not trust the prettiest grid</h2>
+<p>The project included a metrics module with three common image-generation metrics.</p>
+<p><strong>Bits per dimension (BPD)</strong> estimates how well the model explains the data distribution, normalized by image dimensionality.</p>
+<p><strong>Frechet Inception Distance (FID)</strong> compares statistics of generated images against real images in an Inception feature space. Lower is better, and the metric is often used as a rough proxy for visual realism and distributional similarity.</p>
+<p><strong>Inception Score (IS)</strong> tries to reward images that are both classifiable and diverse across classes.</p>
+<p>These metrics are imperfect, especially on small academic experiments and simple datasets. Still, including them matters because visual grids are dangerously persuasive. A generated sample can look promising while the model is collapsing in diversity, or the metric can look acceptable while the images are blurry. The healthy approach is to inspect both.</p>
+<h2>The software shape</h2>
+<p>The report describes the system as a package rather than a single notebook. The main design separated:</p>
+<ul>
+<li>Diffusion process definitions.</li>
+<li>Noise schedules.</li>
+<li>The ScoreNet architecture.</li>
+<li>Training routines.</li>
+<li>Sampling algorithms.</li>
+<li>YAML/dictionary configuration.</li>
+<li>Conditioning and imputation utilities.</li>
+<li>Evaluation functions.</li>
+<li>Notebooks for training, generation, evaluation, and advanced examples.</li>
+</ul>
+<p>The central orchestrator was a DiffusionExperiment-style class that hid the wiring from the user. A typical workflow looked like this:</p>
+<pre><code class="language-text">experiment = DiffusionExperiment(config)
+experiment.train(dataset)
+experiment.sample_and_plot(sampler=&quot;predictor_corrector&quot;)
+experiment.evaluate(metrics=[&quot;bpd&quot;, &quot;fid&quot;, &quot;is&quot;])
+</code></pre>
+<p>The actual implementation also handled practical requirements: grayscale or RGB inputs, normalization to [-1, 1], PyTorch tensor formatting, model saving/loading, CPU/GPU detection, tests for key components, and notebooks that execute the workflows in order.</p>
+<h2>What the demos showed</h2>
+<p>The report describes five demonstration notebooks.</p>
+<p>The first trained models on MNIST digit 3, using VE, VP, and Sub-VP variants with linear or cosine schedules. The second compared sampling methods from the trained models: Euler-Maruyama, Predictor-Corrector, Probability Flow ODE, and Exponential Integrator. The third moved to color images using the boat class from CIFAR-10. The fourth evaluated generated samples with BPD, FID, and IS. The fifth demonstrated class conditioning and imputation over MNIST digits.</p>
+<p>The results were deliberately framed with modest compute in mind. Training a U-Net-based model from scratch with reduced model size and a limited number of training steps cannot compete with large diffusion systems. But the generated images were coherent enough to demonstrate that the system learned useful relationships between noise, class information, and visual form.</p>
+<p><img src="/blog-plots/diffusion-denoising-samples.png" alt="Sub-VP Predictor-Corrector sample progression from random noise to CIFAR-10 boat images." loading="lazy" decoding="async" class="my-9 w-full rounded-xl border border-black/[0.08] bg-white p-2 shadow-lg shadow-black/[0.06]"/></p>
+<p>I would not present these samples as artistic output. They are more useful as debugging evidence. The left side is still noise, the right side has learned class-level structure, and the middle of the pipeline is where small mistakes in normalization, timestep scaling, or sampler compatibility usually show up. When a generated image looks wrong, the bug is rarely just &quot;the model is bad&quot;; it can be the score target, the marginal probability function, the timestep embedding, the reverse-step variance, or the conditioning path.</p>
+<p>That makes the project valuable as an experimental platform: not &quot;look, I recreated a frontier image model,&quot; but &quot;look, every important moving piece of score-based image generation is implemented, swappable, and testable.&quot;</p>
+<h2>The lesson I took from building it</h2>
+<p>Diffusion models are often taught as if the key idea is just repeated denoising. Building one makes the real structure clearer. A diffusion model is a stack:</p>
+<pre><code class="language-text">data preprocessing
+  -&gt; forward SDE
+  -&gt; noise schedule
+  -&gt; score network
+  -&gt; training objective
+  -&gt; sampler/integrator
+  -&gt; conditioning rule
+  -&gt; evaluation metric
+</code></pre>
+<p>Each layer can be changed. Each change has mathematical and software consequences. VE, VP, and Sub-VP define different noise geometries. Euler-Maruyama and Probability Flow ODE express different beliefs about stochasticity during sampling. Class conditioning and imputation turn generation into controlled navigation through the learned image distribution.</p>
+<p>The most useful part of the project was seeing how the math becomes engineering. The equations tell you what the process should be; the package design decides whether you can actually compare variants without tearing the system apart.</p>
+<p>That is the kind of generative AI project I like: not just a gallery of samples, but a small laboratory where the algorithm&#x27;s moving parts are visible.</p></div></article></main><footer class="personal-footer"><div class="site-width footer-main"><div><a class="wordmark" href="/">adam maltoni<span>.</span></a><p>Madrid, Spain</p></div><div class="footer-links"><a href="/portfolio">Technical portfolio<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="/atlas">Atlas<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="/gdg">GDG UAM<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="/blog">Writing<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="/about">About<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div><div class="footer-social"><a href="https://linkedin.com/in/adam-maltoni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://youtube.com/@admsito17" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a><a href="mailto:adam.maltoni@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Adam" title="Email Adam"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></a><a href="https://github.com/admsit0" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div></div><div class="site-width footer-bottom"><span>© <!-- -->Adam Maltoni</span><span>Madrid, Spain</span></div></footer></div><!--/$--></div>
   </body>
 </html>
