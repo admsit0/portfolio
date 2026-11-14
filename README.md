@@ -1,6 +1,6 @@
 # Adam Maltoni's personal website
 
-My personal website, with a dedicated technical portfolio and bilingual long-form articles.
+My personal website, in English, Spanish and Italian, with a dedicated technical portfolio and long-form articles.
 
 Live site: [adammaltoni.com](https://adammaltoni.com/).
 
@@ -15,13 +15,24 @@ the permanent HTTP-to-HTTPS redirect.
 Keep `public/CNAME` in the build so the custom domain survives each deployment.
 Assets use Vite's root base path for the custom domain.
 
-The postbuild step reads the application's route and project definitions and generates
-static HTML entry points for direct GitHub Pages URLs, route-specific canonical metadata,
-a sitemap, and a non-indexable unknown-route fallback. Do not replace it with a single
-copied 404 page: known deep links should return HTTP 200.
+`npm run build` makes the client build and a server build of `src/entry-server.tsx`
+(in `dist-ssr/`). The postbuild step reads the application's route and project definitions
+and generates static HTML entry points for direct GitHub Pages URLs, with route-specific
+canonical metadata, a sitemap, and a non-indexable unknown-route fallback. Each canonical
+route is prerendered in English into its own `index.html`, so search engines and visitors
+without JavaScript get the content; aliases and the 404 page stay client-rendered. The
+browser hydrates English pages and renders Spanish or Italian fresh. Do not replace this
+with a single copied 404 page: known deep links should return HTTP 200.
 
-Personal home copy lives in `src/content/personal.ts`; longer personal notes live in
-`src/content/about.ts`. Both contain editable English and Spanish fields. The technical
+Personal home copy lives in `src/content/personal.ts`, including the dated "Right now"
+list and the optional workshop photos (files in `public/photos/`); longer personal notes
+live in `src/content/about.ts`. Every text has `en`, `es` and `it` fields. Other UI text
+is written in English in the components and translated in `src/i18n/spanish.ts` and
+`src/i18n/italian.ts`; only the active language's dictionary is downloaded. Tests fail if
+a string has no Italian translation or a content object lacks a language.
+
+GDG events in `src/content/gdg.ts` have no status field: upcoming or past is computed in
+the browser from the date (an event stays upcoming until two hours after it starts). The technical
 portfolio is at `/portfolio`; Atlas has linked product and engineering views at `/atlas`
 and `/portfolio/atlas`. No private notes, tokens, or local organization files are published.
 
