@@ -32,17 +32,10 @@ export const gdgEvents = [
     href: "https://gdguam.es/events",
   },
   {
-    date: "2026-12-02T13:00:00+01:00",
+    date: "2026-12-07T13:00:00+01:00",
     en: "Boost your employability: portfolio and CV",
     es: "Impulsa tu empleabilidad: portfolio y CV",
     it: "Migliora la tua occupabilità: portfolio e CV",
-    href: "https://gdguam.es/events",
-  },
-  {
-    date: "2026-12-07T13:00:00+01:00",
-    en: "Talk: High Performance Computing for AI",
-    es: "Charla: High Performance Computing para IA",
-    it: "Talk: High Performance Computing per l'IA",
     href: "https://gdguam.es/events",
   },
   {

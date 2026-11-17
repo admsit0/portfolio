@@ -536,8 +536,8 @@ export const italian: Record<string, string> = {
   "No upcoming events in this snapshot. The full calendar may have newer ones.":
     "Non ci sono prossimi eventi in questo elenco. Il calendario completo potrebbe averne di più recenti.",
   "No past events yet.": "Ancora nessun evento passato.",
-  "Calendar snapshot: 14 November 2026. Check the chapter site for changes and registration.":
-    "Calendario aggiornato al 14 novembre 2026. Consulta il sito del gruppo per modifiche e iscrizioni.",
+  "Calendar snapshot: 18 November 2026. Check the chapter site for changes and registration.":
+    "Calendario aggiornato al 18 novembre 2026. Consulta il sito del gruppo per modifiche e iscrizioni.",
   "The results belong to the chapter.": "I risultati sono del gruppo.",
   "The event write-ups, resources, and photographs live on the GDG website.":
     "Resoconti, materiali e foto degli eventi sono sul sito del GDG.",

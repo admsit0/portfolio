@@ -243,8 +243,8 @@ export default function Gdg() {
         </div>
         <p className="evidence-note">
           {t(
-            "Calendar snapshot: 14 November 2026. Check the chapter site for changes and registration.",
-            "Calendario a 14 de noviembre de 2026. Consulta la web del grupo para cambios e inscripción.",
+            "Calendar snapshot: 18 November 2026. Check the chapter site for changes and registration.",
+            "Calendario a 18 de noviembre de 2026. Consulta la web del grupo para cambios e inscripción.",
           )}
         </p>
       </section>

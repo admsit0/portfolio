@@ -40,7 +40,7 @@ export const personalContent = {
   // "Right now" section on the home page. Update `updated` whenever a line changes.
   // `facet` picks the accent colour: research, community, build or personal.
   now: {
-    updated: "2026-11-14",
+    updated: "2026-11-18",
     items: [
       {
         id: "research",
@@ -79,9 +79,9 @@ export const personalContent = {
         facet: "community",
         label: { en: "Organising", es: "Organizando", it: "Organizzo" },
         text: {
-          en: "GDG on Campus UAM, which I co-founded and have led as president since July 2026. We are 275 members, and we have just closed our first machine learning contest.",
-          es: "GDG on Campus UAM, que cofundé y presido desde julio de 2026. Somos 275 miembros y acabamos de cerrar nuestro primer concurso de machine learning.",
-          it: "GDG on Campus UAM, che ho cofondato e presiedo da luglio 2026. Siamo 275 membri e abbiamo appena chiuso la nostra prima gara di machine learning.",
+          en: "GDG on Campus UAM, which I co-founded and have led as president since July 2026. We are 275 members, we have just closed our first machine learning contest, and on 20 November we host a session on the environmental and social impact of AI.",
+          es: "GDG on Campus UAM, que cofundé y presido desde julio de 2026. Somos 275 miembros, acabamos de cerrar nuestro primer concurso de machine learning y el 20 de noviembre organizamos una sesión sobre el impacto medioambiental y social de la IA.",
+          it: "GDG on Campus UAM, che ho cofondato e presiedo da luglio 2026. Siamo 275 membri, abbiamo appena chiuso la nostra prima gara di machine learning e il 20 novembre organizziamo una sessione sull'impatto ambientale e sociale dell'IA.",
         },
         link: {
           href: "/gdg",
