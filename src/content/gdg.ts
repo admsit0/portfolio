@@ -53,6 +53,13 @@ export const gdgEvents = [
     href: "https://gdguam.es/blog/introduccion-a-git-github-2",
   },
   {
+    date: "2026-05-09T08:00:00+02:00",
+    en: "GDG AI Hack Milano: co-organising with GDG PoliMi",
+    es: "GDG AI Hack Milano: coorganizando con GDG PoliMi",
+    it: "GDG AI Hack Milano: co-organizzato con GDG PoliMi",
+    href: "https://gdguam.es/blog/ai-hack-milano-26",
+  },
+  {
     date: "2026-04-24T13:30:00+02:00",
     en: "Teaching robots to reason: reinforcement learning",
     es: "Enseñando a pensar a robots: reinforcement learning",
